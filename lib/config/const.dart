@@ -1,0 +1,1 @@
+const urlimg = "assets/images/";

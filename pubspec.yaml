@@ -9,8 +9,11 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_calendar_week: ^2.0.0
   font_awesome_flutter: ^10.7.0
+  horizontal_week_calendar: ^0.0.16
   salomon_bottom_bar: ^3.3.2
+  table_calendar: ^3.1.1
   unicons: ^2.1.1
 
 dev_dependencies:
@@ -22,3 +25,4 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/files/

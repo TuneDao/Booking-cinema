@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_android/Pages/login.dart';
+import 'package:project_android/Pages/User/SignIn/login.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -75,6 +75,7 @@ class _FormContent extends StatefulWidget {
 
 class __FormContentState extends State<_FormContent> {
   bool _isPasswordVisible = false;
+  bool _isPasswordVisible1 = false;
   final _userController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -144,19 +145,19 @@ class __FormContentState extends State<_FormContent> {
                 }
                 return null;
               },
-              obscureText: !_isPasswordVisible,
+              obscureText: !_isPasswordVisible1,
               decoration: InputDecoration(
                   labelText: 'Xác nhận mật khẩu',
                   hintText: 'Nhập mật khẩu',
                   prefixIcon: const Icon(Icons.lock_outline_rounded),
                   border: const OutlineInputBorder(),
                   suffixIcon: IconButton(
-                    icon: Icon(_isPasswordVisible
+                    icon: Icon(_isPasswordVisible1
                         ? Icons.visibility_off
                         : Icons.visibility),
                     onPressed: () {
                       setState(() {
-                        _isPasswordVisible = !_isPasswordVisible;
+                        _isPasswordVisible1 = !_isPasswordVisible1;
                       });
                     },
                   )),

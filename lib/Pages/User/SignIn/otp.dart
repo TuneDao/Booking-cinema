@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_android/Pages/login.dart';
+import 'package:project_android/Pages/User/SignIn/changepassword.dart';
 
 class OTP extends StatelessWidget {
   const OTP({Key? key}) : super(key: key);
@@ -139,7 +139,7 @@ class __FormContentState extends State<_FormContent> {
                     /// do something
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => SignInPage2()),
+                      MaterialPageRoute(builder: (context) => ChangePassword()),
                     );
                   }
                 },

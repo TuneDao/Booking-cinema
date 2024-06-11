@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
-import 'package:project_android/Pages/forgotpassword.dart';
-import 'package:project_android/Pages/home.dart';
-import 'package:project_android/Pages/register.dart';
+import 'package:project_android/Pages/User/SignIn/forgotpassword.dart';
+import 'package:project_android/Pages/User/Home/home.dart';
+import 'package:project_android/Pages/User/SignIn/register.dart';
 
 class SignInPage2 extends StatelessWidget {
   const SignInPage2({Key? key}) : super(key: key);
