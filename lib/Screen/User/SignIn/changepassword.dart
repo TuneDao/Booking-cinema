@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_android/Pages/User/SignIn/login.dart';
+import 'package:project_android/Screen/User/SignIn/login.dart';
 
 class ChangePassword extends StatelessWidget {
   const ChangePassword({Key? key}) : super(key: key);

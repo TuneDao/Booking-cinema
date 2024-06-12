@@ -1,8 +1,15 @@
+import 'dart:ui';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:project_android/Pages/User/SignIn/login.dart';
+import 'package:flutter/painting.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:project_android/Screen/User/SignIn/forgotpassword.dart';
+import 'package:project_android/Screen/User/Home/home.dart';
+import 'package:project_android/Screen/User/SignIn/register.dart';
 
-class RegisterPage extends StatelessWidget {
-  const RegisterPage({Key? key}) : super(key: key);
+class SignInPage2 extends StatelessWidget {
+  const SignInPage2({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -10,30 +17,29 @@ class RegisterPage extends StatelessWidget {
 
     return Scaffold(
         body: Center(
-      child: isSmallScreen
-          ? const SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _Logo(),
-                  _FormContent(),
-                ],
-              ),
-            )
-          : SingleChildScrollView(
-              child: Container(
-              padding: const EdgeInsets.all(32.0),
-              constraints: const BoxConstraints(maxWidth: 800),
-              child: const Row(
-                children: [
-                  Expanded(child: _Logo()),
-                  Expanded(
-                    child: Center(child: _FormContent()),
-                  ),
-                ],
-              ),
-            )),
-    ));
+            child: SingleChildScrollView(
+                child: isSmallScreen
+                    ? const SingleChildScrollView(
+                        child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          _Logo(),
+                          _FormContent(),
+                        ],
+                      ))
+                    : SingleChildScrollView(
+                        child: Container(
+                        padding: const EdgeInsets.all(15.0),
+                        constraints: const BoxConstraints(maxWidth: 800),
+                        child: const Row(
+                          children: [
+                            Expanded(child: _Logo()),
+                            Expanded(
+                              child: Center(child: _FormContent()),
+                            ),
+                          ],
+                        ),
+                      )))));
   }
 }
 
@@ -54,7 +60,7 @@ class _Logo extends StatelessWidget {
         ),
         const Padding(
           padding: EdgeInsets.all(16.0),
-          child: Text("ĐĂNG KÝ",
+          child: Text("ĐĂNG NHẬP",
               textAlign: TextAlign.center,
               style: TextStyle(
                   color: Color.fromRGBO(21, 52, 72, 1),
@@ -74,9 +80,12 @@ class _FormContent extends StatefulWidget {
 }
 
 class __FormContentState extends State<_FormContent> {
-  bool _isPasswordVisible = false;
-  bool _isPasswordVisible1 = false;
   final _userController = TextEditingController();
+  final _passWordcontroller = TextEditingController();
+
+  bool _isPasswordVisible = false;
+  bool _rememberMe = false;
+
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
@@ -91,7 +100,6 @@ class __FormContentState extends State<_FormContent> {
           children: [
             TextFormField(
               validator: (value) {
-                // add email validation
                 if (value == null || value.isEmpty) {
                   return 'Vui lòng nhập tài khoản';
                 }
@@ -109,18 +117,19 @@ class __FormContentState extends State<_FormContent> {
             TextFormField(
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Vui lòng nhập mật khẫu';
+                  return 'Vui lòng nhập mật khẩu';
                 }
 
                 if (value.length < 6) {
-                  return 'Mật khẩu phải trên 6 ký tự';
+                  return 'Mật khẩu ít nhất phải 6 ký tự';
                 }
                 return null;
               },
+              controller: _passWordcontroller,
               obscureText: !_isPasswordVisible,
               decoration: InputDecoration(
                   labelText: 'Mật khẩu',
-                  hintText: 'Nhập mật khẩu',
+                  hintText: 'Mật khẩu',
                   prefixIcon: const Icon(Icons.lock_outline_rounded),
                   border: const OutlineInputBorder(),
                   suffixIcon: IconButton(
@@ -135,73 +144,39 @@ class __FormContentState extends State<_FormContent> {
                   )),
             ),
             _gap(),
-            TextFormField(
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Vui lòng nhập mật khẫu';
-                }
-                if (value.length < 6) {
-                  return 'Mật khẩu phải trên 6 ký tự';
-                }
-                return null;
-              },
-              obscureText: !_isPasswordVisible1,
-              decoration: InputDecoration(
-                  labelText: 'Xác nhận mật khẩu',
-                  hintText: 'Nhập mật khẩu',
-                  prefixIcon: const Icon(Icons.lock_outline_rounded),
-                  border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    icon: Icon(_isPasswordVisible1
-                        ? Icons.visibility_off
-                        : Icons.visibility),
-                    onPressed: () {
-                      setState(() {
-                        _isPasswordVisible1 = !_isPasswordVisible1;
-                      });
-                    },
-                  )),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              children: [
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              ForgotPassword()), // Replace with your Forgot Password page
+                    );
+                  },
+                  child: const Text(
+                    'Quên mật khẩu ?',
+                    style: TextStyle(color: Color.fromRGBO(232, 189, 15, 1)),
+                  ),
+                ),
+              ],
             ),
             _gap(),
-            TextFormField(
-              validator: (value) {
-                // add email validation
-                if (value == null || value.isEmpty) {
-                  return 'Vui lòng nhập thông tin';
-                }
-                bool emailValid = RegExp(
-                        r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                    .hasMatch(value);
-                if (!emailValid) {
-                  return 'Vui lòng nhập email';
-                }
-                return null;
+            CheckboxListTile(
+              value: _rememberMe,
+              onChanged: (value) {
+                if (value == null) return;
+                setState(() {
+                  _rememberMe = value;
+                });
               },
-              decoration: const InputDecoration(
-                labelText: 'Email',
-                hintText: 'Email',
-                prefixIcon: Icon(Icons.email_outlined),
-                border: OutlineInputBorder(),
-              ),
+              title: const Text('Nhớ tài khoản'),
+              controlAffinity: ListTileControlAffinity.leading,
+              dense: true,
+              contentPadding: const EdgeInsets.all(0),
             ),
-            _gap(),
-            TextFormField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Vui lòng nhập số điện thoại';
-                  }
-
-                  if (value.length > 10 || value.length < 10) {
-                    return 'Nhập số điện thoại đúng 10 số';
-                  }
-                  return null;
-                },
-                decoration: const InputDecoration(
-                  labelText: 'Số điện thoại',
-                  hintText: 'Nhập số điện thoại',
-                  prefixIcon: Icon(Icons.phone_iphone_outlined),
-                  border: OutlineInputBorder(),
-                )),
             _gap(),
             SizedBox(
               width: double.infinity,
@@ -213,7 +188,7 @@ class __FormContentState extends State<_FormContent> {
                 child: const Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Text(
-                    'ĐĂNG KÝ',
+                    'ĐĂNG NHẬP',
                     style: TextStyle(
                         fontSize: 16,
                         fontWeight: FontWeight.bold,
@@ -221,15 +196,44 @@ class __FormContentState extends State<_FormContent> {
                   ),
                 ),
                 onPressed: () {
+                  final username = _userController.text;
+                  final password = _passWordcontroller.text;
                   if (_formKey.currentState?.validate() ?? false) {
-                    /// do something
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => SignInPage2()),
-                    );
+                    if (username == "TuneDao" && password == "123456") {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => HomePage()),
+                      );
+                    }
                   }
                 },
               ),
+            ),
+            _gap(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Bạn chưa có tài khoản? ',
+                  style: TextStyle(color: Color.fromRGBO(21, 52, 72, 1)),
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              RegisterPage()), // Replace with your Forgot Password page
+                    );
+                  },
+                  child: const Text(
+                    'Đăng ký tại đây',
+                    style: TextStyle(
+                        color: Color.fromRGBO(232, 189, 15, 1),
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
             ),
             _gap(),
             const Text(
@@ -237,7 +241,7 @@ class __FormContentState extends State<_FormContent> {
               style: TextStyle(
                   fontWeight: FontWeight.bold,
                   fontSize: 15,
-                  color: Colors.blue),
+                  color: Color.fromRGBO(21, 52, 72, 1)),
             ),
             const Row(
               mainAxisAlignment: MainAxisAlignment.center,

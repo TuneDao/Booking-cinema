@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_android/Pages/User/SignIn/changepassword.dart';
+import 'package:project_android/Screen/User/SignIn/changepassword.dart';
 
 class OTP extends StatelessWidget {
   const OTP({Key? key}) : super(key: key);

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_android/Data/model/filmmodel.dart';
 import 'package:project_android/Data/provider/filmprovider.dart';
-import 'package:project_android/Pages/User/Tickets/filmbody.dart';
-import 'package:project_android/Pages/User/Tickets/filmwidget.dart';
+import 'package:project_android/Screen/User/Tickets/filmbody.dart';
+import 'package:project_android/Screen/User/Tickets/filmwidget.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class TicketsScreen extends StatefulWidget {

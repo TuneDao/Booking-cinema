@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project_android/Pages/User/Tickets/buytickets.dart';
-import 'package:project_android/Pages/User/News/newspage.dart';
-import 'package:project_android/Pages/User/Profile/profile.dart';
+import 'package:project_android/Screen/User/Tickets/buytickets.dart';
+import 'package:project_android/Screen/User/News/newspage.dart';
+import 'package:project_android/Screen/User/Profile/profile.dart';
 import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 

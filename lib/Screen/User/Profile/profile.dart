@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_android/Data/model/model.dart';
-import 'package:project_android/Pages/User/SignIn/changepassword.dart';
+import 'package:project_android/Screen/User/Profile/editprofile.dart';
+import 'package:project_android/Screen/User/SignIn/changepassword.dart';
 
 class ProfilePage1 extends StatelessWidget {
   const ProfilePage1({Key? key}) : super(key: key);
@@ -31,7 +32,12 @@ class ProfilePage1 extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       FloatingActionButton.extended(
-                        onPressed: () {},
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EditProfile()));
+                        },
                         heroTag: 'edit',
                         elevation: 0,
                         label: const Text("Sửa thông tin"),

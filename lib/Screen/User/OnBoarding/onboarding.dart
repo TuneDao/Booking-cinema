@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_android/Pages/User/SignIn/login.dart';
+import 'package:project_android/Screen/User/SignIn/login.dart';
 
 class OnboardingPage1 extends StatelessWidget {
   const OnboardingPage1({Key? key}) : super(key: key);
@@ -19,7 +19,7 @@ class OnboardingPage1 extends StatelessWidget {
             title: 'Tiện lợi, dễ dàng',
             description:
                 'Được thiết kế để mang đến cho người dùng trải nghiệm xem phim tiện lợi và dễ dàng nhất.',
-            imageUrl: 'https://ibb.co/wQC1SCR',
+            imageUrl: 'https://i.ibb.co/cJqsPSB/scooter.png',
             bgColor: Colors.indigo,
           ),
           OnboardingPageModel(
