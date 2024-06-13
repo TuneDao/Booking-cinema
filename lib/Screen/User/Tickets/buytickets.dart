@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:project_android/Data/model/filmmodel.dart';
-import 'package:project_android/Data/provider/filmprovider.dart';
-import 'package:project_android/Screen/User/Tickets/filmbody.dart';
 import 'package:project_android/Screen/User/Tickets/filmwidget.dart';
 import 'package:table_calendar/table_calendar.dart';
 
@@ -34,7 +31,7 @@ class CalenderScreen extends StatefulWidget {
 
 class _CalenderScreenState extends State<CalenderScreen> {
   DateTime _focusedDay = DateTime.now();
-  DateTime? _selectedDay;
+  DateTime? _selectedDay = DateTime.now();
 
   @override
   Widget build(BuildContext context) {
@@ -63,7 +60,7 @@ class _CalenderScreenState extends State<CalenderScreen> {
             onDaySelected: (selectedDay, focusedDay) {
               setState(() {
                 _selectedDay = selectedDay;
-                _focusedDay = focusedDay; // update `_focusedDay` here as well
+                _focusedDay = focusedDay;
               });
             },
             calendarFormat: CalendarFormat.week,

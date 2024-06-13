@@ -4,17 +4,20 @@
             "id": 1,
             "name":"DORAEMON: NOBITA VÀ BẢN GIAO HƯỞNG ĐỊA CẦU",
             "category": "Hoạt hình",
-            "img": "Doraemon.jpeg"
+            "img": "Doraemon.jpeg",
+            "time":"11:45"
         },{
             "id": 2,
             "name":"LẬT MẶT 7, MỘT ĐIỀU ƯỚC",
             "category": "Phim hài",
-            "img": "Latmat.jpeg"
+            "img": "Latmat.jpeg",
+            "time":"13:45"
         },{
             "id": 3,
             "name":"FURIOSA: CÂU CHUYỆN TỪ MAX ĐIÊN",
             "category": "Phiêu lưu",
-            "img": "Furiosa.jpeg"
+            "img": "Furiosa.jpeg",
+            "time":"02:45"
         }
         
     ]

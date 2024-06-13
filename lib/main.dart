@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:project_android/Screen/User/Home/home.dart';
-import 'package:project_android/Screen/User/OnBoarding/onboarding.dart';
-import 'package:project_android/Screen/User/Profile/editprofile.dart';
 
 void main() {
   runApp(const MainApp());

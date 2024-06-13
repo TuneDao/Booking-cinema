@@ -4,8 +4,8 @@ import 'package:project_android/config/const.dart';
 
 Widget itemFilmView(Film itemFilm) {
   return Container(
-    padding: const EdgeInsets.all(15),
-    margin: const EdgeInsets.symmetric(vertical: 5),
+    padding: const EdgeInsets.all(10),
+    margin: const EdgeInsets.symmetric(vertical: 10),
     decoration: BoxDecoration(color: Colors.grey.shade200),
     child: Row(
       mainAxisAlignment: MainAxisAlignment.start,
@@ -14,7 +14,7 @@ Widget itemFilmView(Film itemFilm) {
         Image.asset(
           urlimg + itemFilm.img!,
           height: 120,
-          width: 60,
+          width: 120,
           errorBuilder: (context, error, stackTrace) => const Icon(Icons.image),
         ),
         const SizedBox(
@@ -32,11 +32,37 @@ Widget itemFilmView(Film itemFilm) {
                 ),
               ),
               const SizedBox(height: 5), // Add some space between the texts
-              Text(
-                itemFilm.category ?? '',
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.red,
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8), // Rounded corners
+                  color: const Color.fromRGBO(
+                      0, 173, 239, 1), // Background color of the box
+                ),
+                child: Text(
+                  itemFilm.category ?? '',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.black,
+                  ),
+                ),
+              ),
+              const SizedBox(height: 15),
+              Container(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(8), // Rounded corners
+                  color: const Color.fromRGBO(
+                      0, 51, 160, 1), // Background color of the box
+                ),
+                child: Text(
+                  itemFilm.time ?? '',
+                  style: const TextStyle(
+                    fontSize: 14,
+                    color: Colors.white,
+                  ),
                 ),
               ),
             ],
