@@ -9,6 +9,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.11.0"
+  awesome_drawer_bar:
+    dependency: "direct main"
+    description:
+      name: awesome_drawer_bar
+      sha256: "6fddeb0e3e144be6d872a68bd9760e5e15299e561e4aab82895aaf02690bdc9c"
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.2.0"
   boolean_selector:
     dependency: transitive
     description:
@@ -70,6 +78,14 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_adaptive_scaffold:
+    dependency: transitive
+    description:
+      name: flutter_adaptive_scaffold
+      sha256: "28ba468c0183f6632cb222298f47f74c6c0888580784757d6a4ceeba00be6154"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.9"
   flutter_calendar_week:
     dependency: "direct main"
     description:
@@ -86,6 +102,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.0.2"
+  flutter_slider_drawer:
+    dependency: "direct main"
+    description:
+      name: flutter_slider_drawer
+      sha256: "7e34f47a6d37c7518791fa1e242492df23e75ccbc600eeda4abfd5641aeea709"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.3"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -282,4 +306,4 @@ packages:
     version: "13.0.0"
 sdks:
   dart: ">=3.3.4 <4.0.0"
-  flutter: ">=1.17.0"
+  flutter: ">=3.0.0"

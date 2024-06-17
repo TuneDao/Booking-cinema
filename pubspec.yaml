@@ -7,10 +7,12 @@ environment:
   sdk: ">=3.3.4 <4.0.0"
 
 dependencies:
+  awesome_drawer_bar: ^1.2.0
   buttons_tabbar: ^1.3.10
   flutter:
     sdk: flutter
   flutter_calendar_week: ^2.0.0
+  flutter_slider_drawer: ^2.1.3
   font_awesome_flutter: ^10.7.0
   horizontal_week_calendar: ^0.0.16
   salomon_bottom_bar: ^3.3.2
