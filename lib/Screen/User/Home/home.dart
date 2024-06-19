@@ -1,4 +1,6 @@
+import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project_android/Screen/User/Tickets/buytickets.dart';
 import 'package:project_android/Screen/User/News/newspage.dart';
@@ -31,6 +33,14 @@ class _HomePageState extends State<HomePage> {
         return const NewsPage();
       case 3:
         return const ProfilePage1();
+      case 4:
+        return const Center(
+          child: Text('Thông tin rạp'),
+        );
+      case 5:
+        return const Center(
+          child: Text('Vé của tôi'),
+        );
       default:
         return const Center(child: Text("Trang chủ"));
     }
@@ -121,6 +131,56 @@ class _HomePageState extends State<HomePage> {
           ),
         );
       case 3:
+        return AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: const Color.fromRGBO(0, 51, 160, 1),
+          elevation: 0,
+          title: Row(
+            children: [
+              if (!isLargeScreen)
+                IconButton(
+                  icon: const Icon(Icons.menu),
+                  color: Colors.white,
+                  onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+                ),
+              const Text(
+                "Thành viên",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                  wordSpacing: 5,
+                ),
+              ),
+              if (isLargeScreen) Expanded(child: _navBarItems()),
+            ],
+          ),
+        );
+      case 4:
+        return AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: const Color.fromRGBO(0, 51, 160, 1),
+          elevation: 0,
+          title: Row(
+            children: [
+              if (!isLargeScreen)
+                IconButton(
+                  icon: const Icon(Icons.menu),
+                  color: Colors.white,
+                  onPressed: () => _scaffoldKey.currentState?.openDrawer(),
+                ),
+              const Text(
+                "Thông tin rạp",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w500,
+                  wordSpacing: 5,
+                ),
+              ),
+              if (isLargeScreen) Expanded(child: _navBarItems()),
+            ],
+          ),
+        );
+      case 5:
         return AppBar(
           automaticallyImplyLeading: false,
           backgroundColor: const Color.fromRGBO(0, 51, 160, 1),
@@ -264,7 +324,47 @@ class _HomePageState extends State<HomePage> {
                 ],
               ),
             ),
-
+            const Divider(), // kẻ thẳng
+            TextButton(
+              onPressed: () {
+                _loadWidget(_selectedIndex);
+              },
+              child: const Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    FontAwesomeIcons.crown,
+                    size: 15,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    '  Đặc quyền',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(), // kẻ thẳng
+            TextButton(
+              onPressed: () {},
+              child: const Row(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    FontAwesomeIcons.photoFilm,
+                    size: 15,
+                    color: Colors.white,
+                  ),
+                  Text(
+                    '  Danh sách phim',
+                    style: TextStyle(color: Colors.white),
+                  ),
+                ],
+              ),
+            ),
+            const Divider(), // kẻ thẳng
             Expanded(
               child: GridView.count(
                 crossAxisCount: 3,
@@ -304,6 +404,27 @@ class _HomePageState extends State<HomePage> {
                         ))
                     .values
                     .toList(),
+              ),
+            ),
+            const Divider(),
+            const Expanded(
+              child: TextButton(
+                onPressed: null,
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      FontAwesomeIcons.rightFromBracket,
+                      size: 15,
+                      color: Colors.white,
+                    ),
+                    Text(
+                      ' Đăng xuất',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
