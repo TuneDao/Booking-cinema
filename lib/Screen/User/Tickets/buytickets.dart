@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_android/Screen/User/Tickets/filmwidget.dart';
+import 'package:project_android/config/const.dart';
 import 'package:table_calendar/table_calendar.dart';
 
 class TicketsScreen extends StatefulWidget {
@@ -39,8 +40,8 @@ class _CalenderScreenState extends State<CalenderScreen> {
       decoration: const BoxDecoration(
         gradient: LinearGradient(
           colors: [
-            Color.fromRGBO(0, 51, 160, 1),
-            Color.fromRGBO(0, 173, 239, 1),
+            colorTheme,
+            colorTheme2,
           ],
           begin: Alignment.topCenter,
           end: Alignment.bottomCenter,

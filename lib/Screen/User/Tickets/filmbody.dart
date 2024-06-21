@@ -36,15 +36,14 @@ Widget itemFilmView(Film itemFilm) {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8), // Rounded corners
-                  color: const Color.fromRGBO(
-                      0, 173, 239, 1), // Background color of the box
-                ),
+                    borderRadius: BorderRadius.circular(8), // Rounded corners
+                    color: colorTheme2 // Background color of the box
+                    ),
                 child: Text(
                   itemFilm.category ?? '',
                   style: const TextStyle(
                     fontSize: 14,
-                    color: Colors.black,
+                    color: Colors.white,
                   ),
                 ),
               ),
@@ -53,10 +52,9 @@ Widget itemFilmView(Film itemFilm) {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8), // Rounded corners
-                  color: const Color.fromRGBO(
-                      0, 51, 160, 1), // Background color of the box
-                ),
+                    borderRadius: BorderRadius.circular(8), // Rounded corners
+                    color: colorHome // Background color of the box
+                    ),
                 child: Text(
                   itemFilm.time ?? '',
                   style: const TextStyle(
