@@ -18,7 +18,20 @@
             "category": "Phiêu lưu",
             "img": "Furiosa.jpeg",
             "time":"02:45"
+        },{
+            "id": 4,
+            "name":"KUNG FU PANDA 4",
+            "category": "Hoạt hình",
+            "img": "Panda.jpg",
+            "time":"09:30"
+        },
+        {
+            "id": 5,
+            "name":"DEADPOOL 2",
+            "category": "Hành động",
+            "img": "Deadpool.jpg",
+            "time":"11:30"
         }
-        
+
     ]
 }

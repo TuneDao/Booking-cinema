@@ -2,6 +2,7 @@ import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:project_android/Data/model/model.dart';
 import 'package:project_android/Screen/User/Tickets/buytickets.dart';
 import 'package:project_android/Screen/User/News/newspage.dart';
 import 'package:project_android/Screen/User/Profile/profile.dart';
@@ -274,7 +275,7 @@ class _HomePageState extends State<HomePage> {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         Text(
-                          'Đào Nguyễn Tuấn Anh',
+                          "TuneDao",
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 16,
