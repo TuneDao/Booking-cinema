@@ -33,7 +33,7 @@ class _HomePageState extends State<HomePage> {
       case 2:
         return const NewsPage();
       case 3:
-        return const ProfilePage1();
+        return const ProfileScreen();
       case 4:
         return const Center(
           child: Text('Thông tin rạp'),

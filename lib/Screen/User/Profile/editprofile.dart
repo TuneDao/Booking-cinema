@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_android/config/const.dart';
 
 class EditProfile extends StatefulWidget {
   const EditProfile({super.key});
@@ -26,19 +27,9 @@ class _AppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-      iconTheme: const IconThemeData(color: Colors.white),
-      title: const Center(
-        child: Text(
-          "CẬP NHẬT THÔNG TIN",
-          style: TextStyle(
-              color: Colors.white,
-              fontWeight: FontWeight.w500,
-              wordSpacing: 5,
-              letterSpacing: 5),
-        ),
-      ),
-      backgroundColor: const Color.fromRGBO(0, 51, 160, 1),
-    );
+        iconTheme: const IconThemeData(color: Colors.white),
+        title: const Text("CẬP NHẬT THÔNG TIN", style: titleStyle),
+        backgroundColor: colorTheme);
   }
 }
 
@@ -116,7 +107,7 @@ class __FormContentState extends State<_FormContent> {
             },
             child: const Text(
               'XÓA TÀI KHOẢN',
-              style: TextStyle(color: Colors.amber),
+              style: TextStyle(color: Colors.red),
             ),
           ),
         ],

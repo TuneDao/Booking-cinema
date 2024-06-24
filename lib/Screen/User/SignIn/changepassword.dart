@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_android/Screen/User/SignIn/login.dart';
+import 'package:project_android/config/const.dart';
 
 class ChangePassword extends StatelessWidget {
   const ChangePassword({Key? key}) : super(key: key);
@@ -17,10 +18,10 @@ class ChangePassword extends StatelessWidget {
               Navigator.pop(context);
             },
           ),
-          backgroundColor: const Color.fromRGBO(0, 51, 160, 1),
+          backgroundColor: colorTheme,
           title: const Text(
             "Đổi mật khẩu",
-            style: TextStyle(color: Colors.white),
+            style: titleStyle,
           ),
         ),
         body: Center(
