@@ -39,7 +39,7 @@ class _FilmWidgetState extends State<FilmWidget> {
                 NeverScrollableScrollPhysics(), // Prevents scrolling in nested ListView
             itemCount: lstFilm.length,
             itemBuilder: (context, index) {
-              return itemFilmView(lstFilm[index]);
+              return itemFilmView(context, lstFilm[index]);
             },
           );
         }
