@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_android/Data/model/filmmodel.dart';
-import 'package:project_android/Screen/User/Tickets/test.dart';
+import 'package:project_android/Screen/User/Tickets/seats.dart';
 import 'package:project_android/config/const.dart';
 
 Widget itemFilmView(BuildContext context, Film itemFilm) {

@@ -10,6 +10,14 @@ class SeatsSelect extends StatelessWidget {
       create: (_) => SeatSelectionModel(),
       child: MaterialApp(
         home: Scaffold(
+          appBar: AppBar(
+            backgroundColor: colorTheme,
+            title: const Text(
+              'Chọn ghế',
+              style: titleStyle,
+            ),
+            automaticallyImplyLeading: true,
+          ),
           body: SeatSelectionScreen(),
         ),
       ),
