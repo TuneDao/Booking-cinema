@@ -12,14 +12,15 @@ class _TicketsScreenState extends State<TicketsScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+        backgroundColor: Colors.white,
         body: SingleChildScrollView(
-      child: Column(
-        children: [
-          CalenderScreen(),
-          FilmWidget(),
-        ],
-      ),
-    ));
+          child: Column(
+            children: [
+              CalenderScreen(),
+              FilmWidget(),
+            ],
+          ),
+        ));
   }
 }
 

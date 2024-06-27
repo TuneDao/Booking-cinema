@@ -1,0 +1,36 @@
+{
+    "data":[
+        {
+            "id": 1,
+            "name":"MINION SINGLE COMBO",
+            "price": 259000,
+            "img": "popcorn.png",
+            "info":"01 ly nhân vật Minion + 01 nước siêu lớn + 01 bắp ngọt lớn"
+        },{
+            "id": 2,
+            "name":"MILO COMBO",
+            "price": 99000,
+            "img": "Milo.png",
+            "info":"01 Milo lớn + 1 nước ngọt siêu lớn + 1 bắt ngọt lớn"
+        },{
+             "id": 3,
+            "name":"PREMIUM MY COMBO",
+            "price": 109000,
+            "img": "premiumPopcorn.png",
+            "info":"01 Bắp lớn + 1 Nước siêu lớn + 01 Snack tùy chọn"
+        },{
+             "id": 4,
+            "name":"MY COMBO",
+            "price": 89000,
+            "img": "popcorn_drink.png",
+            "info":"01 Bắp lớn + 1 Nước siêu lớn "
+        },{
+             "id": 5,
+            "name":"HF COMBO",
+            "price": 89000,
+            "img": "HF_combo.png",
+            "info":"01 Bắp lớn + 1 Nước siêu lớn "
+        }
+
+    ]
+}

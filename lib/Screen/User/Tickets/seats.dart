@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
+import 'package:project_android/Screen/User/Food/combolist.dart';
 import 'package:project_android/config/const.dart';
 import 'package:provider/provider.dart';
 
@@ -11,12 +13,18 @@ class SeatsSelect extends StatelessWidget {
       child: MaterialApp(
         home: Scaffold(
           appBar: AppBar(
+            leading: IconButton(
+              icon: const Icon(Icons.arrow_back),
+              color: Colors.white,
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
             backgroundColor: colorTheme,
             title: const Text(
               'Chọn ghế',
               style: titleStyle,
             ),
-            automaticallyImplyLeading: true,
           ),
           body: SeatSelectionScreen(),
         ),
@@ -68,12 +76,14 @@ class Seat {
 enum SeatType { standard, vip, unavailable, couple }
 
 class SeatSelectionScreen extends StatelessWidget {
+  int totalPrice = 0;
+
   @override
   Widget build(BuildContext context) {
     final seatModel = Provider.of<SeatSelectionModel>(context);
 
     return Container(
-      color: Colors.grey[850],
+      color: Color(0xFF303030),
       child: Column(
         children: [
           Container(
@@ -145,73 +155,15 @@ class SeatSelectionScreen extends StatelessWidget {
             ),
           ),
           Container(
-              decoration: const BoxDecoration(
-                gradient: LinearGradient(
-                  colors: [colorTheme, Colors.black],
-                  begin: Alignment.centerLeft,
-                  end: Alignment.centerRight,
-                ),
+            decoration: const BoxDecoration(
+              gradient: LinearGradient(
+                colors: [colorTheme, Colors.black],
+                begin: Alignment.centerLeft,
+                end: Alignment.centerRight,
               ),
-              child: const Padding(
-                padding: EdgeInsets.all(16.0),
-                child: Row(
-                  children: [
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      children: [
-                        textWhite(text: 'Suất chiếu'),
-                        SizedBox(
-                          height: 8.0,
-                        ),
-                        textWhite(text: 'Phòng chiếu'),
-                        SizedBox(
-                          height: 8.0,
-                        ),
-                        textWhite(text: 'Ghế'),
-                        SizedBox(
-                          height: 8.0,
-                        ),
-                        textWhite(
-                          text: 'Tiền vé',
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      children: [
-                        textWhite(text: '10:15, 25/06/2024'),
-                        SizedBox(
-                          height: 8.0,
-                        ),
-                        textWhite(text: 'Cinema 3'),
-                        SizedBox(
-                          height: 8.0,
-                        ),
-                        textWhite(text: '4G'),
-                        SizedBox(
-                          height: 8.0,
-                        ),
-                        textWhite(
-                          text: '75,000đ',
-                        )
-                      ],
-                    ),
-                    SizedBox(
-                      width: 140,
-                    ),
-                    ElevatedButton(
-                        onPressed: null,
-                        child: Icon(
-                          FontAwesomeIcons.arrowRight,
-                          color: Colors.white,
-                        ))
-                  ],
-                ),
-              ))
+            ),
+            child: Bottom(totalPrice: totalPrice),
+          )
         ],
       ),
     );
@@ -239,6 +191,65 @@ class LegendItem extends StatelessWidget {
           style: const TextStyle(color: Colors.white),
         ),
       ],
+    );
+  }
+}
+
+class Bottom extends StatelessWidget {
+  final int totalPrice;
+
+  const Bottom({super.key, required this.totalPrice});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [colorTheme, Colors.black],
+          begin: Alignment.centerLeft,
+          end: Alignment.centerRight,
+        ),
+      ),
+      padding: const EdgeInsets.all(16.0),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          const Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              textWhite(text: 'Suất chiếu'),
+              SizedBox(height: 8.0),
+              textWhite(text: 'Phòng chiếu'),
+              SizedBox(height: 8.0),
+              textWhite(text: 'Ghế'),
+              SizedBox(height: 8.0),
+              textWhite(text: 'Tổng tiền'),
+            ],
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              const textWhite(text: '10:15, 25/06/2024'),
+              const SizedBox(height: 8.0),
+              const textWhite(text: 'Cinema 3'),
+              const SizedBox(height: 8.0),
+              const textWhite(text: '4G'),
+              const SizedBox(height: 8.0),
+              textWhite(text: NumberFormat('###,### đ').format(totalPrice)),
+            ],
+          ),
+          ElevatedButton(
+            onPressed: () {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ComboList()));
+            },
+            child: const Icon(
+              FontAwesomeIcons.arrowRight,
+              color: Colors.black,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }

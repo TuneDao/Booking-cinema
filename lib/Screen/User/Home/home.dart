@@ -6,6 +6,7 @@ import 'package:project_android/Data/model/model.dart';
 import 'package:project_android/Screen/User/Tickets/buytickets.dart';
 import 'package:project_android/Screen/User/News/newspage.dart';
 import 'package:project_android/Screen/User/Profile/profile.dart';
+import 'package:project_android/Screen/User/Tickets/filmwidget.dart';
 import 'package:project_android/config/const.dart';
 
 class HomePage extends StatefulWidget {
@@ -323,7 +324,10 @@ class _HomePageState extends State<HomePage> {
               ),
               const Divider(), // kẻ thẳng
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => TicketsScreen()));
+                },
                 child: const Row(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,

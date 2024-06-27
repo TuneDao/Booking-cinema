@@ -28,18 +28,26 @@ class _FilmWidgetState extends State<FilmWidget> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
-          return Center(child: Text('Error: ${snapshot.error}'));
+          return Center(
+              child: Text('Error: ${snapshot.error}',
+                  style: TextStyle(color: Colors.red)));
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return const Center(child: Text('No data available'));
+          return const Center(
+              child: Text('No data available',
+                  style: TextStyle(color: Colors.grey)));
         } else {
           List<Film> lstFilm = snapshot.data!;
           return ListView.builder(
             shrinkWrap: true,
             physics:
-                NeverScrollableScrollPhysics(), // Prevents scrolling in nested ListView
+                const NeverScrollableScrollPhysics(), // Prevents scrolling in nested ListView
             itemCount: lstFilm.length,
             itemBuilder: (context, index) {
-              return itemFilmView(context, lstFilm[index]);
+              return Padding(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+                child: itemFilmView(context, lstFilm[index]),
+              );
             },
           );
         }
