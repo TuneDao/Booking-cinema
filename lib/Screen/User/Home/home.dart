@@ -1,12 +1,10 @@
-import 'package:barcode_widget/barcode_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:project_android/Data/model/model.dart';
+import 'package:project_android/Screen/User/Home/welcomescreen.dart';
 import 'package:project_android/Screen/User/Tickets/buytickets.dart';
 import 'package:project_android/Screen/User/News/newspage.dart';
 import 'package:project_android/Screen/User/Profile/profile.dart';
-import 'package:project_android/Screen/User/Tickets/filmwidget.dart';
 import 'package:project_android/config/const.dart';
 
 class HomePage extends StatefulWidget {
@@ -29,7 +27,7 @@ class _HomePageState extends State<HomePage> {
   Widget _loadWidget(int index) {
     switch (index) {
       case 0:
-        return const Center(child: Text("Trang chủ"));
+        return WelcomeScreen();
       case 1:
         return TicketsScreen();
       case 2:
