@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -247,166 +249,191 @@ class _HomePageState extends State<HomePage> {
       );
 
   Widget _drawer() => Drawer(
-        child: Container(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [colorTheme, colorTheme2],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
+        child: Stack(
+          children: [
+            Positioned.fill(
+              child: Image.asset(
+                'assets/images/rapphim.jpg', // Thay thế đường dẫn đến hình ảnh của bạn
+                fit: BoxFit.cover,
+              ),
             ),
-          ),
-          child: Column(
-            children: [
-              // Avatar and User Info Section
-              Container(
-                padding: const EdgeInsets.all(16.0),
-                child: const Column(
-                  children: [
-                    CircleAvatar(
-                      radius: 30,
-                      backgroundImage: AssetImage(
-                          'assets/images/avatar.png'), // Replace with the path to your avatar image
-                    ),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+            Positioned.fill(
+              child: BackdropFilter(
+                filter: ImageFilter.blur(
+                    sigmaX: 20.0,
+                    sigmaY:
+                        20.0), // Điều chỉnh giá trị sigma để thay đổi mức độ làm mờ
+                child: Container(
+                  color: Colors.black
+                      .withOpacity(0), // Giữ cho container trong suốt
+                ),
+              ),
+            ),
+            Container(
+              child: Column(
+                children: [
+                  // Avatar and User Info Section
+                  Container(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
                       children: [
-                        Text(
-                          "TuneDao",
-                          style: TextStyle(
-                              color: Colors.white,
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Icon(Icons.card_membership,
-                                color: Colors.white, size: 16),
-                            SizedBox(width: 4),
-                            Text(
-                              'Member',
-                              style:
-                                  TextStyle(color: Colors.white, fontSize: 14),
+                        CircleAvatar(
+                          radius: 50,
+                          backgroundColor: Colors.grey[300],
+                          child: ClipRRect(
+                            borderRadius: BorderRadius.circular(100),
+                            child: Image.asset(
+                              'assets/images/avatar.jpg',
+                              fit: BoxFit.cover,
+                              width: 100,
+                              height: 100,
                             ),
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 16,
+                        ),
+                        const Column(
+                          crossAxisAlignment: CrossAxisAlignment.center,
+                          children: [
+                            Text(
+                              "TuneDao",
+                              style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.bold),
+                            ),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.card_membership,
+                                    color: Colors.white, size: 16),
+                                SizedBox(width: 4),
+                                Text(
+                                  'Member',
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 14),
+                                ),
+                              ],
+                            ),
+                            SizedBox(height: 8),
                           ],
                         ),
-                        SizedBox(height: 8),
                       ],
                     ),
-                  ],
-                ),
-              ),
-              const Divider(), // kẻ thẳng
-              TextButton(
-                onPressed: () {
-                  _loadWidget(_selectedIndex);
-                },
-                child: const Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      FontAwesomeIcons.crown,
-                      size: 15,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      '  Đặc quyền',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
-              ),
-              const Divider(), // kẻ thẳng
-              TextButton(
-                onPressed: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => TicketsScreen()));
-                },
-                child: const Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      FontAwesomeIcons.photoFilm,
-                      size: 15,
-                      color: Colors.white,
-                    ),
-                    Text(
-                      '  Danh sách phim',
-                      style: TextStyle(color: Colors.white),
-                    ),
-                  ],
-                ),
-              ),
-              const Divider(), // kẻ thẳng
-              Expanded(
-                child: GridView.count(
-                  crossAxisCount: 3,
-                  childAspectRatio: 1,
-                  padding: const EdgeInsets.all(20.0),
-                  crossAxisSpacing: 5,
-                  mainAxisSpacing: 5,
-                  children: _menuItems
-                      .asMap()
-                      .map((index, item) => MapEntry(
-                            index,
-                            GestureDetector(
-                              onTap: () {
-                                _onItemTapped(index);
-                                _scaffoldKey.currentState?.openEndDrawer();
-                              },
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Icon(
-                                    _menuIcons[index],
-                                    size: 25,
-                                    color: Colors.white,
-                                  ), // Icon size
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Text(
-                                    item,
-                                    style: const TextStyle(
-                                        fontSize: 13, color: Colors.white),
-                                    textAlign: TextAlign.center,
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ))
-                      .values
-                      .toList(),
-                ),
-              ),
-              const Divider(),
-              const Expanded(
-                child: TextButton(
-                  onPressed: null,
-                  child: Row(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(
-                        FontAwesomeIcons.rightFromBracket,
-                        size: 15,
-                        color: Colors.white,
-                      ),
-                      Text(
-                        ' Đăng xuất',
-                        style: TextStyle(color: Colors.white),
-                      ),
-                    ],
                   ),
-                ),
+                  const Divider(), // kẻ thẳng
+                  TextButton(
+                    onPressed: () {
+                      _loadWidget(_selectedIndex);
+                    },
+                    child: const Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          FontAwesomeIcons.crown,
+                          size: 15,
+                          color: Colors.white,
+                        ),
+                        Text(
+                          '  Đặc quyền',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(), // kẻ thẳng
+                  TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => TicketsScreen()));
+                    },
+                    child: const Row(
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          FontAwesomeIcons.photoFilm,
+                          size: 15,
+                          color: Colors.white,
+                        ),
+                        Text(
+                          '  Danh sách phim',
+                          style: TextStyle(color: Colors.white),
+                        ),
+                      ],
+                    ),
+                  ),
+                  const Divider(), // kẻ thẳng
+                  Expanded(
+                    child: GridView.count(
+                      crossAxisCount: 3,
+                      childAspectRatio: 1,
+                      padding: const EdgeInsets.all(20.0),
+                      crossAxisSpacing: 5,
+                      mainAxisSpacing: 5,
+                      children: _menuItems
+                          .asMap()
+                          .map((index, item) => MapEntry(
+                                index,
+                                GestureDetector(
+                                  onTap: () {
+                                    _onItemTapped(index);
+                                    _scaffoldKey.currentState?.openEndDrawer();
+                                  },
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Icon(
+                                        _menuIcons[index],
+                                        size: 25,
+                                        color: Colors.white,
+                                      ), // Icon size
+                                      const SizedBox(
+                                        height: 5,
+                                      ),
+                                      Text(
+                                        item,
+                                        style: const TextStyle(
+                                            fontSize: 13, color: Colors.white),
+                                        textAlign: TextAlign.center,
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ))
+                          .values
+                          .toList(),
+                    ),
+                  ),
+                  const Divider(),
+                  const Expanded(
+                    child: TextButton(
+                      onPressed: null,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.center,
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Icon(
+                            FontAwesomeIcons.rightFromBracket,
+                            size: 15,
+                            color: Colors.white,
+                          ),
+                          Text(
+                            ' Đăng xuất',
+                            style: TextStyle(color: Colors.white),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       );
 }

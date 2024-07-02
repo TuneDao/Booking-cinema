@@ -7,6 +7,7 @@ import 'package:flutter/widgets.dart';
 import 'package:project_android/Screen/User/SignIn/forgotpassword.dart';
 import 'package:project_android/Screen/User/Home/home.dart';
 import 'package:project_android/Screen/User/SignIn/register.dart';
+import 'package:project_android/config/const.dart';
 
 class SignInPage2 extends StatelessWidget {
   const SignInPage2({Key? key}) : super(key: key);
@@ -16,7 +17,29 @@ class SignInPage2 extends StatelessWidget {
     final bool isSmallScreen = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
-        body: Center(
+      body: Stack(
+        children: [
+          // Hình nền với hiệu ứng mờ
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/background_login.jpg', // Thay thế đường dẫn đến hình ảnh của bạn
+              fit: BoxFit.cover,
+            ),
+          ),
+          Positioned.fill(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(
+                  sigmaX: 20.0,
+                  sigmaY:
+                      20.0), // Điều chỉnh giá trị sigma để thay đổi mức độ làm mờ
+              child: Container(
+                color:
+                    Colors.black.withOpacity(0), // Giữ cho container trong suốt
+              ),
+            ),
+          ),
+          // Nội dung màn hình đăng nhập
+          Center(
             child: SingleChildScrollView(
                 child: isSmallScreen
                     ? const SingleChildScrollView(
@@ -39,7 +62,11 @@ class SignInPage2 extends StatelessWidget {
                             ),
                           ],
                         ),
-                      )))));
+                      ))),
+          ),
+        ],
+      ),
+    );
   }
 }
 
@@ -54,18 +81,21 @@ class _Logo extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Image.asset(
-          'assets/images/logo.png',
+          'assets/images/logo2.png',
           width: isSmallScreen ? 230 : 500,
           height: isSmallScreen ? 200 : 500,
         ),
         const Padding(
           padding: EdgeInsets.all(16.0),
-          child: Text("ĐĂNG NHẬP",
-              textAlign: TextAlign.center,
-              style: TextStyle(
-                  color: Color.fromRGBO(21, 52, 72, 1),
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold)),
+          child: Text(
+            "ĐĂNG NHẬP",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 30,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
         )
       ],
     );
@@ -84,7 +114,6 @@ class __FormContentState extends State<_FormContent> {
   final _passWordcontroller = TextEditingController();
 
   bool _isPasswordVisible = false;
-  bool _rememberMe = false;
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -106,11 +135,27 @@ class __FormContentState extends State<_FormContent> {
                 return null;
               },
               controller: _userController,
+              style: const TextStyle(color: Colors.red), // Màu chữ trắng
               decoration: const InputDecoration(
                 labelText: 'Tài khoản',
+                labelStyle: TextStyle(color: Colors.red), // Màu chữ của label
                 hintText: 'Tên tài khoản',
-                prefixIcon: Icon(Icons.person_2_outlined),
-                border: OutlineInputBorder(),
+                hintStyle: TextStyle(color: Colors.red), // Màu chữ hint
+                prefixIcon: Icon(
+                  Icons.person_2_outlined,
+                  color: Colors.red, // Màu của icon
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red), // Màu của border
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.red), // Màu border khi chưa được focus
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.red), // Màu border khi được focus
+                ),
               ),
             ),
             _gap(),
@@ -127,72 +172,80 @@ class __FormContentState extends State<_FormContent> {
               },
               controller: _passWordcontroller,
               obscureText: !_isPasswordVisible,
+              style: const TextStyle(color: Colors.red), // Màu chữ trắng
               decoration: InputDecoration(
-                  labelText: 'Mật khẩu',
-                  hintText: 'Mật khẩu',
-                  prefixIcon: const Icon(Icons.lock_outline_rounded),
-                  border: const OutlineInputBorder(),
-                  suffixIcon: IconButton(
-                    icon: Icon(_isPasswordVisible
+                labelText: 'Mật khẩu',
+                labelStyle:
+                    const TextStyle(color: Colors.red), // Màu chữ của label
+                hintText: 'Mật khẩu',
+                hintStyle: const TextStyle(color: Colors.red), // Màu chữ hint
+                prefixIcon: const Icon(
+                  Icons.lock_outline_rounded,
+                  color: Colors.red, // Màu của icon
+                ),
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red), // Màu của border
+                ),
+                enabledBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.red), // Màu border khi chưa được focus
+                ),
+                focusedBorder: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.red), // Màu border khi được focus
+                ),
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _isPasswordVisible
                         ? Icons.visibility_off
-                        : Icons.visibility),
-                    onPressed: () {
-                      setState(() {
-                        _isPasswordVisible = !_isPasswordVisible;
-                      });
-                    },
-                  )),
+                        : Icons.visibility,
+                    color: Colors.red, // Màu của icon
+                  ),
+                  onPressed: () {
+                    setState(() {
+                      _isPasswordVisible = !_isPasswordVisible;
+                    });
+                  },
+                ),
+              ),
             ),
             _gap(),
             Row(
               mainAxisAlignment: MainAxisAlignment.end,
               children: [
                 GestureDetector(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) =>
-                              ForgotPassword()), // Replace with your Forgot Password page
-                    );
-                  },
-                  child: const Text(
-                    'Quên mật khẩu ?',
-                    style: TextStyle(color: Color.fromRGBO(232, 189, 15, 1)),
-                  ),
-                ),
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>
+                                ForgotPassword()), // Replace with your Forgot Password page
+                      );
+                    },
+                    child: const textWhite(
+                      text: 'Quên mật khẩu',
+                    )),
               ],
-            ),
-            _gap(),
-            CheckboxListTile(
-              value: _rememberMe,
-              onChanged: (value) {
-                if (value == null) return;
-                setState(() {
-                  _rememberMe = value;
-                });
-              },
-              title: const Text('Nhớ tài khoản'),
-              controlAffinity: ListTileControlAffinity.leading,
-              dense: true,
-              contentPadding: const EdgeInsets.all(0),
             ),
             _gap(),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4)),
-                    backgroundColor: const Color.fromRGBO(232, 189, 15, 1)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(4),
+                  ),
+                  backgroundColor: colorTheme,
+                ),
                 child: const Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Text(
                     'ĐĂNG NHẬP',
                     style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
                   ),
                 ),
                 onPressed: () {
@@ -213,10 +266,7 @@ class __FormContentState extends State<_FormContent> {
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                const Text(
-                  'Bạn chưa có tài khoản? ',
-                  style: TextStyle(color: Color.fromRGBO(21, 52, 72, 1)),
-                ),
+                const textWhite(text: 'Bạn đã có tài khoản ?'),
                 GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -226,38 +276,10 @@ class __FormContentState extends State<_FormContent> {
                               RegisterPage()), // Replace with your Forgot Password page
                     );
                   },
-                  child: const Text(
-                    'Đăng ký tại đây',
-                    style: TextStyle(
-                        color: Color.fromRGBO(232, 189, 15, 1),
-                        fontWeight: FontWeight.bold),
-                  ),
+                  child: const textWhite(text: ' Đăng ký tại đây'),
                 ),
               ],
             ),
-            _gap(),
-            const Text(
-              'CONTACT US',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Color.fromRGBO(21, 52, 72, 1)),
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: null,
-                  icon: Icon(Icons.facebook),
-                  iconSize: 30,
-                ),
-                IconButton(
-                  onPressed: null,
-                  icon: Icon(Icons.email),
-                  iconSize: 30,
-                ),
-              ],
-            )
           ],
         ),
       ),
@@ -265,4 +287,19 @@ class __FormContentState extends State<_FormContent> {
   }
 
   Widget _gap() => const SizedBox(height: 16);
+}
+
+// Định nghĩa widget textWhite
+class textWhite extends StatelessWidget {
+  final String text;
+
+  const textWhite({required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: const TextStyle(color: Colors.white),
+    );
+  }
 }

@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:project_android/Screen/User/SignIn/changepassword.dart';
+import 'package:project_android/config/const.dart';
 
 class OTP extends StatelessWidget {
   const OTP({Key? key}) : super(key: key);
@@ -9,30 +12,54 @@ class OTP extends StatelessWidget {
     final bool isSmallScreen = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
-        body: Center(
-            child: SingleChildScrollView(
-                child: isSmallScreen
-                    ? const SingleChildScrollView(
-                        child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          _Logo(),
-                          _FormContent(),
-                        ],
-                      ))
-                    : SingleChildScrollView(
-                        child: Container(
-                        padding: const EdgeInsets.all(15.0),
-                        constraints: const BoxConstraints(maxWidth: 800),
-                        child: const Row(
+      body: Stack(
+        children: [
+          // Hình nền với hiệu ứng mờ
+          Positioned.fill(
+            child: Image.asset(
+              'assets/images/background_login.jpg', // Thay thế đường dẫn đến hình ảnh của bạn
+              fit: BoxFit.cover,
+            ),
+          ),
+          Positioned.fill(
+            child: BackdropFilter(
+              filter: ImageFilter.blur(
+                  sigmaX: 20.0,
+                  sigmaY:
+                      20.0), // Điều chỉnh giá trị sigma để thay đổi mức độ làm mờ
+              child: Container(
+                color:
+                    Colors.black.withOpacity(0), // Giữ cho container trong suốt
+              ),
+            ),
+          ),
+          Center(
+              child: SingleChildScrollView(
+                  child: isSmallScreen
+                      ? const SingleChildScrollView(
+                          child: Column(
+                          mainAxisSize: MainAxisSize.min,
                           children: [
-                            Expanded(child: _Logo()),
-                            Expanded(
-                              child: Center(child: _FormContent()),
-                            ),
+                            _Logo(),
+                            _FormContent(),
                           ],
-                        ),
-                      )))));
+                        ))
+                      : SingleChildScrollView(
+                          child: Container(
+                          padding: const EdgeInsets.all(15.0),
+                          constraints: const BoxConstraints(maxWidth: 800),
+                          child: const Row(
+                            children: [
+                              Expanded(child: _Logo()),
+                              Expanded(
+                                child: Center(child: _FormContent()),
+                              ),
+                            ],
+                          ),
+                        )))),
+        ],
+      ),
+    );
   }
 }
 
@@ -47,7 +74,7 @@ class _Logo extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Image.asset(
-          'assets/images/logo.png',
+          'assets/images/logo2.png',
           width: isSmallScreen ? 230 : 500,
           height: isSmallScreen ? 200 : 500,
         ),
@@ -56,7 +83,7 @@ class _Logo extends StatelessWidget {
           child: Text("XÁC NHẬN OTP",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Color.fromRGBO(21, 52, 72, 1),
+                  color: Colors.white,
                   fontSize: 30,
                   fontWeight: FontWeight.bold)),
         ),
@@ -99,11 +126,24 @@ class __FormContentState extends State<_FormContent> {
                 }
                 return null;
               },
+              style: const TextStyle(color: Colors.red),
               controller: _otpController,
               decoration: const InputDecoration(
                 labelText: 'Nhập mã OTP',
+                labelStyle: TextStyle(color: Colors.red),
                 hintText: 'Mã OTP',
-                border: OutlineInputBorder(),
+                hintStyle: TextStyle(color: Colors.red),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.red), // Màu border khi chưa được focus
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.red), // Màu border khi được focus
+                ),
               ),
             ),
             const Padding(
@@ -112,7 +152,7 @@ class __FormContentState extends State<_FormContent> {
                   "Mã OTP sẽ được gửi qua email của bạn. Vui lòng truy cập email để lấy mã OTP",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Color.fromRGBO(21, 52, 72, 1),
+                      color: Colors.white,
                       fontSize: 16,
                       fontWeight: FontWeight.bold)),
             ),
@@ -123,7 +163,7 @@ class __FormContentState extends State<_FormContent> {
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4)),
-                    backgroundColor: const Color.fromRGBO(232, 189, 15, 1)),
+                    backgroundColor: colorTheme),
                 child: const Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Text(
@@ -146,28 +186,6 @@ class __FormContentState extends State<_FormContent> {
               ),
             ),
             _gap(),
-            const Text(
-              'CONTACT US',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Color.fromRGBO(21, 52, 72, 1)),
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: null,
-                  icon: Icon(Icons.facebook),
-                  iconSize: 30,
-                ),
-                IconButton(
-                  onPressed: null,
-                  icon: Icon(Icons.email),
-                  iconSize: 30,
-                ),
-              ],
-            )
           ],
         ),
       ),

@@ -1,8 +1,8 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 
-class CarouselNews extends StatelessWidget {
-  const CarouselNews({super.key});
+class CarouselBanner extends StatelessWidget {
+  const CarouselBanner({super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:project_android/Screen/User/SignIn/otp.dart';
+import 'package:project_android/config/const.dart';
 
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({Key? key}) : super(key: key);
@@ -9,7 +12,28 @@ class ForgotPassword extends StatelessWidget {
     final bool isSmallScreen = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
-        body: Center(
+        body: Stack(
+      children: [
+        // Hình nền với hiệu ứng mờ
+        Positioned.fill(
+          child: Image.asset(
+            'assets/images/background_login.jpg', // Thay thế đường dẫn đến hình ảnh của bạn
+            fit: BoxFit.cover,
+          ),
+        ),
+        Positioned.fill(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+                sigmaX: 20.0,
+                sigmaY:
+                    20.0), // Điều chỉnh giá trị sigma để thay đổi mức độ làm mờ
+            child: Container(
+              color:
+                  Colors.black.withOpacity(0), // Giữ cho container trong suốt
+            ),
+          ),
+        ),
+        Center(
             child: SingleChildScrollView(
                 child: isSmallScreen
                     ? const SingleChildScrollView(
@@ -32,7 +56,9 @@ class ForgotPassword extends StatelessWidget {
                             ),
                           ],
                         ),
-                      )))));
+                      )))),
+      ],
+    ));
   }
 }
 
@@ -47,7 +73,7 @@ class _Logo extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Image.asset(
-          'assets/images/logo.png',
+          'assets/images/logo2.png',
           width: isSmallScreen ? 230 : 500,
           height: isSmallScreen ? 200 : 500,
         ),
@@ -56,7 +82,7 @@ class _Logo extends StatelessWidget {
           child: Text("QUÊN MẬT KHẨU",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Color.fromRGBO(21, 52, 72, 1),
+                  color: Colors.white,
                   fontSize: 30,
                   fontWeight: FontWeight.bold)),
         ),
@@ -66,7 +92,7 @@ class _Logo extends StatelessWidget {
               "Nhập email tài khoản để nhận mã OTP cập nhật mật khẩu mới",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Color.fromRGBO(21, 52, 72, 1),
+                  color: Colors.white,
                   fontSize: 16,
                   fontWeight: FontWeight.bold)),
         )
@@ -109,11 +135,27 @@ class __FormContentState extends State<_FormContent> {
                 }
                 return null;
               },
+              style: const TextStyle(color: Colors.red),
               decoration: const InputDecoration(
                 labelText: 'Email',
+                labelStyle: TextStyle(color: Colors.red),
                 hintText: 'Email',
-                prefixIcon: Icon(Icons.email_outlined),
-                border: OutlineInputBorder(),
+                hintStyle: TextStyle(color: Colors.red),
+                prefixIcon: Icon(
+                  Icons.email_outlined,
+                  color: Colors.red,
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.red), // Màu border khi chưa được focus
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.red), // Màu border khi được focus
+                ),
               ),
             ),
             _gap(),
@@ -123,7 +165,7 @@ class __FormContentState extends State<_FormContent> {
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4)),
-                    backgroundColor: const Color.fromRGBO(232, 189, 15, 1)),
+                    backgroundColor: colorTheme),
                 child: const Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Text(
@@ -146,28 +188,6 @@ class __FormContentState extends State<_FormContent> {
               ),
             ),
             _gap(),
-            const Text(
-              'CONTACT US',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Color.fromRGBO(21, 52, 72, 1)),
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: null,
-                  icon: Icon(Icons.facebook),
-                  iconSize: 30,
-                ),
-                IconButton(
-                  onPressed: null,
-                  icon: Icon(Icons.email),
-                  iconSize: 30,
-                ),
-              ],
-            )
           ],
         ),
       ),

@@ -1,5 +1,8 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 import 'package:project_android/Screen/User/SignIn/login.dart';
+import 'package:project_android/config/const.dart';
 
 class RegisterPage extends StatelessWidget {
   const RegisterPage({Key? key}) : super(key: key);
@@ -9,30 +12,52 @@ class RegisterPage extends StatelessWidget {
     final bool isSmallScreen = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
-        body: Center(
-      child: isSmallScreen
-          ? const SingleChildScrollView(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  _Logo(),
-                  _FormContent(),
-                ],
-              ),
-            )
-          : SingleChildScrollView(
-              child: Container(
-              padding: const EdgeInsets.all(32.0),
-              constraints: const BoxConstraints(maxWidth: 800),
-              child: const Row(
-                children: [
-                  Expanded(child: _Logo()),
-                  Expanded(
-                    child: Center(child: _FormContent()),
+        body: Stack(
+      children: [
+        Positioned.fill(
+          child: Image.asset(
+            'assets/images/background_login.jpg', // Thay thế đường dẫn đến hình ảnh của bạn
+            fit: BoxFit.cover,
+          ),
+        ),
+        Positioned.fill(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(
+                sigmaX: 20.0,
+                sigmaY:
+                    20.0), // Điều chỉnh giá trị sigma để thay đổi mức độ làm mờ
+            child: Container(
+              color:
+                  Colors.black.withOpacity(0), // Giữ cho container trong suốt
+            ),
+          ),
+        ),
+        Center(
+          child: isSmallScreen
+              ? const SingleChildScrollView(
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _Logo(),
+                      _FormContent(),
+                    ],
                   ),
-                ],
-              ),
-            )),
+                )
+              : SingleChildScrollView(
+                  child: Container(
+                  padding: const EdgeInsets.all(32.0),
+                  constraints: const BoxConstraints(maxWidth: 800),
+                  child: const Row(
+                    children: [
+                      Expanded(child: _Logo()),
+                      Expanded(
+                        child: Center(child: _FormContent()),
+                      ),
+                    ],
+                  ),
+                )),
+        )
+      ],
     ));
   }
 }
@@ -48,7 +73,7 @@ class _Logo extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Image.asset(
-          'assets/images/logo.png',
+          'assets/images/logo2.png',
           width: isSmallScreen ? 230 : 500,
           height: isSmallScreen ? 200 : 500,
         ),
@@ -57,7 +82,7 @@ class _Logo extends StatelessWidget {
           child: Text("ĐĂNG KÝ",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Color.fromRGBO(21, 52, 72, 1),
+                  color: Colors.white,
                   fontSize: 30,
                   fontWeight: FontWeight.bold)),
         )
@@ -98,11 +123,27 @@ class __FormContentState extends State<_FormContent> {
                 return null;
               },
               controller: _userController,
+              style: const TextStyle(color: Colors.red),
               decoration: const InputDecoration(
                 labelText: 'Tài khoản',
+                labelStyle: TextStyle(color: Colors.red),
                 hintText: 'Tên tài khoản',
-                prefixIcon: Icon(Icons.person_2_outlined),
-                border: OutlineInputBorder(),
+                hintStyle: TextStyle(color: Colors.red),
+                prefixIcon: Icon(
+                  Icons.person_2_outlined,
+                  color: Colors.red,
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.red), // Màu border khi chưa được focus
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.red), // Màu border khi được focus
+                ),
               ),
             ),
             _gap(),
@@ -118,15 +159,34 @@ class __FormContentState extends State<_FormContent> {
                 return null;
               },
               obscureText: !_isPasswordVisible,
+              style: const TextStyle(color: Colors.red),
               decoration: InputDecoration(
                   labelText: 'Mật khẩu',
+                  labelStyle: const TextStyle(color: Colors.red),
                   hintText: 'Nhập mật khẩu',
-                  prefixIcon: const Icon(Icons.lock_outline_rounded),
-                  border: const OutlineInputBorder(),
+                  hintStyle: const TextStyle(color: Colors.red),
+                  prefixIcon: const Icon(
+                    Icons.lock_outline_rounded,
+                    color: Colors.red,
+                  ),
+                  border: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red),
+                  ),
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Colors.red), // Màu border khi chưa được focus
+                  ),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Colors.red), // Màu border khi được focus
+                  ),
                   suffixIcon: IconButton(
-                    icon: Icon(_isPasswordVisible
-                        ? Icons.visibility_off
-                        : Icons.visibility),
+                    icon: Icon(
+                      _isPasswordVisible
+                          ? Icons.visibility_off
+                          : Icons.visibility,
+                      color: Colors.red,
+                    ),
                     onPressed: () {
                       setState(() {
                         _isPasswordVisible = !_isPasswordVisible;
@@ -146,15 +206,33 @@ class __FormContentState extends State<_FormContent> {
                 return null;
               },
               obscureText: !_isPasswordVisible1,
+              style: const TextStyle(color: Colors.red),
               decoration: InputDecoration(
                   labelText: 'Xác nhận mật khẩu',
+                  labelStyle: const TextStyle(color: Colors.red),
                   hintText: 'Nhập mật khẩu',
-                  prefixIcon: const Icon(Icons.lock_outline_rounded),
-                  border: const OutlineInputBorder(),
+                  hintStyle: const TextStyle(color: Colors.red),
+                  prefixIcon: const Icon(
+                    Icons.lock_outline_rounded,
+                    color: Colors.red,
+                  ),
+                  border: const OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red),
+                  ),
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Colors.red), // Màu border khi chưa được focus
+                  ),
+                  focusedBorder: const OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Colors.red), // Màu border khi được focus
+                  ),
                   suffixIcon: IconButton(
-                    icon: Icon(_isPasswordVisible1
-                        ? Icons.visibility_off
-                        : Icons.visibility),
+                    icon: Icon(
+                        _isPasswordVisible1
+                            ? Icons.visibility_off
+                            : Icons.visibility,
+                        color: Colors.red),
                     onPressed: () {
                       setState(() {
                         _isPasswordVisible1 = !_isPasswordVisible1;
@@ -177,11 +255,27 @@ class __FormContentState extends State<_FormContent> {
                 }
                 return null;
               },
+              style: const TextStyle(color: Colors.red),
               decoration: const InputDecoration(
                 labelText: 'Email',
+                labelStyle: TextStyle(color: Colors.red),
                 hintText: 'Email',
-                prefixIcon: Icon(Icons.email_outlined),
-                border: OutlineInputBorder(),
+                hintStyle: TextStyle(color: Colors.red),
+                prefixIcon: Icon(
+                  Icons.email_outlined,
+                  color: Colors.red,
+                ),
+                border: OutlineInputBorder(
+                  borderSide: BorderSide(color: Colors.red),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.red), // Màu border khi chưa được focus
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderSide: BorderSide(
+                      color: Colors.red), // Màu border khi được focus
+                ),
               ),
             ),
             _gap(),
@@ -196,11 +290,27 @@ class __FormContentState extends State<_FormContent> {
                   }
                   return null;
                 },
+                style: const TextStyle(color: Colors.red),
                 decoration: const InputDecoration(
                   labelText: 'Số điện thoại',
+                  labelStyle: TextStyle(color: Colors.red),
                   hintText: 'Nhập số điện thoại',
-                  prefixIcon: Icon(Icons.phone_iphone_outlined),
-                  border: OutlineInputBorder(),
+                  hintStyle: TextStyle(color: Colors.red),
+                  prefixIcon: Icon(
+                    Icons.phone_iphone_outlined,
+                    color: Colors.red,
+                  ),
+                  border: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.red),
+                  ),
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Colors.red), // Màu border khi chưa được focus
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(
+                        color: Colors.red), // Màu border khi được focus
+                  ),
                 )),
             _gap(),
             SizedBox(
@@ -209,7 +319,7 @@ class __FormContentState extends State<_FormContent> {
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(4)),
-                    backgroundColor: const Color.fromRGBO(232, 189, 15, 1)),
+                    backgroundColor: colorTheme),
                 child: const Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Text(
@@ -232,28 +342,6 @@ class __FormContentState extends State<_FormContent> {
               ),
             ),
             _gap(),
-            const Text(
-              'CONTACT US',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 15,
-                  color: Colors.blue),
-            ),
-            const Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                IconButton(
-                  onPressed: null,
-                  icon: Icon(Icons.facebook),
-                  iconSize: 30,
-                ),
-                IconButton(
-                  onPressed: null,
-                  icon: Icon(Icons.email),
-                  iconSize: 30,
-                ),
-              ],
-            )
           ],
         ),
       ),

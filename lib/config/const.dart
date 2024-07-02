@@ -11,6 +11,12 @@ const colorTheme = Color.fromRGBO(121, 0, 0, 1);
 const colorHome = Color.fromRGBO(0, 0, 0, 1);
 const colorTheme2 = Color.fromRGBO(210, 117, 117, 1);
 
+const textTitleHome = TextStyle(
+  color: Colors.black,
+  fontSize: 20,
+  fontWeight: FontWeight.bold,
+);
+
 class textWhite extends StatelessWidget {
   final String text;
 

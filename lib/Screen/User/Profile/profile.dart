@@ -20,10 +20,17 @@ class ProfileScreen extends StatelessWidget {
               child: Column(
                 children: [
                   CircleAvatar(
-                    radius: 40,
+                    radius: 50,
                     backgroundColor: Colors.grey[300],
-                    child:
-                        const Icon(Icons.person, size: 40, color: Colors.black),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(100),
+                      child: Image.asset(
+                        'assets/images/avatar.jpg',
+                        fit: BoxFit.cover,
+                        width: 100,
+                        height: 100,
+                      ),
+                    ),
                   ),
                   const SizedBox(height: 10),
                   Text(
