@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:project_android/Data/model/food.dart';
 import 'package:project_android/Data/provider/foodprovider.dart';
 import 'package:project_android/Screen/User/Food/combowidget.dart';
+import 'package:project_android/Screen/User/Payment/payment.dart';
 import 'package:project_android/config/const.dart';
 
 class ComboList extends StatefulWidget {
@@ -143,7 +144,8 @@ class BottomScreen extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              // Add your navigation logic here
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => PaymentScreen()));
             },
             child: const Icon(
               FontAwesomeIcons.arrowRight,

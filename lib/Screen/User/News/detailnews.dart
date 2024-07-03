@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_android/config/const.dart';
 
 class DetailNews extends StatelessWidget {
   final String imageUrl;
@@ -46,7 +47,7 @@ class DetailNews extends StatelessWidget {
                     padding: const EdgeInsets.all(16.0),
                     child: Text(
                       description,
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontSize: 19,
                         fontWeight: FontWeight.bold,
                       ),
@@ -66,11 +67,13 @@ class DetailNews extends StatelessWidget {
         ],
       ),
       appBar: AppBar(
-        backgroundColor: const Color.fromRGBO(121, 0, 0, 1.0),
+        backgroundColor: colorTheme,
         elevation: 0,
         leading: IconButton(
-          icon: const Icon(Icons.arrow_back,
-          color: Colors.white,),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
           onPressed: () {
             Navigator.pop(context);
           },

@@ -109,4 +109,6 @@ final List<String> imgList = [
   'assets/images/minions4.jpg',
   'assets/images/cuoi.jpg',
   'assets/images/Panda.jpg',
+  'assets/images/cuoi.jpg',
+  'assets/images/insideout2.jpg'
 ];
