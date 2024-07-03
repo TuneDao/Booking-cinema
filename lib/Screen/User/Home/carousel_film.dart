@@ -60,8 +60,8 @@ final List<Widget> imageSliders = InfoFilm.map((item) => Container(
     )).toList();
 
 final List<String> InfoFilm = [
-  'assets/images/Furiosa.jpeg',
-  'assets/images/Doraemon.jpeg',
+  'assets/images/traihu.jpg',
+  'assets/images/minions4.jpg',
   'assets/images/garfield_movie.jpg',
-  'assets/images/Panda.jpg',
+  'assets/images/insideout2.jpg',
 ];

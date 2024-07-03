@@ -105,8 +105,8 @@ class MultipleFilm extends StatelessWidget {
 }
 
 final List<String> imgList = [
-  'assets/images/Latmat.jpeg',
-  'assets/images/Doraemon.jpeg',
-  'assets/images/Deadpool.jpg',
+  'assets/images/background_home.jpg',
+  'assets/images/minions4.jpg',
+  'assets/images/cuoi.jpg',
   'assets/images/Panda.jpg',
 ];
