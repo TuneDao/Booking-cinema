@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:project_android/Screen/User/News/detailnews.dart';
 
-class NewsPage extends StatefulWidget {
-  const NewsPage({Key? key}) : super(key: key);
+class NewsScreen extends StatefulWidget {
+  const NewsScreen({Key? key}) : super(key: key);
 
   @override
-  _NewsPageState createState() => _NewsPageState();
+  _NewsScreenState createState() => _NewsScreenState();
 }
 
-class _NewsPageState extends State<NewsPage> {
+class _NewsScreenState extends State<NewsScreen> {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
@@ -157,7 +157,7 @@ class _TabState extends State<_Tab> {
                       ),
                       NewsItem(
                         imageUrl: 'assets/images/uudai1.jpg',
-                        title: 'C"MONDAY - HAPPY DAY - ĐỒNG GIÁ 45K/ 2D',
+                        title: 'C’MONDAY - HAPPY DAY - ĐỒNG GIÁ 45K/ 2D',
                         content: "Condition:\n"
                             "- Áp dụng cho các suất chiếu vào ngày thứ 2 hàng tuần.\n"
                             "- Mua vé trực tiếp tại App/Web Cinestar hoặc mua trực tiếp tại rạp.\n"

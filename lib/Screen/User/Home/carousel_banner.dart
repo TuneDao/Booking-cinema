@@ -43,8 +43,9 @@ final List<Widget> imageSliders = imgList
         ))
     .toList();
 final List<String> imgList = [
+  'assets/images/student.jpg',
+  'assets/images/uudai1.jpg',
   'assets/images/garfield.png',
-  'assets/images/kong&godzilla.png',
   'assets/images/HaiPhuong.jpg',
   'assets/images/LionKing.jpeg',
 ];

@@ -2,35 +2,48 @@
     "data":[
         {
             "id": 1,
-            "name":"DORAEMON: NOBITA VÀ BẢN GIAO HƯỞNG ĐỊA CẦU",
+            "name":"MINION: KẺ TRỘM MẶT TRĂNG 4",
             "category": "Hoạt hình",
-            "img": "Doraemon.jpeg",
+            "img": "minions4.jpg",
+            "description": "",
             "time":"11:45"
         },{
             "id": 2,
-            "name":"LẬT MẶT 7, MỘT ĐIỀU ƯỚC",
+            "name":"DEADPOOL & WOLVERINE",
             "category": "Phim hài",
-            "img": "Latmat.jpeg",
+            "img": "background_home.jpg",
+            "description": "",
             "time":"13:45"
         },{
             "id": 3,
-            "name":"FURIOSA: CÂU CHUYỆN TỪ MAX ĐIÊN",
+            "name":"INSIDE OUT 2",
             "category": "Phiêu lưu",
-            "img": "Furiosa.jpeg",
+            "img": "insideout2.jpg",
+            "description": "",
             "time":"02:45"
         },{
             "id": 4,
             "name":"KUNG FU PANDA 4",
             "category": "Hoạt hình",
             "img": "Panda.jpg",
+            "description": "",
             "time":"09:30"
         },
         {
             "id": 5,
-            "name":"DEADPOOL 2",
-            "category": "Hành động",
-            "img": "Deadpool.jpg",
+            "name":"CƯỜI",
+            "category": "Kinh dị",
+            "img": "cuoi.jpg",
+            "description": "",
             "time":"11:30"
+        },
+        {
+            "id": 6,
+            "name":"MÈO BÉO SIÊU QUẬY (GRAFIELD)",
+            "category": "Hoạt hình",
+            "img": "garfield_movie.jpg",
+            "description": "",
+            "time":"08:30"
         }
 
     ]

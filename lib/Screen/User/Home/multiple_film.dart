@@ -94,10 +94,6 @@ class MultipleFilm extends StatelessWidget {
               );
             },
           ),
-          const SizedBox(
-            height: 5,
-          ),
-          const Divider(),
         ],
       ),
     );
@@ -109,6 +105,6 @@ final List<String> imgList = [
   'assets/images/minions4.jpg',
   'assets/images/cuoi.jpg',
   'assets/images/Panda.jpg',
-  'assets/images/cuoi.jpg',
+  'assets/images/Doraemon.jpeg',
   'assets/images/insideout2.jpg'
 ];

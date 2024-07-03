@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project_android/Screen/User/Home/welcomescreen.dart';
+import 'package:project_android/Screen/User/SignIn/login.dart';
 import 'package:project_android/Screen/User/Tickets/buytickets.dart';
 import 'package:project_android/Screen/User/News/newspage.dart';
 import 'package:project_android/Screen/User/Profile/profile.dart';
@@ -33,7 +34,7 @@ class _HomePageState extends State<HomePage> {
       case 1:
         return TicketsScreen();
       case 2:
-        return const NewsPage();
+        return const NewsScreen();
       case 3:
         return const ProfileScreen();
       case 4:
@@ -410,25 +411,34 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ),
                   const Divider(),
-                  const Expanded(
-                    child: TextButton(
-                      onPressed: null,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Icon(
-                            FontAwesomeIcons.rightFromBracket,
-                            size: 15,
-                            color: Colors.white,
+                  Row(
+                    children: [
+                      Expanded(
+                        child: TextButton(
+                          onPressed: () {
+                            Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => SignInPage2()));
+                          },
+                          child: const Row(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Icon(
+                                FontAwesomeIcons.rightFromBracket,
+                                size: 15,
+                                color: Colors.white,
+                              ),
+                              Text(
+                                ' Đăng xuất',
+                                style: TextStyle(color: Colors.white),
+                              ),
+                            ],
                           ),
-                          Text(
-                            ' Đăng xuất',
-                            style: TextStyle(color: Colors.white),
-                          ),
-                        ],
+                        ),
                       ),
-                    ),
+                    ],
                   ),
                 ],
               ),

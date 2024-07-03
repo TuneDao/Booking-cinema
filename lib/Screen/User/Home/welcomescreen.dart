@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_android/Screen/User/Home/carousel_film.dart';
 import 'package:project_android/Screen/User/Home/carousel_banner.dart';
+import 'package:project_android/Screen/User/Home/carousel_news.dart';
 import 'package:project_android/Screen/User/Home/multiple_film.dart';
 
 class WelcomeScreen extends StatelessWidget {
@@ -20,15 +21,13 @@ class WelcomeScreen extends StatelessWidget {
         child: const SingleChildScrollView(
           child: Column(
             children: [
-              Divider(
-                color: Colors.grey,
-              ),
               CarouselBanner(),
               SizedBox(
                 height: 10,
               ),
               CarouselFilm(),
-              MultipleFilm()
+              MultipleFilm(),
+              CarouselNews(),
             ],
           ),
         ),
