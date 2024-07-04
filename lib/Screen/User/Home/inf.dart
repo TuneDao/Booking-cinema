@@ -12,7 +12,7 @@ class _MovieTheaterPageState extends State<MovieTheaterPage> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            SizedBox(height: 0), // Khoảng cách giữa AppBar và ảnh
+            const SizedBox(height: 0), // Khoảng cách giữa AppBar và ảnh
             Stack(
               children: [
                 Container(
@@ -25,7 +25,7 @@ class _MovieTheaterPageState extends State<MovieTheaterPage> {
                     ),
                   ),
                 ),
-                Positioned(
+                const Positioned(
                   bottom: 20,
                   left: 20,
                   child: Text(
@@ -57,8 +57,8 @@ class _MovieTheaterPageState extends State<MovieTheaterPage> {
                           const Icon(Icons.image),
                     ),
                   ),
-                  SizedBox(width: 16), // Khoảng cách giữa ảnh và nội dung
-                  Expanded(
+                  const SizedBox(width: 16), // Khoảng cách giữa ảnh và nội dung
+                  const Expanded(
                     child: Text(
                       'Chúng tôi tự hào mang đến cho bạn trải nghiệm xem phim đỉnh cao với hệ thống âm thanh và hình ảnh hiện đại\n'
                       "Chúng tôi cam kết mang lại cho bạn những giây phút thư giãn và giải trí tuyệt vời.",
@@ -72,8 +72,8 @@ class _MovieTheaterPageState extends State<MovieTheaterPage> {
               padding:
                   const EdgeInsets.symmetric(horizontal: 16.0, vertical: 5.0),
               child: Container(
-                padding: EdgeInsets.all(12.0),
-                child: Text(
+                padding: const EdgeInsets.all(12.0),
+                child: const Text(
                   'Sứ Mệnh',
                   style: TextStyle(
                     fontSize: 28,
@@ -90,9 +90,9 @@ class _MovieTheaterPageState extends State<MovieTheaterPage> {
                 padding: const EdgeInsets.all(16.0),
 
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(218, 33, 67, 1),
+                  color: const Color.fromRGBO(218, 33, 67, 1),
                   borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Colors.white,
                       blurRadius: 10,
@@ -100,14 +100,8 @@ class _MovieTheaterPageState extends State<MovieTheaterPage> {
                     ),
                   ],
                 ),
-                // child: Text(
-                //   '01\n'
-                //   'Góp phần tăng trưởng thị phần điện ảnh\n'
-                //   'văn hóa, giải trí của người Việt Nam',
-                //   style: TextStyle(fontSize: 16, color: Colors.white),
-                //   textAlign: TextAlign.center,
-                // ),
-                child: Column(
+
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
@@ -139,9 +133,9 @@ class _MovieTheaterPageState extends State<MovieTheaterPage> {
                 padding: const EdgeInsets.all(16.0),
 
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(218, 33, 67, 1),
+                  color: const Color.fromRGBO(218, 33, 67, 1),
                   borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Colors.white,
                       blurRadius: 10,
@@ -156,7 +150,7 @@ class _MovieTheaterPageState extends State<MovieTheaterPage> {
                 //   style: TextStyle(fontSize: 16, color: Colors.white),
                 //   textAlign: TextAlign.center,
                 // ),
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
@@ -187,9 +181,9 @@ class _MovieTheaterPageState extends State<MovieTheaterPage> {
                 padding: const EdgeInsets.all(16.0),
 
                 decoration: BoxDecoration(
-                  color: Color.fromRGBO(218, 33, 67, 1),
+                  color: const Color.fromRGBO(218, 33, 67, 1),
                   borderRadius: BorderRadius.circular(20),
-                  boxShadow: [
+                  boxShadow: const [
                     BoxShadow(
                       color: Colors.white,
                       blurRadius: 10,
@@ -204,7 +198,7 @@ class _MovieTheaterPageState extends State<MovieTheaterPage> {
                 //   style: TextStyle(fontSize: 16, color: Colors.white),
                 //   textAlign: TextAlign.center,
                 // ),
-                child: Column(
+                child: const Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Text(
@@ -227,19 +221,19 @@ class _MovieTheaterPageState extends State<MovieTheaterPage> {
                 ),
               ),
             ),
-            SizedBox(height: 10), // Khoảng cách giữa các phần tử
+            const SizedBox(height: 10), // Khoảng cách giữa các phần tử
             Padding(
               padding: const EdgeInsets.all(
                   16.0), // Khoảng cách top và bottom cho phần hệ thống cụm rạp
               child: Container(
                 padding: const EdgeInsets.all(16.0),
-                decoration: BoxDecoration(
+                decoration: const BoxDecoration(
                   color: Colors.white,
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Text(
+                    const Text(
                       'Hệ Thống Cụm Rạp',
                       style: TextStyle(
                         fontSize: 20,
@@ -248,16 +242,16 @@ class _MovieTheaterPageState extends State<MovieTheaterPage> {
                       ),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(
+                    const SizedBox(
                         height: 10), // Khoảng cách giữa tiêu đề và nội dung
-                    Text(
+                    const Text(
                       'Các phòng chiếu được trang bị các thiết bị tiên tiến như hệ thống âm thanh vòm, màn hình rộng và độ phân giải cao, '
                       'tạo nên hình ảnh sắc nét và âm thanh sống động.',
                       style: TextStyle(fontSize: 16, color: Colors.black),
                       textAlign: TextAlign.center,
                     ),
-                    SizedBox(height: 20), // Khoảng cách giữa nội dung và ảnh
-
+                    const SizedBox(
+                        height: 20), // Khoảng cách giữa nội dung và ảnh
                     // Đoạn code để chèn ảnh chiếm một nửa chiều cao của màn hình
                     Row(
                       children: [
@@ -268,7 +262,7 @@ class _MovieTheaterPageState extends State<MovieTheaterPage> {
                               'assets/images/map.jpg', // Đường dẫn đến ảnh của bạn
                               fit: BoxFit.cover,
                               height: MediaQuery.of(context).size.height *
-                                  0.7, // Chiều cao là một nửa màn hình
+                                  0.9, // Chiều cao là một nửa màn hình
                             ),
                           ),
                         ),

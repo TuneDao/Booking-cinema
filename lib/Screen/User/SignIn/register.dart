@@ -123,26 +123,26 @@ class __FormContentState extends State<_FormContent> {
                 return null;
               },
               controller: _userController,
-              style: const TextStyle(color: Colors.red),
+              style: const TextStyle(color: Colors.yellow),
               decoration: const InputDecoration(
                 labelText: 'Tài khoản',
-                labelStyle: TextStyle(color: Colors.red),
+                labelStyle: TextStyle(color: Colors.yellow),
                 hintText: 'Tên tài khoản',
-                hintStyle: TextStyle(color: Colors.red),
+                hintStyle: TextStyle(color: Colors.yellow),
                 prefixIcon: Icon(
                   Icons.person_2_outlined,
-                  color: Colors.red,
+                  color: Colors.yellow,
                 ),
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red),
+                  borderSide: BorderSide(color: Colors.yellow),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                      color: Colors.red), // Màu border khi chưa được focus
+                      color: Colors.yellow), // Màu border khi chưa được focus
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                      color: Colors.red), // Màu border khi được focus
+                      color: Colors.yellow), // Màu border khi được focus
                 ),
               ),
             ),
@@ -159,33 +159,33 @@ class __FormContentState extends State<_FormContent> {
                 return null;
               },
               obscureText: !_isPasswordVisible,
-              style: const TextStyle(color: Colors.red),
+              style: const TextStyle(color: Colors.yellow),
               decoration: InputDecoration(
                   labelText: 'Mật khẩu',
-                  labelStyle: const TextStyle(color: Colors.red),
+                  labelStyle: const TextStyle(color: Colors.yellow),
                   hintText: 'Nhập mật khẩu',
-                  hintStyle: const TextStyle(color: Colors.red),
+                  hintStyle: const TextStyle(color: Colors.yellow),
                   prefixIcon: const Icon(
                     Icons.lock_outline_rounded,
-                    color: Colors.red,
+                    color: Colors.yellow,
                   ),
                   border: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red),
+                    borderSide: BorderSide(color: Colors.yellow),
                   ),
                   enabledBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
-                        color: Colors.red), // Màu border khi chưa được focus
+                        color: Colors.yellow), // Màu border khi chưa được focus
                   ),
                   focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
-                        color: Colors.red), // Màu border khi được focus
+                        color: Colors.yellow), // Màu border khi được focus
                   ),
                   suffixIcon: IconButton(
                     icon: Icon(
                       _isPasswordVisible
                           ? Icons.visibility_off
                           : Icons.visibility,
-                      color: Colors.red,
+                      color: Colors.yellow,
                     ),
                     onPressed: () {
                       setState(() {
@@ -206,33 +206,33 @@ class __FormContentState extends State<_FormContent> {
                 return null;
               },
               obscureText: !_isPasswordVisible1,
-              style: const TextStyle(color: Colors.red),
+              style: const TextStyle(color: Colors.yellow),
               decoration: InputDecoration(
                   labelText: 'Xác nhận mật khẩu',
-                  labelStyle: const TextStyle(color: Colors.red),
+                  labelStyle: const TextStyle(color: Colors.yellow),
                   hintText: 'Nhập mật khẩu',
-                  hintStyle: const TextStyle(color: Colors.red),
+                  hintStyle: const TextStyle(color: Colors.yellow),
                   prefixIcon: const Icon(
                     Icons.lock_outline_rounded,
-                    color: Colors.red,
+                    color: Colors.yellow,
                   ),
                   border: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red),
+                    borderSide: BorderSide(color: Colors.yellow),
                   ),
                   enabledBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
-                        color: Colors.red), // Màu border khi chưa được focus
+                        color: Colors.yellow), // Màu border khi chưa được focus
                   ),
                   focusedBorder: const OutlineInputBorder(
                     borderSide: BorderSide(
-                        color: Colors.red), // Màu border khi được focus
+                        color: Colors.yellow), // Màu border khi được focus
                   ),
                   suffixIcon: IconButton(
                     icon: Icon(
                         _isPasswordVisible1
                             ? Icons.visibility_off
                             : Icons.visibility,
-                        color: Colors.red),
+                        color: Colors.yellow),
                     onPressed: () {
                       setState(() {
                         _isPasswordVisible1 = !_isPasswordVisible1;
@@ -255,26 +255,26 @@ class __FormContentState extends State<_FormContent> {
                 }
                 return null;
               },
-              style: const TextStyle(color: Colors.red),
+              style: const TextStyle(color: Colors.yellow),
               decoration: const InputDecoration(
                 labelText: 'Email',
-                labelStyle: TextStyle(color: Colors.red),
+                labelStyle: TextStyle(color: Colors.yellow),
                 hintText: 'Email',
-                hintStyle: TextStyle(color: Colors.red),
+                hintStyle: TextStyle(color: Colors.yellow),
                 prefixIcon: Icon(
                   Icons.email_outlined,
-                  color: Colors.red,
+                  color: Colors.yellow,
                 ),
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red),
+                  borderSide: BorderSide(color: Colors.yellow),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                      color: Colors.red), // Màu border khi chưa được focus
+                      color: Colors.yellow), // Màu border khi chưa được focus
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                      color: Colors.red), // Màu border khi được focus
+                      color: Colors.yellow), // Màu border khi được focus
                 ),
               ),
             ),
@@ -290,26 +290,26 @@ class __FormContentState extends State<_FormContent> {
                   }
                   return null;
                 },
-                style: const TextStyle(color: Colors.red),
+                style: const TextStyle(color: Colors.yellow),
                 decoration: const InputDecoration(
                   labelText: 'Số điện thoại',
-                  labelStyle: TextStyle(color: Colors.red),
+                  labelStyle: TextStyle(color: Colors.yellow),
                   hintText: 'Nhập số điện thoại',
-                  hintStyle: TextStyle(color: Colors.red),
+                  hintStyle: TextStyle(color: Colors.yellow),
                   prefixIcon: Icon(
                     Icons.phone_iphone_outlined,
-                    color: Colors.red,
+                    color: Colors.yellow,
                   ),
                   border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.red),
+                    borderSide: BorderSide(color: Colors.yellow),
                   ),
                   enabledBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                        color: Colors.red), // Màu border khi chưa được focus
+                        color: Colors.yellow), // Màu border khi chưa được focus
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide: BorderSide(
-                        color: Colors.red), // Màu border khi được focus
+                        color: Colors.yellow), // Màu border khi được focus
                   ),
                 )),
             _gap(),

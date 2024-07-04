@@ -135,26 +135,28 @@ class __FormContentState extends State<_FormContent> {
                 return null;
               },
               controller: _userController,
-              style: const TextStyle(color: Colors.red), // Màu chữ trắng
+              style: const TextStyle(color: Colors.yellow), // Màu chữ trắng
               decoration: const InputDecoration(
                 labelText: 'Tài khoản',
-                labelStyle: TextStyle(color: Colors.red), // Màu chữ của label
+                labelStyle:
+                    TextStyle(color: Colors.yellow), // Màu chữ của label
                 hintText: 'Tên tài khoản',
-                hintStyle: TextStyle(color: Colors.red), // Màu chữ hint
+                hintStyle: TextStyle(color: Colors.yellow), // Màu chữ hint
                 prefixIcon: Icon(
                   Icons.person_2_outlined,
-                  color: Colors.red, // Màu của icon
+                  color: Colors.yellow, // Màu của icon
                 ),
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red), // Màu của border
+                  borderSide:
+                      BorderSide(color: Colors.yellow), // Màu của border
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                      color: Colors.red), // Màu border khi chưa được focus
+                      color: Colors.yellow), // Màu border khi chưa được focus
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                      color: Colors.red), // Màu border khi được focus
+                      color: Colors.yellow), // Màu border khi được focus
                 ),
               ),
             ),
@@ -172,34 +174,36 @@ class __FormContentState extends State<_FormContent> {
               },
               controller: _passWordcontroller,
               obscureText: !_isPasswordVisible,
-              style: const TextStyle(color: Colors.red), // Màu chữ trắng
+              style: const TextStyle(color: Colors.yellow), // Màu chữ trắng
               decoration: InputDecoration(
                 labelText: 'Mật khẩu',
                 labelStyle:
-                    const TextStyle(color: Colors.red), // Màu chữ của label
+                    const TextStyle(color: Colors.yellow), // Màu chữ của label
                 hintText: 'Mật khẩu',
-                hintStyle: const TextStyle(color: Colors.red), // Màu chữ hint
+                hintStyle:
+                    const TextStyle(color: Colors.yellow), // Màu chữ hint
                 prefixIcon: const Icon(
                   Icons.lock_outline_rounded,
-                  color: Colors.red, // Màu của icon
+                  color: Colors.yellow, // Màu của icon
                 ),
                 border: const OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red), // Màu của border
+                  borderSide:
+                      BorderSide(color: Colors.yellow), // Màu của border
                 ),
                 enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
-                      color: Colors.red), // Màu border khi chưa được focus
+                      color: Colors.yellow), // Màu border khi chưa được focus
                 ),
                 focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(
-                      color: Colors.red), // Màu border khi được focus
+                      color: Colors.yellow), // Màu border khi được focus
                 ),
                 suffixIcon: IconButton(
                   icon: Icon(
                     _isPasswordVisible
                         ? Icons.visibility_off
                         : Icons.visibility,
-                    color: Colors.red, // Màu của icon
+                    color: Colors.yellow, // Màu của icon
                   ),
                   onPressed: () {
                     setState(() {

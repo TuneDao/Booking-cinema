@@ -5,28 +5,28 @@
             "name":"MINION: KẺ TRỘM MẶT TRĂNG 4",
             "category": "Hoạt hình",
             "img": "minions4.jpg",
-            "description": "",
+            "description": "Kẻ Trộm Mặt Trăng 4 (Despicable Me 4) là phim chiếu rạp tháng 7/2024, tiếp nối phần phim Despicable Me 3 ra mắt vào 2017. Những chú Minions vàng chuối sẽ tiếp tục xâm chiếm các rạp phim bằng sự vô tri và những cuộc phiêu lưu điên rồ với chủ nhân Gru của chúng.",
             "time":"11:45"
         },{
             "id": 2,
             "name":"DEADPOOL & WOLVERINE",
             "category": "Phim hài",
             "img": "background_home.jpg",
-            "description": "",
+            "description": "Deadpool & Wolverine là một bộ phim siêu anh hùng hài hước sắp ra mắt của Mỹ dựa trên nhân vật Deadpool của Marvel Comics, bộ phim được sản xuất bởi Marvel Studios và Maximum Effort và được phân phối bởi Walt Disney Studios Motion Pictures. ",
             "time":"13:45"
         },{
             "id": 3,
             "name":"INSIDE OUT 2",
             "category": "Phiêu lưu",
             "img": "insideout2.jpg",
-            "description": "",
+            "description": "Mô tả tâm lý tuổi mới lớn, khi nhân vật Riley trở nên lo lắng, áp lực trong quá trình trưởng thành. Tác phẩm do Kelsey Mann đạo diễn, lấy bối cảnh hai năm sau các sự kiện ở phần đầu. Riley (Amy Poehler lồng tiếng) lúc này bước sang tuổi 13, có nhiều thay đổi về tâm sinh lý.",
             "time":"02:45"
         },{
             "id": 4,
             "name":"KUNG FU PANDA 4",
             "category": "Hoạt hình",
             "img": "Panda.jpg",
-            "description": "",
+            "description": "Kung Fu Panda 4 là một bộ phim điện ảnh hoạt hình Mỹ thuộc thể loại hài võ thuật ra mắt vào năm 2024, do DreamWorks Animation sản xuất và Universal Pictures phát hành. Đây là phần bốn của thương hiệu cùng tên, và là phần tiếp nối của Kung Fu Panda 3 ra mắt vào năm 2016. ",
             "time":"09:30"
         },
         {
@@ -34,7 +34,7 @@
             "name":"CƯỜI",
             "category": "Kinh dị",
             "img": "cuoi.jpg",
-            "description": "",
+            "description": "Thuộc thể loại tâm lý kinh dị, Cười là câu chuyện về bác sĩ tâm lý Rose (Sosie Bacon), người vẫn bị ám ảnh bởi cái chết của người mẹ, đồng thời là lý do cô trở thành bác sĩ tâm lý. Trong lần tham vấn cho một bệnh nhân nữ đang hoảng loạn tột độ, Rose chứng kiến cảnh tượng kinh hoàng – bệnh nhân đó đã tự kết liễu đời mình với một nụ cười quỷ dị trên môi. Nhưng thứ còn đáng sợ hơn là sự kiện đó đã vô tình lôi kéo Rose vào một lời nguyền ma quỷ quái ác. Nếu không tìm được cách phá vỡ nó, thời hạn sống của nữ bác sĩ giờ chỉ được tính bằng giờ bằng phút trước khi thực thể bí ẩn này lấy mạng nạn nhân.",
             "time":"11:30"
         },
         {
@@ -42,7 +42,7 @@
             "name":"MÈO BÉO SIÊU QUẬY (GRAFIELD)",
             "category": "Hoạt hình",
             "img": "garfield_movie.jpg",
-            "description": "",
+            "description": "Garfield: Mèo béo siêu quậy là một bộ phim hoạt hình hài sắp ra mắt của Mỹ dựa trên bộ truyện tranh Garfield của Jim Davis (do Columbia Pictures và Alcon Entertainment sản xuất trong bộ phim hoạt hình đầu tiên), hoạt hình bởi DNEG Animation và phân phối bởi Sony Pictures Releasing. Phim do Mark Dindal đạo diễn từ kịch bản của Paul A. Kaplan, Mark Torgove và David Reynolds. Phim có sự tham gia lồng tiếng của Chris Pratt trong vai nhân vật chính, cùng Samuel L. Jackson, Hannah Waddingham, Ving Rhames, Nicholas Hoult, Cecily Strong, Harvey Guillén, Brett Goldstein và Bowen Yang.",
             "time":"08:30"
         }
 

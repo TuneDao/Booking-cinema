@@ -135,26 +135,26 @@ class __FormContentState extends State<_FormContent> {
                 }
                 return null;
               },
-              style: const TextStyle(color: Colors.red),
+              style: const TextStyle(color: Colors.yellow),
               decoration: const InputDecoration(
                 labelText: 'Email',
-                labelStyle: TextStyle(color: Colors.red),
+                labelStyle: TextStyle(color: Colors.yellow),
                 hintText: 'Email',
-                hintStyle: TextStyle(color: Colors.red),
+                hintStyle: TextStyle(color: Colors.yellow),
                 prefixIcon: Icon(
                   Icons.email_outlined,
-                  color: Colors.red,
+                  color: Colors.yellow,
                 ),
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red),
+                  borderSide: BorderSide(color: Colors.yellow),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                      color: Colors.red), // Màu border khi chưa được focus
+                      color: Colors.yellow), // Màu border khi chưa được focus
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                      color: Colors.red), // Màu border khi được focus
+                      color: Colors.yellow), // Màu border khi được focus
                 ),
               ),
             ),

@@ -126,23 +126,23 @@ class __FormContentState extends State<_FormContent> {
                 }
                 return null;
               },
-              style: const TextStyle(color: Colors.red),
+              style: const TextStyle(color: Colors.yellow),
               controller: _otpController,
               decoration: const InputDecoration(
                 labelText: 'Nhập mã OTP',
-                labelStyle: TextStyle(color: Colors.red),
+                labelStyle: TextStyle(color: Colors.yellow),
                 hintText: 'Mã OTP',
-                hintStyle: TextStyle(color: Colors.red),
+                hintStyle: TextStyle(color: Colors.yellow),
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.red),
+                  borderSide: BorderSide(color: Colors.yellow),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                      color: Colors.red), // Màu border khi chưa được focus
+                      color: Colors.yellow), // Màu border khi chưa được focus
                 ),
                 focusedBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                      color: Colors.red), // Màu border khi được focus
+                      color: Colors.yellow), // Màu border khi được focus
                 ),
               ),
             ),

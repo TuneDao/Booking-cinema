@@ -88,10 +88,9 @@ class SeatSelectionScreen extends StatelessWidget {
         children: [
           Container(
             padding: const EdgeInsets.all(8.0),
-            child: const Text(
-              'MÀN HÌNH',
-              style:
-                  TextStyle(color: Colors.grey, wordSpacing: 5, fontSize: 30),
+            child: CustomPaint(
+              size: Size(350, 50),
+              painter: ScreenCurvePainter(),
             ),
           ),
           Expanded(
@@ -251,5 +250,26 @@ class Bottom extends StatelessWidget {
         ],
       ),
     );
+  }
+}
+
+class ScreenCurvePainter extends CustomPainter {
+  @override
+  void paint(Canvas canvas, Size size) {
+    var paint = Paint()
+      ..color = Colors.grey
+      ..style = PaintingStyle.stroke
+      ..strokeWidth = 4.0;
+
+    var path = Path();
+    path.moveTo(0, size.height);
+    path.quadraticBezierTo(size.width / 2, 0, size.width, size.height);
+
+    canvas.drawPath(path, paint);
+  }
+
+  @override
+  bool shouldRepaint(CustomPainter oldDelegate) {
+    return false;
   }
 }
