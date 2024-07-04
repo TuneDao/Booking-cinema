@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:project_android/Screen/User/Home/inf.dart';
 import 'package:project_android/Screen/User/Home/welcomescreen.dart';
 import 'package:project_android/Screen/User/SignIn/login.dart';
 import 'package:project_android/Screen/User/Tickets/buytickets.dart';
@@ -38,9 +39,7 @@ class _HomePageState extends State<HomePage> {
       case 3:
         return const ProfileScreen();
       case 4:
-        return const Center(
-          child: Text('Thông tin rạp'),
-        );
+        return MovieTheaterPage();
       case 5:
         return const Center(
           child: Text('Vé của tôi'),
