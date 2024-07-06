@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project_android/Screen/User/Home/inf.dart';
 import 'package:project_android/Screen/User/Home/welcomescreen.dart';
+import 'package:project_android/Screen/User/Payment/history_payment.dart';
 import 'package:project_android/Screen/User/SignIn/login.dart';
 import 'package:project_android/Screen/User/Tickets/buytickets.dart';
 import 'package:project_android/Screen/User/News/newspage.dart';
@@ -41,9 +42,7 @@ class _HomePageState extends State<HomePage> {
       case 4:
         return MovieTheaterPage();
       case 5:
-        return const Center(
-          child: Text('Vé của tôi'),
-        );
+        return historyPayment();
       default:
         return const Center(child: Text("Trang chủ"));
     }

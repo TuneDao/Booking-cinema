@@ -29,7 +29,7 @@ class _MovieTheaterPageState extends State<MovieTheaterPage> {
                   bottom: 20,
                   left: 20,
                   child: Text(
-                    'HFCinema là một trong những hệ \nthống rạp chiếu phim được yêu thích\n nhất tại Việt Nam. ',
+                    'HFCinema là một trong những hệ \nthống rạp chiếu phim được yêu \nthích nhất tại Việt Nam. ',
                     style: TextStyle(
                       fontSize: 24,
                       color: Colors.white,

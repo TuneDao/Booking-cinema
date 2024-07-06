@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:project_android/Screen/User/Food/combolist.dart';
@@ -139,13 +140,17 @@ class SeatSelectionScreen extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 8.0),
-                Row(
+                Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     LegendItem(color: Colors.blueGrey, text: 'Thường'),
+                    const SizedBox(height: 8.0),
                     LegendItem(color: colorTheme, text: 'VIP'),
+                    const SizedBox(height: 8.0),
                     LegendItem(color: Colors.grey, text: 'Đã chọn'),
+                    const SizedBox(height: 8.0),
                     LegendItem(color: Colors.black, text: 'Không thể chọn'),
+                    const SizedBox(height: 8.0),
                     LegendItem(
                         color: Colors.pinkAccent.shade700, text: 'Ghế đôi'),
                   ],
