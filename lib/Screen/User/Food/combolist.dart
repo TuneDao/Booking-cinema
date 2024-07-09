@@ -144,8 +144,8 @@ class BottomScreen extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => PaymentScreen()));
+              // Navigator.push(context,
+              //     MaterialPageRoute(builder: (context) => PaymentScreen()));
             },
             child: const Icon(
               FontAwesomeIcons.arrowRight,

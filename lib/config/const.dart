@@ -45,3 +45,18 @@ class textPrice extends StatelessWidget {
     );
   }
 }
+
+class textButton extends StatelessWidget {
+  final String text;
+
+  const textButton({super.key, required this.text});
+
+  @override
+  Widget build(BuildContext context) {
+    return Text(
+      text,
+      style: const TextStyle(
+          color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+    );
+  }
+}

@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:project_android/Data/model/filmmodel.dart';
 import 'package:project_android/Screen/User/Payment/payment_complete.dart';
 import 'package:project_android/config/const.dart';
 
 class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({super.key});
+  final Film film;
+  final int totalPrice;
+
+  const PaymentScreen({Key? key, required this.film, required this.totalPrice})
+      : super(key: key);
 
   @override
   _PaymentScreenState createState() => _PaymentScreenState();
@@ -48,52 +54,46 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         height: 180.0,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
-                          image: const DecorationImage(
-                            image: AssetImage('assets/images/Deadpool.jpg'),
+                          image: DecorationImage(
+                            image:
+                                AssetImage('assets/images/${widget.film.img}'),
                             fit: BoxFit.cover,
                           ),
                         ),
                       ),
                       const SizedBox(width: 20.0),
-                      const Expanded(
+                      Expanded(
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              'Tên phim: Tên phim của bạn',
-                              style: TextStyle(
+                              '${widget.film.name}',
+                              style: const TextStyle(
                                 fontSize: 22.0,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 8.0),
+                            const SizedBox(
+                                height: 8.0), // <-- Fixed constant height
                             Text(
-                              'Số Phòng:',
-                              style: TextStyle(fontSize: 18.0),
+                              'Xuất chiếu: ${widget.film.time}',
+                              style: const TextStyle(fontSize: 18.0),
                             ),
-                            SizedBox(height: 4.0),
-                            Text(
-                              'Xuất chiếu: ',
-                              style: TextStyle(fontSize: 18.0),
-                            ),
-                            SizedBox(height: 4.0),
-                            Text(
-                              'Ghế: ',
+                            const SizedBox(
+                                height: 4.0), // <-- Fixed constant height
+                            const Text(
+                              'Giá vé: 70,000 VND',
                               style: TextStyle(
-                                  fontSize: 18.0, fontWeight: FontWeight.bold),
-                            ),
-                            SizedBox(height: 4.0),
-                            Text(
-                              'Giá vé: ',
-                              style: TextStyle(
-                                  fontSize: 18.0, fontWeight: FontWeight.bold),
+                                fontSize: 18.0,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ],
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 20.0),
+                  const SizedBox(height: 20.0), // <-- Fixed constant height
                   Container(
                     width: 500.0,
                     color: const Color.fromRGBO(255, 241, 219, 50),
@@ -106,7 +106,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       ),
                     ),
                   ),
-                  const SizedBox(height: 1.0),
+                  const SizedBox(height: 1.0), // <-- Fixed constant height
                   Container(
                     width: 500.0,
                     padding: const EdgeInsets.fromLTRB(15.0, 13.0, 2.0, 10.0),
@@ -115,10 +115,10 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         bottom: BorderSide(width: 0.5, color: Colors.black),
                       ),
                     ),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
+                        const Text(
                           'Số lượng',
                           style: TextStyle(
                             fontSize: 18.0,
@@ -128,8 +128,8 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         Padding(
                           padding: EdgeInsets.only(right: 15.0),
                           child: Text(
-                            '10',
-                            style: TextStyle(
+                            '${(widget.totalPrice / 70000).toInt()}',
+                            style: const TextStyle(
                               fontSize: 18.0,
                             ),
                           ),
@@ -137,148 +137,32 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 1.0),
+                  const SizedBox(height: 1.0), // <-- Fixed constant height
                   Container(
                     width: 500.0,
                     padding: const EdgeInsets.fromLTRB(15.0, 13.0, 2.0, 1.0),
-                    child: const Row(
+                    child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Tổng',
+                        const Text(
+                          'Tổng thành tiền',
                           style: TextStyle(
                             fontSize: 18.0,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Padding(
-                          padding: EdgeInsets.only(right: 15.0),
+                          padding: const EdgeInsets.only(right: 15.0),
                           child: Text(
-                            '10.000' + ' VND',
-                            style: TextStyle(
+                            NumberFormat('###,### VND')
+                                .format(widget.totalPrice),
+                            style: const TextStyle(
                               fontSize: 18.0,
                             ),
                           ),
                         ),
                       ],
                     ),
-                  ),
-                  const SizedBox(height: 20.0),
-                  Container(
-                    width: 500.0,
-                    color: const Color.fromRGBO(255, 241, 219, 50),
-                    padding: const EdgeInsets.all(15.0),
-                    child: const Text(
-                      'Combo Bắp Nước (Tùy Chọn)',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 1.0),
-                  Container(
-                    width: 500.0,
-                    padding: const EdgeInsets.fromLTRB(15.0, 13.0, 2.0, 10.0),
-                    decoration: const BoxDecoration(
-                      border: Border(
-                        bottom: BorderSide(width: 0.5, color: Colors.black),
-                      ),
-                    ),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Combo A',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(right: 15.0),
-                          child: Text(
-                            '10',
-                            style: TextStyle(
-                              fontSize: 18.0,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 1.0),
-                  Container(
-                    width: 500.0,
-                    padding: const EdgeInsets.fromLTRB(15.0, 13.0, 2.0, 1.0),
-                    child: const Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Tổng',
-                          style: TextStyle(
-                            fontSize: 18.0,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                        Padding(
-                          padding: EdgeInsets.only(right: 15.0),
-                          child: Text(
-                            '10.000' + ' VND',
-                            style: TextStyle(
-                              fontSize: 18.0,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                  const SizedBox(height: 20.0),
-                  Container(
-                    width: 500.0,
-                    color: const Color.fromRGBO(255, 241, 219, 50),
-                    padding: const EdgeInsets.all(15.0),
-                    child: const Text(
-                      'Phương Thức Thanh Toán',
-                      style: TextStyle(
-                        fontSize: 18.0,
-                        fontWeight: FontWeight.bold,
-                      ),
-                    ),
-                  ),
-                  Row(
-                    children: [
-                      Checkbox(
-                        value: isCheckedMomo,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            isCheckedMomo = value ?? false;
-                            if (isCheckedMomo) {
-                              isCheckedVisa = false;
-                            }
-                          });
-                        },
-                      ),
-                      Text(
-                        'Momo',
-                        style: TextStyle(fontSize: 18.0),
-                      ),
-                      Checkbox(
-                        value: isCheckedVisa,
-                        onChanged: (bool? value) {
-                          setState(() {
-                            isCheckedVisa = value ?? false;
-                            if (isCheckedVisa) {
-                              isCheckedMomo = false;
-                            }
-                          });
-                        },
-                      ),
-                      Text(
-                        'Visa / MasterCard',
-                        style: TextStyle(fontSize: 18.0),
-                      ),
-                    ],
                   ),
                 ],
               ),
@@ -290,22 +174,20 @@ class _PaymentScreenState extends State<PaymentScreen> {
                 height: 70.0,
                 padding: EdgeInsets.only(top: 20.0),
                 child: TextButton(
-                  onPressed: () {
-                    // Xử lý khi nút được nhấn
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => PaymentComplete()));
-                    print('Xác nhận đã được nhấn');
-                  },
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Color.fromRGBO(214, 175, 23, 1),
-                  ),
-                  child: Text(
-                    'Xác Nhận',
-                    style: TextStyle(color: Colors.white, fontSize: 19.0),
-                  ),
-                ),
+                    onPressed: () {
+                      // Xử lý khi nút được nhấn
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => PaymentComplete(
+                                  film: widget.film,
+                                  totalPrice: widget.totalPrice)));
+                      print('Xác nhận đã được nhấn');
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: colorTheme,
+                    ),
+                    child: const textButton(text: 'XÁC NHẬN')),
               ),
             ),
           ],

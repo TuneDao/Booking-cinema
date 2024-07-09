@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:project_android/Data/model/filmmodel.dart';
 import 'package:project_android/Screen/User/Tickets/seats.dart';
+// Import CarouselNews
+import 'package:project_android/Screen/User/Home/carousel_film.dart';
+import 'package:project_android/Screen/User/Home/carousel_news.dart';
+import 'package:project_android/config/const.dart'; // Import CarouselFilm
 
 class FilmDetailScreen extends StatelessWidget {
   final Film film;
@@ -12,23 +16,22 @@ class FilmDetailScreen extends StatelessWidget {
     return Scaffold(
       body: CustomScrollView(
         slivers: <Widget>[
-          // SliverAppBar hiển thị ảnh nền phim với hiệu ứng co giãn
+          // SliverAppBar with a large image and title
           SliverAppBar(
-            expandedHeight: 250.0,
+            expandedHeight: 300.0,
             flexibleSpace: FlexibleSpaceBar(
-              title: Text(film.name ?? ''),
               background: Stack(
                 fit: StackFit.expand,
                 children: [
                   Image.asset(
-                    'assets/images/${film.img}',
+                    'assets/images/${film.img}', // Large background image
                     fit: BoxFit.cover,
                   ),
                   Container(
                     decoration: BoxDecoration(
                       gradient: LinearGradient(
                         colors: [
-                          Colors.black.withOpacity(0.7),
+                          Colors.black.withOpacity(0.6),
                           Colors.transparent,
                         ],
                         begin: Alignment.bottomCenter,
@@ -43,69 +46,116 @@ class FilmDetailScreen extends StatelessWidget {
             pinned: true,
             stretch: true,
           ),
-          // Nội dung chi tiết phim
+          // Film details
           SliverToBoxAdapter(
             child: Padding(
               padding: const EdgeInsets.all(16.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox(height: 10),
-                  Text(
-                    'Thể loại: ${film.category ?? ''}',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                    ),
+                  // Small overlay image and film name
+                  Row(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                        height: 150,
+                        width: 100,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(16.0),
+                          boxShadow: const [
+                            BoxShadow(
+                              color: Colors.black26,
+                              blurRadius: 10,
+                              offset: Offset(0, 10),
+                            ),
+                          ],
+                        ),
+                        child: Image.asset(
+                          'assets/images/${film.img}', // Small poster image
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      const SizedBox(width: 16.0),
+                      Expanded(
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              film.name.toString(),
+                              style: const TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                            Row(
+                              children: [
+                                Text(
+                                    'Thời gian chiếu: ' + film.time.toString()),
+                              ],
+                            ),
+                            const SizedBox(height: 8.0),
+                            Row(
+                              children: [
+                                Icon(Icons.favorite, color: Colors.red),
+                                SizedBox(width: 8.0),
+                                Text('3050'),
+                                SizedBox(width: 32.0),
+                                ElevatedButton(
+                                    onPressed: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => SeatsSelect(
+                                                    film: film,
+                                                  )));
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      backgroundColor:
+                                          Color.fromARGB(255, 227, 57, 47),
+                                      minimumSize: Size(120, 50),
+                                      padding: EdgeInsets.all(10),
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(60),
+                                      ),
+                                    ),
+                                    child: const textButton(text: 'ĐẶT VÉ')),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ),
+                    ],
                   ),
-                  const SizedBox(height: 10),
+                  const SizedBox(height: 16),
                   Text(
-                    'Thời gian chiếu: ${film.time ?? ''}',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.grey,
-                    ),
+                    film.description.toString(),
+                    style: const TextStyle(fontSize: 16, height: 1.5),
+                  ),
+                  const SizedBox(height: 16),
+                  const Divider(
+                    color: Colors.grey,
+                    thickness: 1.0,
+                    height: 20,
+                    indent: 0,
+                    endIndent: 0,
                   ),
                   const SizedBox(height: 20),
-                  Text(
-                    film.description ?? '',
-                    style: const TextStyle(
-                      fontSize: 16,
-                      height: 1.5,
-                    ),
+                  Text(film.category.toString()),
+                  const SizedBox(height: 10),
+                  Text('Đạo diễn: Imai Kazuaki'),
+                  const SizedBox(height: 10),
+                  Text('Ngôn ngữ: Tiếng Nhật - Phụ đề tiếng Việt'),
+                  const SizedBox(height: 10),
+                  const SizedBox(height: 16),
+                  Divider(
+                    color: Colors.grey,
+                    thickness: 1.0,
+                    height: 20,
+                    indent: 0,
+                    endIndent: 0,
                   ),
-                  const SizedBox(height: 30),
-                  Center(
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) =>
-                                SeatsSelect(), // Điều hướng đến trang chọn ghế
-                          ),
-                        );
-                      },
-                      style: ElevatedButton.styleFrom(
-                        padding: const EdgeInsets.symmetric(
-                          vertical: 15,
-                          horizontal: 30,
-                        ),
-                        backgroundColor: Colors.orange,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(10),
-                        ), // Màu nền của nút
-                      ),
-                      child: const Text(
-                        'Đặt vé',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                          color: Colors.white,
-                        ),
-                      ),
-                    ),
-                  ),
+                  const SizedBox(height: 0),
+                  CarouselNews(), // Thêm CarouselFilm vào cuối màn hình
                 ],
               ),
             ),

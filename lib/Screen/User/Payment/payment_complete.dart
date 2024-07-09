@@ -1,146 +1,91 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:intl/intl.dart';
+import 'package:project_android/Data/model/filmmodel.dart';
 import 'package:project_android/Screen/User/Home/home.dart';
 import 'package:project_android/config/const.dart';
 
-class PaymentComplete extends StatefulWidget {
-  const PaymentComplete({Key? key}) : super(key: key);
-
-  @override
-  _PaymentCompleteState createState() => _PaymentCompleteState();
-}
-
-class _PaymentCompleteState extends State<PaymentComplete> {
-  bool isCheckedMomo = false;
-  bool isCheckedVisa = false;
-
+class PaymentComplete extends StatelessWidget {
+  final Film film;
+  final int totalPrice;
+  const PaymentComplete(
+      {Key? key, required this.film, required this.totalPrice})
+      : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colorTheme,
         leading: IconButton(
-          padding: const EdgeInsets.only(bottom: 5.0),
-          icon: const Icon(Icons.arrow_back),
-          onPressed: () {
-            Navigator.pop(context);
-          },
+          icon: Icon(Icons.arrow_back),
           color: Colors.white,
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => HomePage()));
+          },
         ),
-        title: const Padding(
-          padding: EdgeInsets.only(top: 5.0),
-          child: Text('Xác Nhận', style: titleStyle),
+        title: const Text(
+          'Xác nhận',
+          style: titleStyle,
         ),
       ),
-      body: SingleChildScrollView(
-        child: Center(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: EdgeInsets.all(20),
-                child: Container(
-                  padding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 30.0),
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(10),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.black12,
-                        blurRadius: 10,
-                        offset: Offset(0, 5),
-                      ),
-                    ],
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      const Icon(
-                        FontAwesomeIcons.checkDouble,
-                        size: 50,
-                      ),
-                      SizedBox(height: 30),
-                      Text(
-                        'Thanh Toán Thành Công',
-                        style: TextStyle(fontSize: 22.0),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 9.0),
-                      Text(
-                        'Mã thanh toán: 010101010',
-                        style: TextStyle(fontSize: 22.0),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 9.0),
-                      Container(
-                        width: 300.0,
-                        padding: EdgeInsets.fromLTRB(15.0, 13.0, 2.0, 10.0),
-                        decoration: BoxDecoration(
-                          border: Border(
-                            bottom: BorderSide(width: 0.5, color: Colors.black),
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 9.0),
-                      Text(
-                        'Số tiền thanh toán: 100.000 VNĐ',
-                        style: TextStyle(
-                            fontSize: 22.0, fontWeight: FontWeight.bold),
-                        textAlign: TextAlign.center,
-                      ),
-                      SizedBox(height: 9.0),
-                      Padding(
-                        padding: EdgeInsets.only(left: 40),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text(
-                              'Phương Thức Thanh Toán:  ',
-                              style: TextStyle(fontSize: 19.0),
-                            ),
-                            Container(
-                              width: 40.0,
-                              height: 40.0,
-                              decoration: BoxDecoration(
-                                image: const DecorationImage(
-                                  image: AssetImage('assets/images/img_1.jpg'),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 20),
-                      Container(
-                        width: 320.0,
-                        height: 70.0,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => HomePage()),
-                            );
-                            print('Xác nhận đã được nhấn');
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: Color.fromRGBO(214, 175, 23, 1),
-                          ),
-                          child: Text(
-                            'Quay Về',
-                            style:
-                                TextStyle(color: Colors.white, fontSize: 19.0),
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: <Widget>[
+            const Icon(
+              Icons.check_circle,
+              color: Colors.green,
+              size: 100.0,
+            ),
+            const SizedBox(height: 16.0),
+            const Text(
+              'Thanh toán thành công',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 24.0,
+                fontWeight: FontWeight.bold,
               ),
-            ],
-          ),
+            ),
+            const SizedBox(height: 16.0),
+            Text(
+              'Số tiền thanh toán: ${NumberFormat('###,### VND').format(totalPrice)}',
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 18.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+            const SizedBox(height: 8.0),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Phương thức thanh toán ',
+                  style: TextStyle(fontSize: 18.0),
+                ),
+                Image.network(
+                  'https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png',
+                  height: 24.0,
+                ),
+              ],
+            ),
+            const SizedBox(height: 32.0),
+            ElevatedButton(
+                style: ElevatedButton.styleFrom(
+                  foregroundColor: Colors.white,
+                  padding: EdgeInsets.all(10),
+                  backgroundColor: colorTheme,
+                ),
+                onPressed: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => HomePage()));
+                },
+                child: const textButton(text: 'QUAY VỀ')),
+          ],
         ),
       ),
     );
