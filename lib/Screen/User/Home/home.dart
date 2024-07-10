@@ -273,7 +273,9 @@ class _HomePageState extends State<HomePage> {
                 children: [
                   // Avatar and User Info Section
                   Container(
-                    padding: const EdgeInsets.all(16.0),
+                    margin: const EdgeInsets.only(
+                        left: 0, right: 0, top: 40, bottom: 0),
+                    padding: const EdgeInsets.all(20.0),
                     child: Column(
                       children: [
                         CircleAvatar(

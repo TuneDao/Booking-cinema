@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_android/Data/model/filmmodel.dart';
 import 'package:project_android/Screen/User/Tickets/seats.dart';
-// Import CarouselNews
-import 'package:project_android/Screen/User/Home/carousel_film.dart';
 import 'package:project_android/Screen/User/Home/carousel_news.dart';
 import 'package:project_android/config/const.dart'; // Import CarouselFilm
 
@@ -142,12 +140,12 @@ class FilmDetailScreen extends StatelessWidget {
                   const SizedBox(height: 20),
                   Text(film.category.toString()),
                   const SizedBox(height: 10),
-                  Text('Đạo diễn: Imai Kazuaki'),
+                  const Text('Đạo diễn: Imai Kazuaki'),
                   const SizedBox(height: 10),
-                  Text('Ngôn ngữ: Tiếng Nhật - Phụ đề tiếng Việt'),
+                  const Text('Ngôn ngữ: Tiếng Nhật - Phụ đề tiếng Việt'),
                   const SizedBox(height: 10),
                   const SizedBox(height: 16),
-                  Divider(
+                  const Divider(
                     color: Colors.grey,
                     thickness: 1.0,
                     height: 20,
@@ -155,7 +153,7 @@ class FilmDetailScreen extends StatelessWidget {
                     endIndent: 0,
                   ),
                   const SizedBox(height: 0),
-                  CarouselNews(), // Thêm CarouselFilm vào cuối màn hình
+                  const CarouselNews(), // Thêm CarouselFilm vào cuối màn hình
                 ],
               ),
             ),
