@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:buttons_tabbar/buttons_tabbar.dart';
 import 'package:project_android/Screen/User/News/detailnews.dart';
+import 'package:project_android/config/const.dart';
 
 class NewsScreen extends StatefulWidget {
   const NewsScreen({Key? key}) : super(key: key);
@@ -118,11 +119,11 @@ class _TabState extends State<_Tab> {
       child: Column(
         children: <Widget>[
           ButtonsTabBar(
-            backgroundColor: const Color.fromRGBO(246, 217, 62, 1),
-            unselectedBackgroundColor: const Color.fromRGBO(0, 173, 239, 1),
+            backgroundColor: colorTheme,
+            unselectedBackgroundColor: colorHome,
             unselectedLabelStyle: const TextStyle(color: Colors.white),
             labelStyle: const TextStyle(
-              color: Colors.black,
+              color: Colors.white,
               fontWeight: FontWeight.bold,
             ),
             contentPadding: const EdgeInsets.symmetric(horizontal: 16),

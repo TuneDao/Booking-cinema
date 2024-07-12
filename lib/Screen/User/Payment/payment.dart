@@ -16,8 +16,31 @@ class PaymentScreen extends StatefulWidget {
 }
 
 class _PaymentScreenState extends State<PaymentScreen> {
+  String? _selectedPaymentMethod = 'ATM card (Thẻ nội địa)';
   bool isCheckedMomo = false;
   bool isCheckedVisa = false;
+  final List<Map<String, String>> paymentMethods = [
+    {
+      'title': 'ATM card (Thẻ nội địa)',
+      'image':
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/MAC_%28Money_Access_Card%29_ATM_Card.jpg/640px-MAC_%28Money_Access_Card%29_ATM_Card.jpg', // Replace with your image URL
+    },
+    {
+      'title': 'Thẻ quốc tế (Visa, Master, Amex, JCB)',
+      'image':
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/Visa_Electron.png/640px-Visa_Electron.png', // Replace with your image URL
+    },
+    {
+      'title': 'MoMo: Nhập MM24 -5K, nhận thẻ 10k 4G/5G',
+      'image':
+          'https://upload.wikimedia.org/wikipedia/vi/f/fe/MoMo_Logo.png', // Replace with your image URL
+    },
+    {
+      'title': 'ZaloPay - 84k/vé + gói quà ưu đãi 530k',
+      'image':
+          'https://upload.wikimedia.org/wikipedia/commons/thumb/1/1c/ZaloPay-chuong.png/640px-ZaloPay-chuong.png', // Replace with your image URL
+    },
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -164,6 +187,77 @@ class _PaymentScreenState extends State<PaymentScreen> {
                       ],
                     ),
                   ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  Container(
+                    width: 500.0,
+                    color: const Color.fromRGBO(255, 241, 219, 50),
+                    padding: const EdgeInsets.all(15.0),
+                    child: const Text(
+                      'Thanh toán',
+                      style: TextStyle(
+                        fontSize: 18.0,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: EdgeInsets.symmetric(horizontal: 16.0),
+                    child: DropdownButtonHideUnderline(
+                      child: DropdownButton<String>(
+                        isExpanded: true,
+                        value: _selectedPaymentMethod,
+                        onChanged: (String? newValue) {
+                          setState(() {
+                            _selectedPaymentMethod = newValue;
+                          });
+                        },
+                        items: paymentMethods.map<DropdownMenuItem<String>>(
+                            (Map<String, String> method) {
+                          return DropdownMenuItem<String>(
+                            value: method['title'],
+                            child: Row(
+                              children: [
+                                Image.network(
+                                  method['image']!,
+                                  width: 20,
+                                  height: 20,
+                                ),
+                                SizedBox(width: 10),
+                                Expanded(child: Text(method['title']!)),
+                              ],
+                            ),
+                          );
+                        }).toList(),
+                      ),
+                    ),
+                  ),
+                  // DropdownButton<String>(
+                  //   value: _selectedPaymentMethod,
+                  //   onChanged: (String? newValue) {
+                  //     setState(() {
+                  //       _selectedPaymentMethod = newValue;
+                  //     });
+                  //   },
+                  //   items: paymentMethods.map<DropdownMenuItem<String>>(
+                  //       (Map<String, String> method) {
+                  //     return DropdownMenuItem<String>(
+                  //       value: method['title'],
+                  //       child: Row(
+                  //         children: [
+                  //           Image.network(
+                  //             method['image']!,
+                  //             width: 20,
+                  //             height: 20,
+                  //           ),
+                  //           SizedBox(width: 10),
+                  //           Text(method['title']!),
+                  //         ],
+                  //       ),
+                  //     );
+                  //   }).toList(),
+                  // ),
                 ],
               ),
             ),

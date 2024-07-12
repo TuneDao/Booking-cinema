@@ -288,7 +288,7 @@ class _PaymentDetailScreenState extends State<PaymentDetailScreen> {
                                                   ),
                                                   // GHẾ NGỒI
                                                   TextSpan(
-                                                    text: 'B11 B12 B13',
+                                                    text: 'B2 B3 B4',
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,

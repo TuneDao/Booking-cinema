@@ -1,803 +1,312 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:project_android/Data/model/booking.dart';
+import 'package:project_android/Data/provider/bookingprovider.dart';
+import 'package:project_android/Screen/User/Payment/booking_detail.dart';
 import 'package:project_android/Screen/User/Payment/payment_detail.dart';
+import 'package:project_android/config/const.dart';
 
-class historyPayment extends StatefulWidget {
-  const historyPayment({super.key});
+// class HistoryPayment extends StatefulWidget {
+//   const HistoryPayment({super.key});
+
+//   @override
+//   _HistoryPaymentState createState() => _HistoryPaymentState();
+// }
+
+// class _HistoryPaymentState extends State<HistoryPayment> {
+//   Future<List<MovieBooking>> loadBill() async {
+//     return await ReadDataFodd().loadDataBooking();
+//   }
+
+//   @override
+//   void initState() {
+//     super.initState();
+//   }
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return Scaffold(
+//       body: FutureBuilder<List<MovieBooking>>(
+//         future: loadBill(),
+//         builder: (context, snapshot) {
+//           if (snapshot.connectionState == ConnectionState.waiting) {
+//             return Center(child: CircularProgressIndicator());
+//           } else if (snapshot.hasError) {
+//             return Center(child: Text('Error: ${snapshot.error}'));
+//           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+//             return Center(child: Text('No data available'));
+//           } else {
+//             final bookings = snapshot.data!;
+//             return ListView.builder(
+//               itemCount: bookings.length,
+//               itemBuilder: (context, index) {
+//                 final booking = bookings[index];
+//                 return Padding(
+//                   padding: const EdgeInsets.all(12.0),
+//                   child: Card(
+//                     color: Colors.grey[850],
+//                     shape: RoundedRectangleBorder(
+//                       borderRadius: BorderRadius.circular(10.0),
+//                     ),
+//                     child: Row(
+//                       crossAxisAlignment: CrossAxisAlignment.start,
+//                       children: [
+//                         ClipRRect(
+//                           borderRadius: BorderRadius.only(
+//                             topLeft: Radius.circular(10.0),
+//                             bottomLeft: Radius.circular(10.0),
+//                           ),
+//                           child: Image.asset(
+//                             'assets/images/${booking.img}',
+//                             height: 150,
+//                             width: 100,
+//                             fit: BoxFit.cover,
+//                           ),
+//                         ),
+//                         const SizedBox(width: 15),
+//                         Expanded(
+//                           child: Padding(
+//                             padding: const EdgeInsets.symmetric(vertical: 10.0),
+//                             child: Column(
+//                               crossAxisAlignment: CrossAxisAlignment.start,
+//                               children: [
+//                                 Text(
+//                                   booking.name,
+//                                   style: const TextStyle(
+//                                     fontSize: 20,
+//                                     fontWeight: FontWeight.bold,
+//                                     color: Colors.white,
+//                                   ),
+//                                 ),
+//                                 const SizedBox(height: 8),
+//                                 const SizedBox(height: 8),
+//                                 Row(
+//                                   children: [
+//                                     Icon(Icons.calendar_today,
+//                                         color: Colors.orange, size: 20),
+//                                     const SizedBox(width: 8),
+//                                     Text(
+//                                       booking.date,
+//                                       style: const TextStyle(
+//                                         color: Colors.white,
+//                                         fontSize: 16,
+//                                       ),
+//                                     ),
+//                                   ],
+//                                 ),
+//                                 const SizedBox(height: 8),
+//                                 Row(
+//                                   children: [
+//                                     Icon(Icons.attach_money,
+//                                         color: Colors.green, size: 20),
+//                                     const SizedBox(width: 8),
+//                                     Text(
+//                                       NumberFormat('###,### VND')
+//                                           .format(booking.price),
+//                                       style: const TextStyle(
+//                                         color: Colors.white,
+//                                         fontSize: 16,
+//                                       ),
+//                                     ),
+//                                   ],
+//                                 ),
+//                               ],
+//                             ),
+//                           ),
+//                         ),
+//                         Container(
+//                           padding: const EdgeInsets.all(10),
+//                           color: Colors.red,
+//                           child: Column(
+//                             mainAxisAlignment: MainAxisAlignment.center,
+//                             children: [
+//                               Icon(Icons.local_activity,
+//                                   color: Colors.white, size: 30),
+//                               const SizedBox(height: 8),
+//                               Text(
+//                                 booking.quantity.toString(),
+//                                 style: const TextStyle(
+//                                   fontSize: 20,
+//                                   fontWeight: FontWeight.bold,
+//                                   color: Colors.white,
+//                                 ),
+//                               ),
+//                             ],
+//                           ),
+//                         ),
+//                       ],
+//                     ),
+//                   ),
+//                 );
+//               },
+//             );
+//           }
+//         },
+//       ),
+//     );
+//   }
+// }
+class HistoryPayment extends StatefulWidget {
+  const HistoryPayment({super.key});
 
   @override
-  _historyPaymentState createState() => _historyPaymentState();
+  _HistoryPaymentState createState() => _HistoryPaymentState();
 }
 
-class _historyPaymentState extends State<historyPayment> {
+class _HistoryPaymentState extends State<HistoryPayment> {
+  Future<List<MovieBooking>> loadBill() async {
+    return await ReadDataFodd().loadDataBooking();
+  }
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SingleChildScrollView(
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            SizedBox(height: 7.0),
-            Container(
-              width: 500.0,
-              padding: const EdgeInsets.all(15.0),
-              child: TextField(
-                //controller: ,
-                decoration: InputDecoration(
-                  hintText: 'Tìm kiếm hóa đơn mua vé của bạn',
-                  filled: true,
-                  fillColor: Color.fromRGBO(217, 217, 217, 1),
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(28.0),
-                  ),
-                  suffixIcon: IconButton(
-                    icon: Icon(Icons.search),
-                    onPressed: () {
-                      ////////
-                    },
-                  ),
-                ),
-              ),
-            ),
-            Container(
-              width: 500.0,
-              padding: const EdgeInsets.fromLTRB(15.0, 0, 2.0, 10.0),
-              decoration: const BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(width: 0.5, color: Colors.black),
-                ),
-              ),
-            ),
-            SizedBox(height: 20),
-            // CONTENT BOX
-            Container(
-              width: 400,
-              height: 150,
-              //BORDER RADIUS vs BOXSHADOW CHO CONTENT BOX
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.withOpacity(0.8),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(5, 5)), // 5,5 là bên dưới và bên phải
-                ],
-                border: Border.all(
-                  color: Colors.black,
-                  width: 1.5,
-                ),
-              ),
-              // NƠI CHỨA THÔNG TIN VÉ
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 4, // Chiếm nhiều không gian hơn
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20)),
-                        color: Colors.white,
+      body: FutureBuilder<List<MovieBooking>>(
+        future: loadBill(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+            return Center(child: Text('No data available'));
+          } else {
+            final bookings = snapshot.data!;
+            return ListView.builder(
+              itemCount: bookings.length,
+              itemBuilder: (context, index) {
+                final booking = bookings[index];
+                return GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => BookingDetail(booking: booking),
                       ),
-                      //THÔNG TIN
-                      child: const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              'Mã Hóa Đơn:' + ' 1231233123',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                            SizedBox(height: 2.0),
-                            Text(
-                              'Ngày Mua:' + ' 12/12/2024' + '12:30',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizedBox(height: 2.0),
-                            Text(
-                              'Phương Thức Thanh Toán:' + ' Momo',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizedBox(height: 4.0),
-                            Text(
-                              'Tổng Cộng:' + ' 200000' + ' VND',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 19,
-                              ),
-                            ),
-                          ],
-                        ),
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(12.0),
+                    child: Card(
+                      color: Colors.grey[850],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
                       ),
-                    ),
-                  ),
-                  //
-                  Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 0.75)),
-                  ),
-                  // BUTTON XEM CHI TIẾT
-                  Expanded(
-                    flex: 1, // Chiếm ít không gian hơn
-                    child: Container(
-                      height: 250,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(244, 208, 64, 1),
-                          shape: const RoundedRectangleBorder(
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          ClipRRect(
                             borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20),
-                                bottomRight: Radius.circular(20)),
+                              topLeft: Radius.circular(10.0),
+                              bottomLeft: Radius.circular(10.0),
+                            ),
+                            child: Image.asset(
+                              'assets/images/${booking.img}',
+                              height: 150,
+                              width: 100,
+                              fit: BoxFit.cover,
+                            ),
                           ),
-                        ),
-                        onPressed: () {
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => PaymentDetailScreen()));
-                        },
-                        child: const Text(
-                          'Chi Tiết',
-                          style: TextStyle(fontSize: 15, color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            //
-            SizedBox(height: 22.0),
-            // CONTENT BOX
-            Container(
-              width: 400,
-              height: 150,
-              //BORDER RADIUS vs BOXSHADOW CHO CONTENT BOX
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.withOpacity(0.8),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(5, 5)), // 5,5 là bên dưới và bên phải
-                ],
-                border: Border.all(
-                  color: Colors.black,
-                  width: 1.5,
-                ),
-              ),
-              // NƠI CHỨA THÔNG TIN VÉ
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 4, // Chiếm nhiều không gian hơn
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20)),
-                        color: Colors.white,
-                      ),
-                      //THÔNG TIN
-                      child: const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              'Mã Hóa Đơn:' + ' 1231233123',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
+                          const SizedBox(width: 15),
+                          Expanded(
+                            child: Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 10.0),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    booking.name,
+                                    style: const TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: Colors.white,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Row(
+                                    children: [
+                                      Icon(Icons.hd,
+                                          color: Colors.blue, size: 20),
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        'Quantity: ${booking.quantity}',
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Row(
+                                    children: [
+                                      Icon(Icons.calendar_today,
+                                          color: Colors.orange, size: 20),
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        booking.date,
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Row(
+                                    children: [
+                                      Icon(Icons.attach_money,
+                                          color: Colors.green, size: 20),
+                                      const SizedBox(width: 8),
+                                      Text(
+                                        NumberFormat('###,### VND')
+                                            .format(booking.price),
+                                        style: const TextStyle(
+                                          color: Colors.white,
+                                          fontSize: 16,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ],
                               ),
                             ),
-                            SizedBox(height: 2.0),
-                            Text(
-                              'Ngày Mua:' + ' 12/12/2024' + '12:30',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizedBox(height: 2.0),
-                            Text(
-                              'Phương Thức Thanh Toán:' + ' Momo',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizedBox(height: 4.0),
-                            Text(
-                              'Tổng Cộng:' + ' 200000' + ' VND',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 19,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  //
-                  Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 0.75)),
-                  ),
-                  // BUTTON XEM CHI TIẾT
-                  Expanded(
-                    flex: 1, // Chiếm ít không gian hơn
-                    child: Container(
-                      height: 250,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(244, 208, 64, 1),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20),
-                                bottomRight: Radius.circular(20)),
                           ),
-                        ),
-                        onPressed: () {
-                          // BAM CHUYEN TRANG "XEM CHI TIET"
-                        },
-                        child: const Text(
-                          'Chi Tiết',
-                          style: TextStyle(fontSize: 15, color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            //
-            SizedBox(height: 22.0),
-            // CONTENT BOX
-            Container(
-              width: 400,
-              height: 150,
-              //BORDER RADIUS vs BOXSHADOW CHO CONTENT BOX
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.withOpacity(0.8),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(5, 5)), // 5,5 là bên dưới và bên phải
-                ],
-                border: Border.all(
-                  color: Colors.black,
-                  width: 1.5,
-                ),
-              ),
-              // NƠI CHỨA THÔNG TIN VÉ
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 4, // Chiếm nhiều không gian hơn
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20)),
-                        color: Colors.white,
-                      ),
-                      //THÔNG TIN
-                      child: const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              'Mã Hóa Đơn:' + ' 1231233123',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
+                          Container(
+                            padding: const EdgeInsets.all(10),
+                            color: Colors.red,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(Icons.local_activity,
+                                    color: Colors.white, size: 30),
+                                const SizedBox(height: 8),
+                                Text(
+                                  booking.quantity.toString(),
+                                  style: const TextStyle(
+                                    fontSize: 20,
+                                    fontWeight: FontWeight.bold,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                              ],
                             ),
-                            SizedBox(height: 2.0),
-                            Text(
-                              'Ngày Mua:' + ' 12/12/2024' + '12:30',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizedBox(height: 2.0),
-                            Text(
-                              'Phương Thức Thanh Toán:' + ' Momo',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizedBox(height: 4.0),
-                            Text(
-                              'Tổng Cộng:' + ' 200000' + ' VND',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 19,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  //
-                  Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 0.75)),
-                  ),
-                  // BUTTON XEM CHI TIẾT
-                  Expanded(
-                    flex: 1, // Chiếm ít không gian hơn
-                    child: Container(
-                      height: 250,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(244, 208, 64, 1),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20),
-                                bottomRight: Radius.circular(20)),
                           ),
-                        ),
-                        onPressed: () {
-                          // BAM CHUYEN TRANG "XEM CHI TIET"
-                        },
-                        child: const Text(
-                          'Chi Tiết',
-                          style: TextStyle(fontSize: 15, color: Colors.black),
-                        ),
+                        ],
                       ),
                     ),
                   ),
-                ],
-              ),
-            ),
-            //
-            SizedBox(height: 22.0),
-            // CONTENT BOX
-            Container(
-              width: 400,
-              height: 150,
-              //BORDER RADIUS vs BOXSHADOW CHO CONTENT BOX
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.withOpacity(0.8),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(5, 5)), // 5,5 là bên dưới và bên phải
-                ],
-                border: Border.all(
-                  color: Colors.black,
-                  width: 1.5,
-                ),
-              ),
-              // NƠI CHỨA THÔNG TIN VÉ
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 4, // Chiếm nhiều không gian hơn
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20)),
-                        color: Colors.white,
-                      ),
-                      //THÔNG TIN
-                      child: const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              'Mã Hóa Đơn:' + ' 1231233123',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                            SizedBox(height: 2.0),
-                            Text(
-                              'Ngày Mua:' + ' 12/12/2024' + '12:30',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizedBox(height: 2.0),
-                            Text(
-                              'Phương Thức Thanh Toán:' + ' Momo',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizedBox(height: 4.0),
-                            Text(
-                              'Tổng Cộng:' + ' 200000' + ' VND',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 19,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  //
-                  Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 0.75)),
-                  ),
-                  // BUTTON XEM CHI TIẾT
-                  Expanded(
-                    flex: 1, // Chiếm ít không gian hơn
-                    child: Container(
-                      height: 250,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(244, 208, 64, 1),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20),
-                                bottomRight: Radius.circular(20)),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: const Text(
-                          'Chi Tiết',
-                          style: TextStyle(fontSize: 15, color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            //
-            SizedBox(height: 22.0),
-            // CONTENT BOX
-            Container(
-              width: 400,
-              height: 150,
-              //BORDER RADIUS vs BOXSHADOW CHO CONTENT BOX
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.withOpacity(0.8),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(5, 5)), // 5,5 là bên dưới và bên phải
-                ],
-                border: Border.all(
-                  color: Colors.black,
-                  width: 1.5,
-                ),
-              ),
-              // NƠI CHỨA THÔNG TIN VÉ
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 4, // Chiếm nhiều không gian hơn
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20)),
-                        color: Colors.white,
-                      ),
-                      //THÔNG TIN
-                      child: const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              'Mã Hóa Đơn:' + ' 1231233123',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                            SizedBox(height: 2.0),
-                            Text(
-                              'Ngày Mua:' + ' 12/12/2024' + '12:30',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizedBox(height: 2.0),
-                            Text(
-                              'Phương Thức Thanh Toán:' + ' Momo',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizedBox(height: 4.0),
-                            Text(
-                              'Tổng Cộng:' + ' 200000' + ' VND',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 19,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  //
-                  Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 0.75)),
-                  ),
-                  // BUTTON XEM CHI TIẾT
-                  Expanded(
-                    flex: 1, // Chiếm ít không gian hơn
-                    child: Container(
-                      height: 250,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(244, 208, 64, 1),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20),
-                                bottomRight: Radius.circular(20)),
-                          ),
-                        ),
-                        onPressed: () {
-                          // BAM CHUYEN TRANG "XEM CHI TIET"
-                        },
-                        child: const Text(
-                          'Chi Tiết',
-                          style: TextStyle(fontSize: 15, color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            //
-            SizedBox(height: 22.0),
-            // CONTENT BOX
-            Container(
-              width: 400,
-              height: 150,
-              //BORDER RADIUS vs BOXSHADOW CHO CONTENT BOX
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.withOpacity(0.8),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(5, 5)), // 5,5 là bên dưới và bên phải
-                ],
-                border: Border.all(
-                  color: Colors.black,
-                  width: 1.5,
-                ),
-              ),
-              // NƠI CHỨA THÔNG TIN VÉ
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 4, // Chiếm nhiều không gian hơn
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20)),
-                        color: Colors.white,
-                      ),
-                      //THÔNG TIN
-                      child: const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              'Mã Hóa Đơn:' + ' 1231233123',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                            SizedBox(height: 2.0),
-                            Text(
-                              'Ngày Mua:' + ' 12/12/2024' + '12:30',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizedBox(height: 2.0),
-                            Text(
-                              'Phương Thức Thanh Toán:' + ' Momo',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizedBox(height: 4.0),
-                            Text(
-                              'Tổng Cộng:' + ' 200000' + ' VND',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 19,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  //
-                  Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 0.75)),
-                  ),
-                  // BUTTON XEM CHI TIẾT
-                  Expanded(
-                    flex: 1, // Chiếm ít không gian hơn
-                    child: Container(
-                      height: 250,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(244, 208, 64, 1),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20),
-                                bottomRight: Radius.circular(20)),
-                          ),
-                        ),
-                        onPressed: () {
-                          // BAM CHUYEN TRANG "XEM CHI TIET"
-                        },
-                        child: const Text(
-                          'Chi Tiết',
-                          style: TextStyle(fontSize: 15, color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-            //
-            SizedBox(height: 22.0),
-            // CONTENT BOX
-            Container(
-              width: 400,
-              height: 150,
-              //BORDER RADIUS vs BOXSHADOW CHO CONTENT BOX
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(20),
-                boxShadow: [
-                  BoxShadow(
-                      color: Colors.grey.withOpacity(0.8),
-                      spreadRadius: 5,
-                      blurRadius: 7,
-                      offset: Offset(5, 5)), // 5,5 là bên dưới và bên phải
-                ],
-                border: Border.all(
-                  color: Colors.black,
-                  width: 1.5,
-                ),
-              ),
-              // NƠI CHỨA THÔNG TIN VÉ
-              child: Row(
-                children: <Widget>[
-                  Expanded(
-                    flex: 4, // Chiếm nhiều không gian hơn
-                    child: Container(
-                      decoration: const BoxDecoration(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(20),
-                            bottomLeft: Radius.circular(20)),
-                        color: Colors.white,
-                      ),
-                      //THÔNG TIN
-                      child: const Padding(
-                        padding: EdgeInsets.all(12.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              'Mã Hóa Đơn:' + ' 1231233123',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 20,
-                              ),
-                            ),
-                            SizedBox(height: 2.0),
-                            Text(
-                              'Ngày Mua:' + ' 12/12/2024' + '12:30',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizedBox(height: 2.0),
-                            Text(
-                              'Phương Thức Thanh Toán:' + ' Momo',
-                              style: TextStyle(
-                                fontWeight: FontWeight.normal,
-                                fontSize: 16,
-                              ),
-                            ),
-                            SizedBox(height: 4.0),
-                            Text(
-                              'Tổng Cộng:' + ' 200000' + ' VND',
-                              style: TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 19,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ),
-                  //
-                  Container(
-                    decoration: BoxDecoration(
-                        border: Border.all(color: Colors.black, width: 0.75)),
-                  ),
-                  // BUTTON XEM CHI TIẾT
-                  Expanded(
-                    flex: 1, // Chiếm ít không gian hơn
-                    child: Container(
-                      height: 250,
-                      child: TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: Color.fromRGBO(244, 208, 64, 1),
-                          shape: const RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topRight: Radius.circular(20),
-                                bottomRight: Radius.circular(20)),
-                          ),
-                        ),
-                        onPressed: () {
-                          // BAM CHUYEN TRANG "XEM CHI TIET"
-                        },
-                        child: const Text(
-                          'Chi Tiết',
-                          style: TextStyle(fontSize: 15, color: Colors.black),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        ),
+                );
+              },
+            );
+          }
+        },
       ),
     );
   }

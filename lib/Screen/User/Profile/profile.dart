@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:project_android/Data/model/model.dart';
+import 'package:project_android/Screen/User/Payment/history_payment.dart';
 import 'package:project_android/Screen/User/Profile/editprofile.dart';
 import 'package:project_android/Screen/User/SignIn/changepassword.dart';
 
@@ -74,7 +75,8 @@ class ProfileScreen extends StatelessWidget {
               icon: Icons.history,
               title: 'Lịch sử giao dịch',
               onTap: () {
-                // Handle tap
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => HistoryPayment()));
               },
             ),
             const Divider(),

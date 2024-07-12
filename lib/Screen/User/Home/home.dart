@@ -38,11 +38,11 @@ class _HomePageState extends State<HomePage> {
       case 2:
         return const NewsScreen();
       case 3:
-        return const ProfileScreen();
+        return ProfileScreen();
       case 4:
         return MovieTheaterPage();
       case 5:
-        return historyPayment();
+        return HistoryPayment();
       default:
         return const Center(child: Text("Trang chủ"));
     }
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
       case 0:
         return AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: colorHome,
+          backgroundColor: colorTheme,
           elevation: 0,
           title: Row(
             children: [
@@ -68,7 +68,9 @@ class _HomePageState extends State<HomePage> {
               Expanded(
                 child: Center(
                   child: Image.asset(
-                    'assets/images/logo2.png',
+                    urlLogo,
+                    errorBuilder: (context, error, stackTrace) =>
+                        const SizedBox.shrink(),
                     width: 150,
                     height: 150,
                   ),
@@ -168,7 +170,7 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.white,
                   onPressed: () => _scaffoldKey.currentState?.openDrawer(),
                 ),
-              const Text("Thành viên", style: titleStyle),
+              const Text("Vé của tôi", style: titleStyle),
               if (isLargeScreen) Expanded(child: _navBarItems()),
             ],
           ),
@@ -187,7 +189,9 @@ class _HomePageState extends State<HomePage> {
                   onPressed: () => _scaffoldKey.currentState?.openDrawer(),
                 ),
               Image.asset(
-                'assets/images/logo2.png',
+                urlLogo,
+                errorBuilder: (context, error, stackTrace) =>
+                    const SizedBox.shrink(),
                 width: 150,
                 height: 150,
               ),

@@ -164,8 +164,8 @@ class __FormContentState extends State<_FormContent> {
               child: ElevatedButton(
                 style: ElevatedButton.styleFrom(
                     shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(4)),
-                    backgroundColor: const Color.fromRGBO(232, 189, 15, 1)),
+                        borderRadius: BorderRadius.circular(10)),
+                    backgroundColor: colorTheme),
                 child: const Padding(
                   padding: EdgeInsets.all(10.0),
                   child: Text(

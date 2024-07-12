@@ -1,0 +1,19 @@
+{
+    "data":[
+        {
+            "id": 1,
+            "name":"MINION: KẺ TRỘM MẶT TRĂNG 4",
+            "img": "minions4.jpg",
+            "date": "10/7/2024",
+            "price": 140000,
+            "quantity": 2
+        },{
+            "id": 2,
+            "name":"DEADPOOL & WOLVERINE",
+            "img": "background_home.jpg",
+            "date": "11/07/2024",
+            "price": 210000,
+            "quantity": 3
+        }
+    ]
+}

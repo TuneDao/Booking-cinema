@@ -73,7 +73,8 @@ class _Logo extends StatelessWidget {
       mainAxisSize: MainAxisSize.min,
       children: [
         Image.asset(
-          'assets/images/logo2.png',
+          urlLogo,
+          errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
           width: isSmallScreen ? 230 : 500,
           height: isSmallScreen ? 200 : 500,
         ),

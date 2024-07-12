@@ -33,7 +33,7 @@ class _CarouselFilmState extends State<CarouselFilm> {
         ? CarouselSlider(
             options: CarouselOptions(
               autoPlay: false,
-              aspectRatio: 1.11,
+              aspectRatio: 0.8,
               enlargeCenterPage: true,
               enlargeStrategy: CenterPageEnlargeStrategy.zoom,
             ),

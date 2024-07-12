@@ -90,24 +90,24 @@ class __FormContentState extends State<_FormContent> {
             ),
           ),
           const SizedBox(height: 20),
-          ElevatedButton(
-            onPressed: () {
-              // Add update functionality here
-            },
-            child: Text('CẬP NHẬT'),
-            style: ElevatedButton.styleFrom(
-              foregroundColor: Colors.white,
-              backgroundColor: Colors.amber, // Text color
-            ),
-          ),
-          const SizedBox(height: 20),
-          TextButton(
-            onPressed: () {
-              // Add delete account functionality here
-            },
-            child: const Text(
-              'XÓA TÀI KHOẢN',
-              style: TextStyle(color: Colors.red),
+          SizedBox(
+            width: double.infinity,
+            child: ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10)),
+                  backgroundColor: colorTheme),
+              child: const Padding(
+                padding: EdgeInsets.all(10.0),
+                child: Text(
+                  'CẬP NHẬT',
+                  style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white),
+                ),
+              ),
+              onPressed: () {},
             ),
           ),
         ],

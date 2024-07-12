@@ -91,6 +91,10 @@ class Seat {
   bool isSelected = false;
 
   Seat(this.row, this.col, this.type);
+
+  static fromJson(seatJson) {}
+
+  toJson() {}
 }
 
 enum SeatType {

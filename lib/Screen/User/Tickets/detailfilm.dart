@@ -138,7 +138,7 @@ class FilmDetailScreen extends StatelessWidget {
                     endIndent: 0,
                   ),
                   const SizedBox(height: 20),
-                  Text(film.category.toString()),
+                  Text('Thể loại: ' + film.category.toString()),
                   const SizedBox(height: 10),
                   const Text('Đạo diễn: Imai Kazuaki'),
                   const SizedBox(height: 10),

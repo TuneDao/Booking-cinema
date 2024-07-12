@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:project_android/config/const.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key});
@@ -27,7 +28,8 @@ class _SplashScreenState extends State<SplashScreen> {
       backgroundColor: Colors.black, // Màu nền của splash screen.
       body: Center(
         child: Image.asset(
-          'assets/images/logo2.png',
+          urlLogo,
+          errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
           width: 300,
           height: 300,
         ),
