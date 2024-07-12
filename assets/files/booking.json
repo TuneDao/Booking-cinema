@@ -4,8 +4,11 @@
             "id": 1,
             "name":"MINION: KẺ TRỘM MẶT TRĂNG 4",
             "img": "minions4.jpg",
-            "date": "10/7/2024",
+            "date": "10/07/2024",
             "price": 140000,
+            "time":"11:45 Ngày 7/12/2024",
+            "room": "Cinema A2",
+            "seats": "C2 - C3",
             "quantity": 2
         },{
             "id": 2,
@@ -13,6 +16,9 @@
             "img": "background_home.jpg",
             "date": "11/07/2024",
             "price": 210000,
+            "time":"13:45 Ngày 7/12/2024",
+            "room": "Cinema A2",
+            "seats": "C2 - C3 - C4",
             "quantity": 3
         }
     ]
