@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:project_android/Screen/User/Home/carousel_banner.dart';
 import 'package:project_android/Screen/User/Home/inf.dart';
 import 'package:project_android/Screen/User/Home/welcomescreen.dart';
 import 'package:project_android/Screen/User/Payment/history_payment.dart';
@@ -55,7 +56,8 @@ class _HomePageState extends State<HomePage> {
       case 0:
         return AppBar(
           automaticallyImplyLeading: false,
-          backgroundColor: colorTheme,
+          backgroundColor: Colors.white
+              .withOpacity(0), // Make AppBar transparent with some opacity
           elevation: 0,
           title: Row(
             children: [
@@ -68,7 +70,7 @@ class _HomePageState extends State<HomePage> {
               Expanded(
                 child: Center(
                   child: Image.asset(
-                    urlLogo,
+                    urlLogo1,
                     errorBuilder: (context, error, stackTrace) =>
                         const SizedBox.shrink(),
                     width: 150,
@@ -214,6 +216,7 @@ class _HomePageState extends State<HomePage> {
 
     return Scaffold(
       key: _scaffoldKey,
+      extendBodyBehindAppBar: true,
       appBar: _getAppBar(_selectedIndex),
       drawer: isLargeScreen ? null : _drawer(),
       body: _loadWidget(_selectedIndex),

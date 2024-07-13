@@ -12,52 +12,58 @@ class OTP extends StatelessWidget {
     final bool isSmallScreen = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
-      body: Stack(
-        children: [
-          // Hình nền với hiệu ứng mờ
-          Positioned.fill(
-            child: Image.asset(
-              'assets/images/background_login.jpg', // Thay thế đường dẫn đến hình ảnh của bạn
-              fit: BoxFit.cover,
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: 300.0,
+              leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: colorTheme,
+                  )),
+              floating: false,
+              pinned: true,
+              stretch: true,
+              flexibleSpace: FlexibleSpaceBar(
+                  collapseMode: CollapseMode.parallax,
+                  background: Image.asset(
+                    "assets/images/background_login.jpg",
+                    fit: BoxFit.cover,
+                  )),
             ),
-          ),
-          Positioned.fill(
-            child: BackdropFilter(
-              filter: ImageFilter.blur(
-                  sigmaX: 20.0,
-                  sigmaY:
-                      20.0), // Điều chỉnh giá trị sigma để thay đổi mức độ làm mờ
-              child: Container(
-                color:
-                    Colors.black.withOpacity(0), // Giữ cho container trong suốt
-              ),
-            ),
-          ),
-          Center(
-              child: SingleChildScrollView(
-                  child: isSmallScreen
-                      ? const SingleChildScrollView(
-                          child: Column(
-                          mainAxisSize: MainAxisSize.min,
-                          children: [
-                            _Logo(),
-                            _FormContent(),
-                          ],
-                        ))
-                      : SingleChildScrollView(
-                          child: Container(
-                          padding: const EdgeInsets.all(15.0),
-                          constraints: const BoxConstraints(maxWidth: 800),
-                          child: const Row(
-                            children: [
-                              Expanded(child: _Logo()),
-                              Expanded(
-                                child: Center(child: _FormContent()),
-                              ),
-                            ],
+          ];
+        },
+        body: Center(
+          child: SingleChildScrollView(
+            child: isSmallScreen
+                ? const SingleChildScrollView(
+                    child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      _Logo(),
+                      _FormContent(),
+                    ],
+                  ))
+                : SingleChildScrollView(
+                    child: Container(
+                      padding: const EdgeInsets.all(15.0),
+                      constraints: const BoxConstraints(maxWidth: 800),
+                      child: const Row(
+                        children: [
+                          Expanded(child: _Logo()),
+                          Expanded(
+                            child: Center(child: _FormContent()),
                           ),
-                        )))),
-        ],
+                        ],
+                      ),
+                    ),
+                  ),
+          ),
+        ),
       ),
     );
   }
@@ -70,16 +76,10 @@ class _Logo extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isSmallScreen = MediaQuery.of(context).size.width < 600;
 
-    return Column(
+    return const Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset(
-          urlLogo,
-          errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
-          width: isSmallScreen ? 230 : 500,
-          height: isSmallScreen ? 200 : 500,
-        ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.all(16.0),
           child: Text("XÁC NHẬN OTP",
               textAlign: TextAlign.center,

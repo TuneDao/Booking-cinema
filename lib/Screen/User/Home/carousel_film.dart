@@ -35,6 +35,7 @@ class _CarouselFilmState extends State<CarouselFilm> {
               autoPlay: false,
               aspectRatio: 0.8,
               enlargeCenterPage: true,
+              enlargeFactor: 0.5,
               enlargeStrategy: CenterPageEnlargeStrategy.zoom,
             ),
             items: films.map((film) {

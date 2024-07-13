@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:project_android/Screen/User/Home/home.dart';
 import 'package:project_android/Screen/User/Home/splash.dart';
-import 'package:project_android/Screen/User/OnBoarding/onboarding.dart';
+// import 'package:project_android/Screen/User/OnBoarding/onboarding.dart';
+import 'package:project_android/Screen/User/SignIn/login.dart';
 
 void main() {
   runApp(const MainApp());
@@ -16,7 +17,7 @@ class MainApp extends StatelessWidget {
       home: HomePage(),
       // routes: {
       //   '/': (context) => SplashScreen(),
-      //   '/home': (context) => OnboardingPage1(), // Trang chủ của bạn.
+      //   '/home': (context) => HomePage(), // Trang chủ của bạn.
       // },
     );
   }

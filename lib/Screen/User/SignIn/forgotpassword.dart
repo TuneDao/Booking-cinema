@@ -1,6 +1,7 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:project_android/Screen/User/SignIn/changepassword.dart';
 import 'package:project_android/Screen/User/SignIn/otp.dart';
 import 'package:project_android/config/const.dart';
 
@@ -12,40 +13,46 @@ class ForgotPassword extends StatelessWidget {
     final bool isSmallScreen = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
-        body: Stack(
-      children: [
-        // Hình nền với hiệu ứng mờ
-        Positioned.fill(
-          child: Image.asset(
-            'assets/images/background_login.jpg', // Thay thế đường dẫn đến hình ảnh của bạn
-            fit: BoxFit.cover,
-          ),
-        ),
-        Positioned.fill(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(
-                sigmaX: 20.0,
-                sigmaY:
-                    20.0), // Điều chỉnh giá trị sigma để thay đổi mức độ làm mờ
-            child: Container(
-              color:
-                  Colors.black.withOpacity(0), // Giữ cho container trong suốt
+      body: NestedScrollView(
+        headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          return <Widget>[
+            SliverAppBar(
+              expandedHeight: 300.0,
+              leading: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back,
+                    color: colorTheme,
+                  )),
+              floating: false,
+              pinned: true,
+              stretch: true,
+              flexibleSpace: FlexibleSpaceBar(
+                  collapseMode: CollapseMode.parallax,
+                  background: Image.asset(
+                    "assets/images/background_login.jpg",
+                    fit: BoxFit.cover,
+                  )),
             ),
-          ),
-        ),
-        Center(
+          ];
+        },
+        body: Container(
+          color: Colors.white, // Replace with your desired background color
+          child: Center(
             child: SingleChildScrollView(
-                child: isSmallScreen
-                    ? const SingleChildScrollView(
-                        child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          _Logo(),
-                          _FormContent(),
-                        ],
-                      ))
-                    : SingleChildScrollView(
-                        child: Container(
+              child: isSmallScreen
+                  ? const SingleChildScrollView(
+                      child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        _Logo(),
+                        _FormContent(),
+                      ],
+                    ))
+                  : SingleChildScrollView(
+                      child: Container(
                         padding: const EdgeInsets.all(15.0),
                         constraints: const BoxConstraints(maxWidth: 800),
                         child: const Row(
@@ -56,9 +63,13 @@ class ForgotPassword extends StatelessWidget {
                             ),
                           ],
                         ),
-                      )))),
-      ],
-    ));
+                      ),
+                    ),
+            ),
+          ),
+        ),
+      ),
+    );
   }
 }
 
@@ -69,33 +80,22 @@ class _Logo extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isSmallScreen = MediaQuery.of(context).size.width < 600;
 
-    return Column(
+    return const Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset(
-          urlLogo,
-          errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
-          width: isSmallScreen ? 230 : 500,
-          height: isSmallScreen ? 200 : 500,
-        ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.all(16.0),
           child: Text("QUÊN MẬT KHẨU",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
-                  fontWeight: FontWeight.bold)),
+                  color: colorHome, fontSize: 30, fontWeight: FontWeight.bold)),
         ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.all(16.0),
-          child: Text(
-              "Nhập email tài khoản để nhận mã OTP cập nhật mật khẩu mới",
+          child: Text("Nhập email tài khoản bạn đã đăng ký",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold)),
+                  color: colorHome, fontSize: 16, fontWeight: FontWeight.bold)),
         )
       ],
     );
@@ -136,26 +136,26 @@ class __FormContentState extends State<_FormContent> {
                 }
                 return null;
               },
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: colorHome),
               decoration: const InputDecoration(
                 labelText: 'Email',
-                labelStyle: TextStyle(color: Colors.white),
+                labelStyle: TextStyle(color: colorHome),
                 hintText: 'Email',
-                hintStyle: TextStyle(color: Colors.white),
+                hintStyle: TextStyle(color: colorHome),
                 prefixIcon: Icon(
                   Icons.email_outlined,
-                  color: Colors.white,
+                  color: colorHome,
                 ),
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
+                  borderSide: BorderSide(color: colorHome),
                 ),
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(
-                      color: Colors.white), // Màu border khi chưa được focus
+                      color: colorHome), // Màu border khi chưa được focus
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      color: Colors.white), // Màu border khi được focus
+                  borderSide:
+                      BorderSide(color: colorHome), // Màu border khi được focus
                 ),
               ),
             ),
@@ -182,7 +182,7 @@ class __FormContentState extends State<_FormContent> {
                     /// do something
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => OTP()),
+                      MaterialPageRoute(builder: (context) => ChangePassword()),
                     );
                   }
                 },

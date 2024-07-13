@@ -4,7 +4,6 @@ import 'package:project_android/Data/model/booking.dart';
 import 'package:project_android/Data/model/filmmodel.dart';
 import 'package:project_android/Data/provider/bookingprovider.dart';
 import 'package:project_android/Screen/User/Payment/booking_detail.dart';
-import 'package:project_android/Screen/User/Payment/payment_detail.dart';
 import 'package:project_android/config/const.dart';
 
 class HistoryPayment extends StatefulWidget {

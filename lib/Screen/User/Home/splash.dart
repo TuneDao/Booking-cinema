@@ -25,7 +25,7 @@ class _SplashScreenState extends State<SplashScreen> {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersiveSticky);
 
     return Scaffold(
-      backgroundColor: Colors.black, // Màu nền của splash screen.
+      backgroundColor: Colors.white, // Màu nền của splash screen.
       body: Center(
         child: Image.asset(
           urlLogo,

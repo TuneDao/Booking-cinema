@@ -1,5 +1,4 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:project_android/Screen/User/SignIn/login.dart';
 import 'package:project_android/config/const.dart';
@@ -12,52 +11,59 @@ class RegisterPage extends StatelessWidget {
     final bool isSmallScreen = MediaQuery.of(context).size.width < 600;
 
     return Scaffold(
-        body: Stack(
-      children: [
-        Positioned.fill(
-          child: Image.asset(
-            'assets/images/background_login.jpg', // Thay thế đường dẫn đến hình ảnh của bạn
-            fit: BoxFit.cover,
-          ),
-        ),
-        Positioned.fill(
-          child: BackdropFilter(
-            filter: ImageFilter.blur(
-                sigmaX: 20.0,
-                sigmaY:
-                    20.0), // Điều chỉnh giá trị sigma để thay đổi mức độ làm mờ
-            child: Container(
-              color:
-                  Colors.black.withOpacity(0), // Giữ cho container trong suốt
-            ),
-          ),
-        ),
-        Center(
-          child: isSmallScreen
-              ? const SingleChildScrollView(
-                  child: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      _Logo(),
-                      _FormContent(),
-                    ],
-                  ),
-                )
-              : SingleChildScrollView(
-                  child: Container(
-                  padding: const EdgeInsets.all(32.0),
-                  constraints: const BoxConstraints(maxWidth: 800),
-                  child: const Row(
-                    children: [
-                      Expanded(child: _Logo()),
-                      Expanded(
-                        child: Center(child: _FormContent()),
-                      ),
-                    ],
-                  ),
+        body: NestedScrollView(
+      headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+        return <Widget>[
+          SliverAppBar(
+            expandedHeight: 300.0,
+            leading: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back,
+                  color: colorTheme,
                 )),
-        )
-      ],
+            floating: false,
+            pinned: true,
+            stretch: true,
+            flexibleSpace: FlexibleSpaceBar(
+                collapseMode: CollapseMode.parallax,
+                background: Image.asset(
+                  "assets/images/background_login.jpg",
+                  fit: BoxFit.cover,
+                )),
+          ),
+        ];
+      },
+      body: Container(
+        color: Colors.white, // Replace with your desired background color
+        child: Center(
+          child: SingleChildScrollView(
+              child: isSmallScreen
+                  ? const SingleChildScrollView(
+                      child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        _Logo(),
+                        _FormContent(),
+                      ],
+                    ))
+                  : SingleChildScrollView(
+                      child: Container(
+                      padding: const EdgeInsets.all(15.0),
+                      constraints: const BoxConstraints(maxWidth: 800),
+                      child: const Row(
+                        children: [
+                          Expanded(child: _Logo()),
+                          Expanded(
+                            child: Center(child: _FormContent()),
+                          ),
+                        ],
+                      ),
+                    ))),
+        ),
+      ),
     ));
   }
 }
@@ -69,22 +75,16 @@ class _Logo extends StatelessWidget {
   Widget build(BuildContext context) {
     final bool isSmallScreen = MediaQuery.of(context).size.width < 600;
 
-    return Column(
+    return const Column(
       mainAxisSize: MainAxisSize.min,
       children: [
-        Image.asset(
-          urlLogo,
-          errorBuilder: (context, error, stackTrace) => const SizedBox.shrink(),
-          width: isSmallScreen ? 230 : 500,
-          height: isSmallScreen ? 200 : 500,
-        ),
-        const Padding(
+        Padding(
           padding: EdgeInsets.all(16.0),
           child: Text("ĐĂNG KÝ",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Colors.white,
-                  fontSize: 30,
+                  color: colorHome,
+                  fontSize: 34, // Increased font size
                   fontWeight: FontWeight.bold)),
         )
       ],
@@ -108,211 +108,100 @@ class __FormContentState extends State<_FormContent> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(maxWidth: 300),
+      constraints: const BoxConstraints(maxWidth: 350), // Increased maxWidth
       child: Form(
         key: _formKey,
         child: Column(
           mainAxisSize: MainAxisSize.min,
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            TextFormField(
+            _buildTextField(
+              controller: _userController,
+              label: 'Tài khoản',
+              hint: 'Tên tài khoản',
+              icon: Icons.person_2_outlined,
               validator: (value) {
-                // add email validation
                 if (value == null || value.isEmpty) {
                   return 'Vui lòng nhập tài khoản';
                 }
                 return null;
               },
-              controller: _userController,
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                labelText: 'Tài khoản',
-                labelStyle: TextStyle(color: Colors.white),
-                hintText: 'Tên tài khoản',
-                hintStyle: TextStyle(color: Colors.white),
-                prefixIcon: Icon(
-                  Icons.person_2_outlined,
-                  color: Colors.white,
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      color: Colors.white), // Màu border khi chưa được focus
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      color: Colors.white), // Màu border khi được focus
-                ),
-              ),
             ),
             _gap(),
-            TextFormField(
-              validator: (value) {
-                if (value == null || value.isEmpty) {
-                  return 'Vui lòng nhập mật khẫu';
-                }
-
-                if (value.length < 6) {
-                  return 'Mật khẩu phải trên 6 ký tự';
-                }
-                return null;
+            _buildPasswordField(
+              isPasswordVisible: _isPasswordVisible,
+              onVisibilityToggle: () {
+                setState(() {
+                  _isPasswordVisible = !_isPasswordVisible;
+                });
               },
-              obscureText: !_isPasswordVisible,
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                  labelText: 'Mật khẩu',
-                  labelStyle: const TextStyle(color: Colors.white),
-                  hintText: 'Nhập mật khẩu',
-                  hintStyle: const TextStyle(color: Colors.white),
-                  prefixIcon: const Icon(
-                    Icons.lock_outline_rounded,
-                    color: Colors.white,
-                  ),
-                  border: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                  ),
-                  enabledBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Colors.white), // Màu border khi chưa được focus
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Colors.white), // Màu border khi được focus
-                  ),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                      _isPasswordVisible
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                      color: Colors.white,
-                    ),
-                    onPressed: () {
-                      setState(() {
-                        _isPasswordVisible = !_isPasswordVisible;
-                      });
-                    },
-                  )),
-            ),
-            _gap(),
-            TextFormField(
+              label: 'Mật khẩu',
+              hint: 'Nhập mật khẩu',
               validator: (value) {
                 if (value == null || value.isEmpty) {
-                  return 'Vui lòng nhập mật khẫu';
+                  return 'Vui lòng nhập mật khẩu';
                 }
                 if (value.length < 6) {
                   return 'Mật khẩu phải trên 6 ký tự';
                 }
                 return null;
               },
-              obscureText: !_isPasswordVisible1,
-              style: const TextStyle(color: Colors.white),
-              decoration: InputDecoration(
-                  labelText: 'Xác nhận mật khẩu',
-                  labelStyle: const TextStyle(color: Colors.white),
-                  hintText: 'Nhập mật khẩu',
-                  hintStyle: const TextStyle(color: Colors.white),
-                  prefixIcon: const Icon(
-                    Icons.lock_outline_rounded,
-                    color: Colors.white,
-                  ),
-                  border: const OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                  ),
-                  enabledBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Colors.white), // Màu border khi chưa được focus
-                  ),
-                  focusedBorder: const OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Colors.white), // Màu border khi được focus
-                  ),
-                  suffixIcon: IconButton(
-                    icon: Icon(
-                        _isPasswordVisible1
-                            ? Icons.visibility_off
-                            : Icons.visibility,
-                        color: Colors.white),
-                    onPressed: () {
-                      setState(() {
-                        _isPasswordVisible1 = !_isPasswordVisible1;
-                      });
-                    },
-                  )),
             ),
             _gap(),
-            TextFormField(
+            _buildPasswordField(
+              isPasswordVisible: _isPasswordVisible1,
+              onVisibilityToggle: () {
+                setState(() {
+                  _isPasswordVisible1 = !_isPasswordVisible1;
+                });
+              },
+              label: 'Xác nhận mật khẩu',
+              hint: 'Nhập lại mật khẩu',
               validator: (value) {
-                // add email validation
                 if (value == null || value.isEmpty) {
-                  return 'Vui lòng nhập thông tin';
+                  return 'Vui lòng nhập mật khẩu';
+                }
+                if (value.length < 6) {
+                  return 'Mật khẩu phải trên 6 ký tự';
+                }
+                return null;
+              },
+            ),
+            _gap(),
+            _buildTextField(
+              controller: TextEditingController(),
+              label: 'Email',
+              hint: 'Nhập email',
+              icon: Icons.email_outlined,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Vui lòng nhập email';
                 }
                 bool emailValid = RegExp(
                         r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
                     .hasMatch(value);
                 if (!emailValid) {
-                  return 'Vui lòng nhập email';
+                  return 'Vui lòng nhập email hợp lệ';
                 }
                 return null;
               },
-              style: const TextStyle(color: Colors.white),
-              decoration: const InputDecoration(
-                labelText: 'Email',
-                labelStyle: TextStyle(color: Colors.white),
-                hintText: 'Email',
-                hintStyle: TextStyle(color: Colors.white),
-                prefixIcon: Icon(
-                  Icons.email_outlined,
-                  color: Colors.white,
-                ),
-                border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      color: Colors.white), // Màu border khi chưa được focus
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      color: Colors.white), // Màu border khi được focus
-                ),
-              ),
             ),
             _gap(),
-            TextFormField(
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Vui lòng nhập số điện thoại';
-                  }
-
-                  if (value.length > 10 || value.length < 10) {
-                    return 'Nhập số điện thoại đúng 10 số';
-                  }
-                  return null;
-                },
-                style: const TextStyle(color: Colors.white),
-                decoration: const InputDecoration(
-                  labelText: 'Số điện thoại',
-                  labelStyle: TextStyle(color: Colors.white),
-                  hintText: 'Nhập số điện thoại',
-                  hintStyle: TextStyle(color: Colors.white),
-                  prefixIcon: Icon(
-                    Icons.phone_iphone_outlined,
-                    color: Colors.white,
-                  ),
-                  border: OutlineInputBorder(
-                    borderSide: BorderSide(color: Colors.white),
-                  ),
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Colors.white), // Màu border khi chưa được focus
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: Colors.white), // Màu border khi được focus
-                  ),
-                )),
+            _buildTextField(
+              controller: TextEditingController(),
+              label: 'Số điện thoại',
+              hint: 'Nhập số điện thoại',
+              icon: Icons.phone_iphone_outlined,
+              validator: (value) {
+                if (value == null || value.isEmpty) {
+                  return 'Vui lòng nhập số điện thoại';
+                }
+                if (value.length != 10) {
+                  return 'Nhập số điện thoại đúng 10 số';
+                }
+                return null;
+              },
+            ),
             _gap(),
             SizedBox(
               width: double.infinity,
@@ -322,18 +211,17 @@ class __FormContentState extends State<_FormContent> {
                         borderRadius: BorderRadius.circular(4)),
                     backgroundColor: colorTheme),
                 child: const Padding(
-                  padding: EdgeInsets.all(10.0),
+                  padding: EdgeInsets.all(16.0), // Increased padding
                   child: Text(
                     'ĐĂNG KÝ',
                     style: TextStyle(
-                        fontSize: 16,
+                        fontSize: 18, // Increased font size
                         fontWeight: FontWeight.bold,
                         color: Colors.white),
                   ),
                 ),
                 onPressed: () {
                   if (_formKey.currentState?.validate() ?? false) {
-                    /// do something
                     Navigator.push(
                       context,
                       MaterialPageRoute(builder: (context) => SignInPage2()),
@@ -343,11 +231,117 @@ class __FormContentState extends State<_FormContent> {
               ),
             ),
             _gap(),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text('Bạn đã có tài khoản',
+                    style: TextStyle(
+                        color: colorHome, fontSize: 16)), // Increased font size
+                GestureDetector(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              SignInPage2()), // Replace with your Forgot Password page
+                    );
+                  },
+                  child: const Text(
+                    ' Đăng nhập tại đây',
+                    style: TextStyle(
+                        color: colorTheme,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16), // Increased font size
+                  ),
+                ),
+              ],
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget _gap() => const SizedBox(height: 16);
+  Widget _gap() => const SizedBox(height: 20); // Increased gap height
+
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String label,
+    required String hint,
+    required IconData icon,
+    required String? Function(String?)? validator,
+  }) {
+    return TextFormField(
+      controller: controller,
+      style: const TextStyle(
+          color: colorHome, fontSize: 18), // Increased font size
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: const TextStyle(
+            color: colorHome, fontSize: 18), // Increased font size
+        hintText: hint,
+        hintStyle: const TextStyle(
+            color: colorHome, fontSize: 18), // Increased font size
+        prefixIcon: Icon(
+          icon,
+          color: colorHome,
+        ),
+        border: const OutlineInputBorder(
+          borderSide: BorderSide(color: colorHome),
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderSide:
+              BorderSide(color: colorHome), // Border color when not focused
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: colorHome), // Border color when focused
+        ),
+      ),
+      validator: validator,
+    );
+  }
+
+  Widget _buildPasswordField({
+    required bool isPasswordVisible,
+    required VoidCallback onVisibilityToggle,
+    required String label,
+    required String hint,
+    required String? Function(String?)? validator,
+  }) {
+    return TextFormField(
+      obscureText: !isPasswordVisible,
+      style: const TextStyle(
+          color: colorHome, fontSize: 18), // Increased font size
+      decoration: InputDecoration(
+        labelText: label,
+        labelStyle: const TextStyle(
+            color: colorHome, fontSize: 18), // Increased font size
+        hintText: hint,
+        hintStyle: const TextStyle(
+            color: colorHome, fontSize: 18), // Increased font size
+        prefixIcon: const Icon(
+          Icons.lock_outline_rounded,
+          color: colorHome,
+        ),
+        border: const OutlineInputBorder(
+          borderSide: BorderSide(color: colorHome),
+        ),
+        enabledBorder: const OutlineInputBorder(
+          borderSide:
+              BorderSide(color: colorHome), // Border color when not focused
+        ),
+        focusedBorder: const OutlineInputBorder(
+          borderSide: BorderSide(color: colorHome), // Border color when focused
+        ),
+        suffixIcon: IconButton(
+          icon: Icon(
+            isPasswordVisible ? Icons.visibility_off : Icons.visibility,
+            color: colorHome,
+          ),
+          onPressed: onVisibilityToggle,
+        ),
+      ),
+      validator: validator,
+    );
+  }
 }

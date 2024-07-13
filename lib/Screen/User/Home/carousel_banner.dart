@@ -7,6 +7,7 @@ class CarouselBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
+      margin: EdgeInsets.only(top: 100),
       child: CarouselSlider(
         options: CarouselOptions(
           autoPlay: true,

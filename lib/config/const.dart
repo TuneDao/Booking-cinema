@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 
 const urlimg = "assets/images/";
-const urlLogo = "assets/images/logo2.png";
+const urlLogo = "assets/images/logo.png";
 const urlLogo1 = "assets/images/logo2.png";
 const titleStyle = TextStyle(
   color: Color.fromRGBO(255, 255, 255, 1),
