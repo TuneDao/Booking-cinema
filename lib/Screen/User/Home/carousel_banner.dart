@@ -1,5 +1,5 @@
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:carousel_slider/carousel_slider.dart';
 
 class CarouselBanner extends StatelessWidget {
   const CarouselBanner({super.key});
@@ -7,7 +7,7 @@ class CarouselBanner extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(top: 100),
+      margin: EdgeInsets.only(top: 10),
       child: CarouselSlider(
         options: CarouselOptions(
           autoPlay: true,

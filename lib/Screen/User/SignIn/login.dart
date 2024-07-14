@@ -32,7 +32,7 @@ class SignInPage2 extends StatelessWidget {
             flexibleSpace: FlexibleSpaceBar(
                 collapseMode: CollapseMode.parallax,
                 background: Image.asset(
-                  "assets/images/background_login.jpg",
+                  "assets/images/neonCinema.jpg",
                   fit: BoxFit.cover,
                 )),
           ),

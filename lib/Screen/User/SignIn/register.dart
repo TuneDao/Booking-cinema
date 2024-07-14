@@ -30,7 +30,7 @@ class RegisterPage extends StatelessWidget {
             flexibleSpace: FlexibleSpaceBar(
                 collapseMode: CollapseMode.parallax,
                 background: Image.asset(
-                  "assets/images/background_login.jpg",
+                  "assets/images/neonCinema2.jpg",
                   fit: BoxFit.cover,
                 )),
           ),
