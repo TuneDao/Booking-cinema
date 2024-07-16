@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:project_android/Data/API/api.dart';
+import 'package:project_android/Data/API/api.dart'; // Giả sử bạn đã có API này để lấy dữ liệu phim
 
 void main() {
   runApp(MyApp());
@@ -58,17 +58,41 @@ class MovieListScreen extends StatelessWidget {
                         ),
                         SizedBox(height: 10),
                         Text(
-                          'Thể loại: ${movie['TheLoai']}',
+                          'Thể loại: ${movie['TheLoai']['TenTL']}',
                           style: TextStyle(
                             fontSize: 16,
                           ),
                         ),
                         SizedBox(height: 10),
                         Text(
-                          movie['MoTa'],
+                          'Đạo diễn: ${movie['DaoDien']}',
+                          style: TextStyle(
+                            fontSize: 16,
+                          ),
+                        ),
+                        SizedBox(height: 10),
+                        Text(
+                          'Mô tả: ${movie['MoTa']}',
                           style: TextStyle(
                             fontSize: 14,
                           ),
+                        ),
+                        SizedBox(height: 10),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children:
+                              movie['SuatChieux'].map<Widget>((suatChieu) {
+                            return Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(vertical: 4.0),
+                              child: Text(
+                                'Suất chiếu: ${suatChieu['NgayChieu']} - ${suatChieu['ThoiGianBD']} đến ${suatChieu['ThoiGianKT']} tại rạp ${suatChieu['RapChieu']}',
+                                style: TextStyle(
+                                  fontSize: 14,
+                                ),
+                              ),
+                            );
+                          }).toList(),
                         ),
                       ],
                     ),
@@ -80,41 +104,5 @@ class MovieListScreen extends StatelessWidget {
         },
       ),
     );
-  }
-}
-
-class MyWidget extends StatelessWidget {
-  const MyWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-        child: FutureBuilder<List<dynamic>>(
-            future: fetchCustomers(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.waiting) {
-                return Center(child: CircularProgressIndicator());
-              } else if (snapshot.hasError) {
-                return Center(child: Text('Error: ${snapshot.error}'));
-              } else {
-                final customers = snapshot.data!;
-                return ListView.builder(
-                  itemCount: customers.length,
-                  itemBuilder: (context, index) {
-                    final customer = customers[index];
-                    return Center(
-                      child: Column(
-                        children: [
-                          Text(customer['HoTenKH']),
-                          Text(customer['Email']),
-                          Text(customer['MatKhau']),
-                          Text(customer['SDT']),
-                        ],
-                      ),
-                    );
-                  },
-                );
-              }
-            }));
   }
 }

@@ -17,7 +17,7 @@ class DetailNews extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final screenHeight = MediaQuery.of(context).size.height;
-    final imageHeight = 220.0; // Đẩy ảnh xuống phía dưới 20 điểm
+    final imageHeight = 220.0;
     final double imageWidth = MediaQuery.of(context).size.width * 0.9;
     return Scaffold(
       body: Column(

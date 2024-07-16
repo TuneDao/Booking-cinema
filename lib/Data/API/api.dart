@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-const String baseUrl = 'http://192.168.1.224:3030/api';
+const String baseUrl = 'http://192.168.1.224:3030/api/';
 
 Future<List<dynamic>> fetchData(String endpoint) async {
   final response = await http.get(Uri.parse('$baseUrl/$endpoint'));

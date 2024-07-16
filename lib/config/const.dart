@@ -12,6 +12,10 @@ const titleStyle = TextStyle(
 const colorTheme = Color.fromRGBO(121, 0, 0, 1);
 const colorHome = Color.fromRGBO(0, 0, 0, 1);
 const colorTheme2 = Color.fromRGBO(210, 117, 117, 1);
+const colorBtnAdminScreen1 = Colors.redAccent;
+const colorBtnAdminScreen2 = Colors.greenAccent;
+const colorBtnAdminScreen3 = Colors.blueAccent;
+const colorBtnAdminScreen4 = Colors.orangeAccent;
 
 const textTitleHome = TextStyle(
   color: Colors.black,

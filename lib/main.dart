@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_android/Screen/Admin/adminscreen.dart';
 import 'package:project_android/Screen/User/Home/home.dart';
 import 'package:project_android/Screen/User/Home/splash.dart';
 import 'package:project_android/Screen/User/SignIn/login.dart';
@@ -13,7 +14,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: HomePage(),
+      home: AdminScreen(),
       // routes: {
       //   '/': (context) => SplashScreen(),
       //   '/home': (context) => HomePage(), // Trang chủ của bạn.
