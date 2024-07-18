@@ -1,16 +1,40 @@
 import 'package:flutter/material.dart';
+import 'package:project_android/Data/API/sharedpre.dart';
 import 'package:project_android/Data/model/model.dart';
 import 'package:project_android/Screen/User/Payment/history_payment.dart';
 import 'package:project_android/Screen/User/Profile/editprofile.dart';
 import 'package:project_android/Screen/User/SignIn/changepassword.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
 
   @override
+  _ProfileScreenState createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  String email = '';
+  String userName = '';
+  String avatar = '';
+
+  @override
+  void initState() {
+    super.initState();
+    _loadUserData();
+  }
+
+  _loadUserData() async {
+    final userDetails = await SharedPreferencesUtil.getUserDetails();
+    setState(() {
+      email = userDetails['Email']!;
+      userName = userDetails['HoTen']!;
+      avatar = userDetails['AnhDaiDien']!;
+    });
+  }
+
+  @override
   Widget build(BuildContext context) {
-    User user =
-        User(email: 'tune@gmail.com', userName: 'TuneDao', phone: '0328510990');
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -25,17 +49,22 @@ class ProfileScreen extends StatelessWidget {
                     backgroundColor: Colors.grey[300],
                     child: ClipRRect(
                       borderRadius: BorderRadius.circular(100),
-                      child: Image.asset(
-                        'assets/images/avatar.jpg',
+                      child: Image.network(
+                        avatar,
                         fit: BoxFit.cover,
                         width: 100,
                         height: 100,
+                        errorBuilder: (BuildContext context, Object exception,
+                            StackTrace? stackTrace) {
+                          return Image.network(avatar.toString(),
+                              width: 100, height: 100, fit: BoxFit.cover);
+                        },
                       ),
                     ),
                   ),
                   const SizedBox(height: 10),
                   Text(
-                    user.userName.toString(),
+                    userName,
                     style: const TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,

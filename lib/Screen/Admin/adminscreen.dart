@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project_android/Screen/Admin/QLFilm.dart';
 import 'package:project_android/Screen/Admin/QLHD.dart';
 import 'package:project_android/Screen/Admin/QLKH.dart';
 import 'package:project_android/config/const.dart';
-import 'package:project_android/Screen/User/Home/home.dart';
 
 class AdminScreen extends StatelessWidget {
   @override
@@ -12,14 +10,6 @@ class AdminScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: colorTheme,
-        // leading: IconButton(
-        //   icon: const FaIcon(FontAwesomeIcons.arrowLeft),
-        //   color: Colors.white,
-        //   onPressed: ()   {
-        //     Navigator.push(
-        //         context, MaterialPageRoute(builder: (context) => HomePage()));
-        //   },
-        // ),
         title: const Row(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,

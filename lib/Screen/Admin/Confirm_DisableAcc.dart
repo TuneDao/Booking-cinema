@@ -8,8 +8,9 @@ class confirmDisableAcc extends StatefulWidget {
   @override
   _confirmDisableAcc createState() => _confirmDisableAcc();
 }
+
 class _confirmDisableAcc extends State<confirmDisableAcc> {
- @override
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
@@ -57,7 +58,6 @@ class _confirmDisableAcc extends State<confirmDisableAcc> {
                         ),
                       ),
                       SizedBox(height: 10),
-                      
                     ],
                   ),
                 ],
@@ -68,78 +68,77 @@ class _confirmDisableAcc extends State<confirmDisableAcc> {
       ),
       /////
       body: SingleChildScrollView(
-        child:Padding(
-            padding: EdgeInsets.fromLTRB(40, 20, 30, 10),
-            child: Column(
-              children: [
-                Container(
-                  child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          'THÔNG TIN KHÁCH HÀNG',
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 20,
+        child: Padding(
+          padding: EdgeInsets.fromLTRB(40, 20, 30, 10),
+          child: Column(
+            children: [
+              Container(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    Text(
+                      'THÔNG TIN KHÁCH HÀNG',
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 20,
+                      ),
+                    ),
+                    SizedBox(height: 10),
+                    Text(
+                      'Mã khách hàng: CUS21123',
+                      style: TextStyle(
+                        fontSize: 16,
+                      ),
+                    ),
+                    SizedBox(height: 150),
+                    Text(
+                      'BẠN CÓ CHẮC CHẮN VÔ HIỆU HÓA TÀI KHOẢN NÀY ?',
+                      textAlign: TextAlign.center,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        fontSize: 15,
+                      ),
+                    ),
+                    SizedBox(height: 40),
+                    Container(
+                        width: 280,
+                        height: 42,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                                color: Colors.grey.withOpacity(0.8),
+                                spreadRadius: 0,
+                                blurRadius: 3,
+                                offset: Offset(
+                                    5, 5)), // 5,5 là bên dưới và bên phải
+                          ],
+                          border: Border.all(
+                            color: Colors.black,
+                            width: 1,
                           ),
                         ),
-                        SizedBox(height: 10),
-                        Text(
-                          'Mã khách hàng: CUS21123',
-                          style: TextStyle(
-                            fontSize: 16,
-                          ),
-                        ),
-                        SizedBox(height: 150),
-                        Text(
-                          'BẠN CÓ CHẮC CHẮN VÔ HIỆU HÓA TÀI KHOẢN NÀY ?',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontWeight: FontWeight.bold,
-                            fontSize: 15,
-                          ),
-                        ),
-                        SizedBox(height: 40),
-                        Container(
-                          width: 280,
-                          height: 42,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: Colors.grey.withOpacity(0.8),
-                                  spreadRadius: 0,
-                                  blurRadius: 3,
-                                  offset: Offset(5, 5)), // 5,5 là bên dưới và bên phải
-                            ],
-                            border: Border.all(
-                              color: Colors.black,
-                              width: 1,
-                            ),
-                          ),
-                          child: TextButton(
+                        child: TextButton(
                             style: TextButton.styleFrom(
-                            backgroundColor: Color.fromRGBO(210, 117, 117, 1),
-                          ),
+                              backgroundColor: Color.fromRGBO(210, 117, 117, 1),
+                            ),
                             onPressed: () {},
                             child: Padding(
                               padding: EdgeInsets.only(bottom: 2),
                               child: Text(
-                              'Xác nhận',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontSize: 18,
+                                'Xác nhận',
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 18,
                                 ),
                               ),
-                            )
-                            )
-                          ), 
-                      ],
-                    ),
+                            ))),
+                  ],
                 ),
-              ],
-            ),
+              ),
+            ],
           ),
+        ),
       ),
     );
   }
