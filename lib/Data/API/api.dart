@@ -26,6 +26,10 @@ Future<List<dynamic>> getBill() async {
   return await fetchData('HoaDon/Get');
 }
 
+Future<List<dynamic>> getCustome() async {
+  return await fetchData('KhachHang/Get');
+}
+
 Future<Map<String, dynamic>> login(String email, String password) async {
   final response = await http.post(
     Uri.parse(

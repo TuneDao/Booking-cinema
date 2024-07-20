@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:project_android/Screen/Admin/QLFilm.dart';
-import 'package:project_android/Screen/Admin/QLHD.dart';
-import 'package:project_android/Screen/Admin/QLKH.dart';
+import 'package:project_android/Screen/Admin/Film/QLFilm.dart';
+import 'package:project_android/Screen/Admin/Bill/QLHD.dart';
+import 'package:project_android/Screen/Admin/Customer/QLKH.dart';
 import 'package:project_android/config/const.dart';
 
 class AdminScreen extends StatelessWidget {
@@ -117,7 +117,7 @@ class AdminScreen extends StatelessWidget {
                   ),
                   _buildGridItem(
                     icon: Icons.receipt,
-                    title: 'QUẢN LÝ HÓA ĐƠN',
+                    title: 'QUẢN LÝ ĐƠN HÀNG',
                     color: colorBtnAdminScreen3,
                     onTap: () {
                       // Điều hướng đến trang quản lý hóa đơn

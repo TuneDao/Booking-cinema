@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:intl/intl.dart';
 import 'package:project_android/Data/API/api.dart';
-import 'package:project_android/Screen/Admin/detailbill.dart';
+import 'package:project_android/Screen/Admin/Customer/detailinfomation.dart';
 import 'package:project_android/Screen/User/Home/home.dart';
 import 'package:project_android/config/const.dart';
 
-class invoiceManagement extends StatefulWidget {
-  const invoiceManagement({super.key});
+class customerManagement extends StatefulWidget {
+  const customerManagement({super.key});
 
   @override
-  _invoiceManagement createState() => _invoiceManagement();
+  _customerManagement createState() => _customerManagement();
 }
 
-class _invoiceManagement extends State<invoiceManagement> {
+class _customerManagement extends State<customerManagement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -29,7 +28,7 @@ class _invoiceManagement extends State<invoiceManagement> {
         title: const Row(
           children: [
             Text(
-              'Quản lý hóa đơn',
+              'Danh sách khách hàng',
               style: TextStyle(
                   color: Colors.white,
                   fontSize: 24,
@@ -38,22 +37,21 @@ class _invoiceManagement extends State<invoiceManagement> {
           ],
         ),
       ),
-      /////
       body: FutureBuilder<List<dynamic>>(
-        future: getBill(),
+        future: getCustome(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            final bills = snapshot.data!;
+            final customers = snapshot.data!;
             return ListView.builder(
-              itemCount: bills.length,
+              itemCount: customers.length,
               itemBuilder: (context, index) {
-                final bill = bills[index];
+                final customer = customers[index];
                 return Padding(
-                  padding: const EdgeInsets.all(10),
+                  padding: EdgeInsets.all(10),
                   child: Container(
                     width: 380,
                     height: 105,
@@ -65,8 +63,8 @@ class _invoiceManagement extends State<invoiceManagement> {
                             color: Colors.grey.withOpacity(0.8),
                             spreadRadius: 0,
                             blurRadius: 3,
-                            offset: const Offset(
-                                5, 5)), // 5,5 là bên dưới và bên phải
+                            offset:
+                                Offset(5, 5)), // 5,5 là bên dưới và bên phải
                       ],
                       border: Border.all(
                         color: Colors.black,
@@ -87,29 +85,29 @@ class _invoiceManagement extends State<invoiceManagement> {
                             ),
                             //THÔNG TIN
                             child: Padding(
-                              padding: const EdgeInsets.all(12.0),
+                              padding: EdgeInsets.all(12.0),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: <Widget>[
                                   Text(
-                                    'Mã hóa đơn: ' + bill['MaHD'],
-                                    style: const TextStyle(
+                                    'Mã Khách Hàng: ' + customer['MaKH'],
+                                    style: TextStyle(
                                       fontWeight: FontWeight.bold,
                                       fontSize: 18,
                                     ),
                                   ),
-                                  const SizedBox(height: 2.0),
+                                  SizedBox(height: 2.0),
                                   Text(
-                                    'Tên khách hàng: ${bill['KhachHang']['HoTen']}',
-                                    style: const TextStyle(
+                                    'Họ và tên: ' + customer['HoTen'],
+                                    style: TextStyle(
                                       fontWeight: FontWeight.normal,
                                       fontSize: 16,
                                     ),
                                   ),
-                                  const SizedBox(height: 2.0),
+                                  SizedBox(height: 2.0),
                                   Text(
-                                    'Ngày mua: ${bill['ThoiGianTT']}',
-                                    style: const TextStyle(
+                                    'Email: ' + customer['Email'],
+                                    style: TextStyle(
                                       fontWeight: FontWeight.normal,
                                       fontSize: 16,
                                     ),
@@ -119,6 +117,7 @@ class _invoiceManagement extends State<invoiceManagement> {
                             ),
                           ),
                         ),
+                        // BUTTON XEM CHI TIẾT
                         Expanded(
                           flex: 1, // Chiếm ít không gian hơn
                           child: Container(
@@ -126,7 +125,7 @@ class _invoiceManagement extends State<invoiceManagement> {
                             child: TextButton(
                               style: TextButton.styleFrom(
                                 backgroundColor:
-                                    const Color.fromRGBO(255, 213, 79, 1),
+                                    Color.fromRGBO(244, 208, 64, 1),
                                 shape: const RoundedRectangleBorder(
                                   borderRadius: BorderRadius.only(
                                       topRight: Radius.circular(20),
@@ -138,7 +137,7 @@ class _invoiceManagement extends State<invoiceManagement> {
                                     context,
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            InvoiceDetailScreen()));
+                                            CustomerDetailScreen()));
                               },
                               child: const Text(
                                 'Chi Tiết',
