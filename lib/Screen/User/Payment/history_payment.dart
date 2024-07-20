@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:project_android/Data/API/api.dart';
+import 'package:project_android/Data/API/sharedpre.dart';
 import 'package:project_android/Data/model/booking.dart';
 import 'package:project_android/Data/model/filmmodel.dart';
 import 'package:project_android/Data/provider/bookingprovider.dart';
@@ -14,6 +16,8 @@ class HistoryPayment extends StatefulWidget {
 }
 
 class _HistoryPaymentState extends State<HistoryPayment> {
+  String maKH = '';
+
   Future<List<MovieBooking>> loadBill() async {
     return await ReadDataFodd().loadDataBooking();
   }
@@ -21,13 +25,21 @@ class _HistoryPaymentState extends State<HistoryPayment> {
   @override
   void initState() {
     super.initState();
+    _loadUserData();
+  }
+
+  _loadUserData() async {
+    final userDetails = await SharedPreferencesUtil.getUserDetails();
+    setState(() {
+      maKH = userDetails['MaKH']!;
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<List<MovieBooking>>(
-        future: loadBill(),
+      body: FutureBuilder<List<dynamic>>(
+        future: getBillById(maKH),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -41,6 +53,8 @@ class _HistoryPaymentState extends State<HistoryPayment> {
               itemCount: bookings.length,
               itemBuilder: (context, index) {
                 final booking = bookings[index];
+                final date = booking['ThoiGianTT'];
+                DateTime dateTime = DateTime.parse(date);
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
@@ -65,8 +79,8 @@ class _HistoryPaymentState extends State<HistoryPayment> {
                               topLeft: Radius.circular(10.0),
                               bottomLeft: Radius.circular(10.0),
                             ),
-                            child: Image.asset(
-                              'assets/images/${booking.img}',
+                            child: Image.network(
+                              booking['DatVe']['Phim']['AnhPhim'],
                               height: 150,
                               width: 100,
                               fit: BoxFit.cover,
@@ -81,7 +95,7 @@ class _HistoryPaymentState extends State<HistoryPayment> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   Text(
-                                    booking.name,
+                                    booking['DatVe']['Phim']['TenPhim'],
                                     style: const TextStyle(
                                       fontSize: 20,
                                       fontWeight: FontWeight.bold,
@@ -95,7 +109,7 @@ class _HistoryPaymentState extends State<HistoryPayment> {
                                           color: Colors.blue, size: 20),
                                       const SizedBox(width: 8),
                                       Text(
-                                        'Quantity: ${booking.quantity}',
+                                        'Số lượng: ${(booking['DatVe']['GiaTien'] / 70000).toString()}',
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
@@ -106,11 +120,12 @@ class _HistoryPaymentState extends State<HistoryPayment> {
                                   const SizedBox(height: 8),
                                   Row(
                                     children: [
-                                      Icon(Icons.calendar_today,
+                                      const Icon(Icons.calendar_today,
                                           color: Colors.orange, size: 20),
                                       const SizedBox(width: 8),
                                       Text(
-                                        booking.date,
+                                        DateFormat('dd/MM/yyyy')
+                                            .format(dateTime),
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
@@ -125,8 +140,8 @@ class _HistoryPaymentState extends State<HistoryPayment> {
                                           color: Colors.green, size: 20),
                                       const SizedBox(width: 8),
                                       Text(
-                                        NumberFormat('###,### VND')
-                                            .format(booking.price),
+                                        NumberFormat('###,### VND').format(
+                                            booking['DatVe']['GiaTien']),
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
@@ -148,7 +163,8 @@ class _HistoryPaymentState extends State<HistoryPayment> {
                                     color: Colors.white, size: 30),
                                 const SizedBox(height: 8),
                                 Text(
-                                  booking.quantity.toString(),
+                                  (booking['DatVe']['GiaTien'] / 70000)
+                                      .toString(),
                                   style: const TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,

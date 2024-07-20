@@ -289,12 +289,14 @@ class _DrawerMenuState extends State<DrawerMenu> {
                       const SizedBox(height: 16),
                       if (name != null && email != null) ...[
                         Text(
-                          name.toString(),
+                          name!,
                           style: const TextStyle(
                             color: Colors.white,
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
                           ),
+                          overflow: TextOverflow
+                              .ellipsis, // Thêm dòng này để xử lý overflow
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,

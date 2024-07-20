@@ -3,17 +3,13 @@ import 'package:http/http.dart' as http;
 
 // http://10.21.21.131:3030/ trường (HUFLIT-GV)
 // http://10.21.11.217:3030/
+// http://10.21.43.166:3030/
+// http://192.168.29.164:3030/ 4G Toàn
 // http://192.168.1.224:3030 nhà
 const String baseUrl = 'http://192.168.1.224:3030/api/';
 
-Future<dynamic> fetchData(String endpoint,
-    [Map<String, String>? queryParams]) async {
-  var uri = Uri.parse('$baseUrl$endpoint');
-  if (queryParams != null) {
-    uri = uri.replace(queryParameters: queryParams);
-  }
-
-  final response = await http.get(uri);
+Future<List<dynamic>> fetchData(String endpoint) async {
+  final response = await http.get(Uri.parse('$baseUrl/$endpoint'));
 
   if (response.statusCode == 200) {
     return json.decode(response.body);
@@ -28,10 +24,6 @@ Future<List<dynamic>> getMovies() async {
 
 Future<List<dynamic>> getBill() async {
   return await fetchData('HoaDon/Get');
-}
-
-Future<Map<String, dynamic>> getBillByID(String maKH) async {
-  return await fetchData('HoaDon/GetByID', {'MaKH': maKH});
 }
 
 Future<Map<String, dynamic>> login(String email, String password) async {
@@ -55,4 +47,13 @@ Future<Map<String, dynamic>> login(String email, String password) async {
   } else {
     throw Exception('Failed to login: ${response.body}');
   }
+}
+
+Future<List<dynamic>> getBillById(String maKH) async {
+  final response = await http.get(
+    Uri.parse('${baseUrl}HoaDon/GetByID?MaKH=${maKH}'),
+    headers: {'Content-Type': 'application/json'},
+  );
+
+  return json.decode(response.body);
 }

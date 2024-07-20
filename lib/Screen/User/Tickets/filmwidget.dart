@@ -37,10 +37,16 @@ class _FilmWidgetState extends State<FilmWidget> {
                   style: TextStyle(color: Colors.grey)));
         } else {
           List<Film> lstFilm = snapshot.data!;
-          return ListView.builder(
+          return GridView.builder(
             shrinkWrap: true,
-            physics:
-                const NeverScrollableScrollPhysics(), // Prevents scrolling in nested ListView
+            physics: const NeverScrollableScrollPhysics(),
+            // Prevents scrolling in nested ListView
+            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2, // Số lượng item trên mỗi hàng
+
+              mainAxisExtent: 400, // Tỷ lệ chiều cao/chiều rộng của mỗi item
+              // Khoảng cách giữa các hàng
+            ),
             itemCount: lstFilm.length,
             itemBuilder: (context, index) {
               return Padding(
