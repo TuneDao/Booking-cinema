@@ -52,100 +52,111 @@ class _customerManagement extends State<customerManagement> {
                 final customer = customers[index];
                 return Padding(
                   padding: EdgeInsets.all(10),
-                  child: Container(
-                    width: 380,
-                    height: 105,
-                    //BORDER RADIUS vs BOXSHADOW CHO CONTENT BOX
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.withOpacity(0.8),
-                            spreadRadius: 0,
-                            blurRadius: 3,
-                            offset:
-                                Offset(5, 5)), // 5,5 là bên dưới và bên phải
-                      ],
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 1,
-                      ),
+                  child: Card(
+                    color: Colors.grey[850],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
-                    // NƠI CHỨA THÔNG TIN KHÁCH HÀNG
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          flex: 4, // Chiếm nhiều không gian hơn
-                          child: Container(
-                            decoration: const BoxDecoration(
+                    child: Stack(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            ClipRRect(
                               borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  bottomLeft: Radius.circular(20)),
-                              color: Colors.white,
-                            ),
-                            //THÔNG TIN
-                            child: Padding(
-                              padding: EdgeInsets.all(12.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    'Mã Khách Hàng: ' + customer['MaKH'],
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
-                                    ),
-                                  ),
-                                  SizedBox(height: 2.0),
-                                  Text(
-                                    'Họ và tên: ' + customer['HoTen'],
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                  SizedBox(height: 2.0),
-                                  Text(
-                                    'Email: ' + customer['Email'],
-                                    style: TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ],
+                                topLeft: Radius.circular(10.0),
+                                bottomLeft: Radius.circular(10.0),
                               ),
+                              child: Image.network(customer['AnhDaiDien'],
+                                  height: 150, width: 100, fit: BoxFit.cover),
                             ),
-                          ),
-                        ),
-                        // BUTTON XEM CHI TIẾT
-                        Expanded(
-                          flex: 1, // Chiếm ít không gian hơn
-                          child: Container(
-                            height: 250,
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                backgroundColor:
-                                    Color.fromRGBO(244, 208, 64, 1),
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(20),
-                                      bottomRight: Radius.circular(20)),
+                            const SizedBox(width: 15),
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Mã khách hàng: ' + customer['MaKH'],
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 8),
+                                    Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            const Icon(Icons.person_2,
+                                                color: Colors.blue, size: 20),
+                                            const SizedBox(width: 8),
+                                            Text.rich(
+                                              TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: 'Họ tên: ',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 16,
+                                                        color: Colors.white),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '${customer['HoTen']}',
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        color: Colors.white),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.email,
+                                                color: Colors.red, size: 20),
+                                            const SizedBox(width: 8),
+                                            Text.rich(
+                                              TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: 'Email: ',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 16,
+                                                        color: Colors.white),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '${customer['Email']}',
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                      ],
+                                    ),
+                                  ],
                                 ),
                               ),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            CustomerDetailScreen()));
-                              },
-                              child: const Text(
-                                'Chi Tiết',
-                                style: TextStyle(
-                                    fontSize: 12, color: Colors.black),
-                              ),
                             ),
-                          ),
+                          ],
                         ),
                       ],
                     ),

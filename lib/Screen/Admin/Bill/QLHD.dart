@@ -55,99 +55,124 @@ class _invoiceManagement extends State<invoiceManagement> {
                 final date = bill['ThoiGianTT'];
                 DateTime dateTime = DateTime.parse(date);
                 return Padding(
-                  padding: const EdgeInsets.all(10),
-                  child: Container(
-                    width: 380,
-                    height: 105,
-                    //BORDER RADIUS vs BOXSHADOW CHO CONTENT BOX
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      boxShadow: [
-                        BoxShadow(
-                            color: Colors.grey.withOpacity(0.8),
-                            spreadRadius: 0,
-                            blurRadius: 3,
-                            offset: const Offset(
-                                5, 5)), // 5,5 là bên dưới và bên phải
-                      ],
-                      border: Border.all(
-                        color: Colors.black,
-                        width: 1,
-                      ),
+                  padding: EdgeInsets.all(10),
+                  child: Card(
+                    color: Colors.grey[850],
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
                     ),
-                    // NƠI CHỨA THÔNG TIN KHÁCH HÀNG
-                    child: Row(
-                      children: <Widget>[
-                        Expanded(
-                          flex: 4, // Chiếm nhiều không gian hơn
-                          child: Container(
-                            decoration: const BoxDecoration(
-                              borderRadius: BorderRadius.only(
-                                  topLeft: Radius.circular(20),
-                                  bottomLeft: Radius.circular(20)),
-                              color: Colors.white,
-                            ),
-                            //THÔNG TIN
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text(
-                                    'Mã hóa đơn: ' + bill['MaHD'],
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 18,
+                    child: Stack(
+                      children: [
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const SizedBox(width: 15),
+                            Expanded(
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 10.0),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Mã hóa đơn: ' + bill['MaHD'],
+                                      style: const TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: Colors.white,
+                                      ),
                                     ),
-                                  ),
-                                  const SizedBox(height: 2.0),
-                                  Text(
-                                    'Tên khách hàng: ${bill['KhachHang']['HoTen']}',
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 16,
+                                    const SizedBox(height: 8),
+                                    Column(
+                                      children: [
+                                        Row(
+                                          children: [
+                                            Icon(Icons.person_2,
+                                                color: Colors.blue, size: 20),
+                                            const SizedBox(width: 8),
+                                            Text.rich(
+                                              TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: 'Họ tên khách hàng: ',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 16,
+                                                        color: Colors.white),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '${bill['KhachHang']['HoTen']}',
+                                                    style: TextStyle(
+                                                        fontSize: 16,
+                                                        color: Colors.white),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 8),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.calendar_month_outlined,
+                                                color: Colors.red, size: 20),
+                                            const SizedBox(width: 8),
+                                            Text.rich(
+                                              TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: 'Ngày đặt: ',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 16,
+                                                        color: Colors.white),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '${DateFormat('dd/MM/yyyy').format(dateTime)}',
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(height: 8),
+                                      ],
                                     ),
-                                  ),
-                                  const SizedBox(height: 2.0),
-                                  Text(
-                                    'Ngày đặt: ${DateFormat('dd/MM/yyyy').format(dateTime)}',
-                                    style: const TextStyle(
-                                      fontWeight: FontWeight.normal,
-                                      fontSize: 16,
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1, // Chiếm ít không gian hơn
-                          child: Container(
-                            height: 250,
-                            child: TextButton(
-                              style: TextButton.styleFrom(
-                                backgroundColor:
-                                    const Color.fromRGBO(255, 213, 79, 1),
-                                shape: const RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.only(
-                                      topRight: Radius.circular(20),
-                                      bottomRight: Radius.circular(20)),
+                                  ],
                                 ),
                               ),
-                              onPressed: () {
-                                Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            InvoiceDetailScreen()));
-                              },
-                              child: const Text(
-                                'Chi Tiết',
-                                style: TextStyle(
-                                    fontSize: 12, color: Colors.black),
-                              ),
                             ),
+                          ],
+                        ),
+                        Positioned(
+                          top: 8,
+                          right: 8,
+                          child: Column(
+                            children: [
+                              // NÚT SỬA
+                              GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) =>
+                                              InvoiceDetailScreen()));
+                                },
+                                child: const CircleAvatar(
+                                  radius: 20,
+                                  backgroundColor: Colors.yellow,
+                                  child: Icon(Icons.info, color: Colors.black),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
                       ],
