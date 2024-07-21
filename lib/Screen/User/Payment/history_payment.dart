@@ -3,7 +3,6 @@ import 'package:intl/intl.dart';
 import 'package:project_android/Data/API/api.dart';
 import 'package:project_android/Data/API/sharedpre.dart';
 import 'package:project_android/Data/model/booking.dart';
-import 'package:project_android/Data/model/filmmodel.dart';
 import 'package:project_android/Data/provider/bookingprovider.dart';
 import 'package:project_android/Screen/User/Payment/booking_detail.dart';
 import 'package:project_android/config/const.dart';
@@ -54,6 +53,9 @@ class _HistoryPaymentState extends State<HistoryPayment> {
               itemBuilder: (context, index) {
                 final booking = bookings[index];
                 final date = booking['ThoiGianTT'];
+                final double quantity = (booking['DatVe']['GiaTien'] / 70000);
+                final String formattedQuantity =
+                    NumberFormat('###.##').format(quantity);
                 DateTime dateTime = DateTime.parse(date);
                 return GestureDetector(
                   onTap: () {
@@ -105,11 +107,11 @@ class _HistoryPaymentState extends State<HistoryPayment> {
                                   const SizedBox(height: 8),
                                   Row(
                                     children: [
-                                      Icon(Icons.hd,
+                                      Icon(Icons.local_activity,
                                           color: Colors.blue, size: 20),
                                       const SizedBox(width: 8),
                                       Text(
-                                        'Số lượng: ${(booking['DatVe']['GiaTien'] / 70000).toString()}',
+                                        'Số lượng: ${formattedQuantity}',
                                         style: const TextStyle(
                                           color: Colors.white,
                                           fontSize: 16,
@@ -163,8 +165,7 @@ class _HistoryPaymentState extends State<HistoryPayment> {
                                     color: Colors.white, size: 30),
                                 const SizedBox(height: 8),
                                 Text(
-                                  (booking['DatVe']['GiaTien'] / 70000)
-                                      .toString(),
+                                  formattedQuantity,
                                   style: const TextStyle(
                                     fontSize: 20,
                                     fontWeight: FontWeight.bold,

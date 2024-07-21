@@ -3,22 +3,22 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:project_android/Data/API/api.dart';
-import 'package:project_android/Screen/Admin/Film/AddFilm.dart';
 import 'package:project_android/Screen/Admin/Film/editFilm.dart';
+import 'package:project_android/Screen/Admin/Time/add_SC.dart';
 
-class filmManagement extends StatefulWidget {
-  const filmManagement({super.key});
+class SuatChieuManagement extends StatefulWidget {
+  const SuatChieuManagement({super.key});
   @override
-  _filmManagement createState() => _filmManagement();
+  _suatchieuManagement createState() => _suatchieuManagement();
 }
 
-class _filmManagement extends State<filmManagement> {
+class _suatchieuManagement extends State<SuatChieuManagement> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Danh sách phim',
+          'Danh sách suất chiếu',
           style: TextStyle(
               color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold),
         ),
@@ -32,18 +32,18 @@ class _filmManagement extends State<filmManagement> {
         ),
       ),
       body: FutureBuilder<List<dynamic>>(
-        future: getMovies(),
+        future: getSuatChieu(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
-            final movies = snapshot.data!;
+            final times = snapshot.data!;
             return ListView.builder(
-              itemCount: movies.length,
+              itemCount: times.length,
               itemBuilder: (context, index) {
-                final movie = movies[index];
+                final time = times[index];
                 return Padding(
                   padding: EdgeInsets.all(10),
                   child: Card(
@@ -56,14 +56,6 @@ class _filmManagement extends State<filmManagement> {
                         Row(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10.0),
-                                bottomLeft: Radius.circular(10.0),
-                              ),
-                              child: Image.network(movie['AnhPhim'],
-                                  height: 180, width: 100, fit: BoxFit.cover),
-                            ),
                             const SizedBox(width: 15),
                             Expanded(
                               child: Padding(
@@ -73,7 +65,7 @@ class _filmManagement extends State<filmManagement> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      movie['TenPhim'],
+                                      time['MaSC'],
                                       style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
@@ -85,14 +77,17 @@ class _filmManagement extends State<filmManagement> {
                                       children: [
                                         Row(
                                           children: [
-                                            FaIcon(FontAwesomeIcons.video,
-                                                color: Colors.blue, size: 20),
+                                            Icon(
+                                                Icons
+                                                    .video_camera_back_outlined,
+                                                color: Colors.blue,
+                                                size: 20),
                                             const SizedBox(width: 8),
                                             Text.rich(
                                               TextSpan(
                                                 children: [
                                                   TextSpan(
-                                                    text: 'Đạo diễn: ',
+                                                    text: 'Thời gian bắt đầu: ',
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -100,7 +95,8 @@ class _filmManagement extends State<filmManagement> {
                                                         color: Colors.white),
                                                   ),
                                                   TextSpan(
-                                                    text: '${movie['DaoDien']}',
+                                                    text:
+                                                        '${time['ThoiGianBD']}',
                                                     style: TextStyle(
                                                         fontSize: 16,
                                                         color: Colors.white),
@@ -113,14 +109,17 @@ class _filmManagement extends State<filmManagement> {
                                         const SizedBox(height: 8),
                                         Row(
                                           children: [
-                                            Icon(Icons.category,
-                                                color: Colors.orange, size: 20),
+                                            Icon(
+                                                Icons.video_camera_back_rounded,
+                                                color: Colors.red,
+                                                size: 20),
                                             const SizedBox(width: 8),
                                             Text.rich(
                                               TextSpan(
                                                 children: [
                                                   TextSpan(
-                                                    text: 'Thể Loại: ',
+                                                    text:
+                                                        'Thời gian kết thúc: ',
                                                     style: TextStyle(
                                                         fontWeight:
                                                             FontWeight.bold,
@@ -129,7 +128,39 @@ class _filmManagement extends State<filmManagement> {
                                                   ),
                                                   TextSpan(
                                                     text:
-                                                        '${movie['TheLoai']['TenTL']}',
+                                                        '${time['ThoiGianKT']}',
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                        const SizedBox(
+                                          height: 8,
+                                        ),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.calendar_today,
+                                                color: Colors.orange, size: 20),
+                                            const SizedBox(width: 8),
+                                            Text.rich(
+                                              TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: 'Ngày chiếu: ',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 16,
+                                                        color: Colors.white),
+                                                  ),
+                                                  TextSpan(
+                                                    text:
+                                                        '${time['NgayChieu']}',
                                                     style: TextStyle(
                                                       fontSize: 16,
                                                       color: Colors.white,
@@ -141,23 +172,33 @@ class _filmManagement extends State<filmManagement> {
                                           ],
                                         ),
                                         const SizedBox(height: 8),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: movie['SuatChieux']
-                                              .map<Widget>((suatChieu) {
-                                            return Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 4.0),
-                                              child: Text(
-                                                'Suất chiếu: ${suatChieu['NgayChieu']} - ${suatChieu['ThoiGianBD']} đến ${suatChieu['ThoiGianKT']}\nTại rạp: ${suatChieu['RapChieu']}',
-                                                style: TextStyle(
-                                                  color: Colors.white,
-                                                ),
+                                        Row(
+                                          children: [
+                                            Icon(Icons.room,
+                                                color: Colors.green, size: 20),
+                                            const SizedBox(width: 8),
+                                            Text.rich(
+                                              TextSpan(
+                                                children: [
+                                                  TextSpan(
+                                                    text: 'Phòng: ',
+                                                    style: TextStyle(
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                        fontSize: 16,
+                                                        color: Colors.white),
+                                                  ),
+                                                  TextSpan(
+                                                    text: '${time['RapChieu']}',
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      color: Colors.white,
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                            );
-                                          }).toList(),
+                                            ),
+                                          ],
                                         ),
                                       ],
                                     ),
@@ -191,7 +232,7 @@ class _filmManagement extends State<filmManagement> {
                               // NÚT XÓA
                               GestureDetector(
                                 onTap: () {
-                                  _showDeleteDialog(context, movie['MaPhim']);
+                                  _showDeleteDialog(context, time['MaSC']);
                                 },
                                 child: const CircleAvatar(
                                   radius: 20,
@@ -214,8 +255,8 @@ class _filmManagement extends State<filmManagement> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(
-              context, MaterialPageRoute(builder: (context) => AddFilmPage()));
+          Navigator.push(context,
+              MaterialPageRoute(builder: (context) => AddSuatChieuScreen()));
         },
         backgroundColor: Color.fromRGBO(121, 0, 0, 1),
         child: const Icon(
@@ -226,7 +267,7 @@ class _filmManagement extends State<filmManagement> {
     );
   }
 
-  void _showDeleteDialog(BuildContext context, String maPhim) {
+  void _showDeleteDialog(BuildContext context, String maSC) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -244,7 +285,7 @@ class _filmManagement extends State<filmManagement> {
               child: Text("Có"),
               onPressed: () async {
                 Navigator.of(context).pop();
-                await deleteFilm(maPhim);
+                await deleteSuatChieu(maSC);
                 setState(() {}); // Refresh the list after deletion
               },
             ),

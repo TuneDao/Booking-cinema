@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:project_android/Data/API/api.dart';
+import 'package:project_android/Data/model/category.dart';
 
 class EditFilmPage extends StatefulWidget {
   @override
@@ -6,52 +8,59 @@ class EditFilmPage extends StatefulWidget {
 }
 
 class _EditFilmPageState extends State<EditFilmPage> {
-  // Các controller để lấy giá trị từ các TextField
   final TextEditingController maPhimController = TextEditingController();
   final TextEditingController tenPhimController = TextEditingController();
   final TextEditingController anhPhimController = TextEditingController();
   final TextEditingController daoDienController = TextEditingController();
   final TextEditingController ngonNguController = TextEditingController();
-  final TextEditingController maSuatChieuController = TextEditingController();
-  final TextEditingController thoiGianBDController = TextEditingController();
-  final TextEditingController thoiGianKTController = TextEditingController();
-  final TextEditingController ngayChieuController = TextEditingController();
-  final TextEditingController rapChieuController = TextEditingController();
+  final TextEditingController moTaController = TextEditingController();
 
-  // Danh sách thể loại
-  final List<String> categories = [
-    'Hành Động',
-    'Hài Hước',
-    'Kinh Dị',
-    'Tình Cảm',
-    'Khoa Học Viễn Tưởng',
-    'Hoạt Hình',
-  ];
+  List<Category> _categories = [];
+  Category? _selectedCategory;
 
-  String? selectedCategory; // Biến để lưu thể loại được chọn
+  @override
+  void initState() {
+    super.initState();
+    _fetchCategories();
+  }
+
+  Future<void> _fetchCategories() async {
+    try {
+      List<dynamic> categoryData = await getCategories();
+      setState(() {
+        _categories =
+            categoryData.map((data) => Category.fromJson(data)).toList();
+      });
+    } catch (e) {
+      print('Failed to load categories: $e');
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Chỉnh sửa phim', // Đổi tiêu đề thành "Chỉnh sửa phim"
+          'Sửa phim',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
           ),
         ),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back, color: Colors.white),
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
           onPressed: () {
             Navigator.pop(context); // Quay lại trang trước
           },
         ),
-        backgroundColor: Color(0xFF790000),
+        backgroundColor: const Color(0xFF790000),
         centerTitle: true,
       ),
       body: SingleChildScrollView(
-        padding: EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
@@ -66,17 +75,7 @@ class _EditFilmPageState extends State<EditFilmPage> {
             _buildTextField(daoDienController, 'Đạo Diễn'),
             _buildDropdown(), // Sử dụng Dropdown cho Mã Thể Loại
             _buildTextField(ngonNguController, 'Ngôn Ngữ'),
-            const SizedBox(height: 32),
-            const Text(
-              'Thông tin suất chiếu',
-              style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 16),
-            _buildTextField(maSuatChieuController, 'Mã Suất Chiếu'),
-            _buildTextField(thoiGianBDController, 'Thời Gian Bắt Đầu'),
-            _buildTextField(thoiGianKTController, 'Thời Gian Kết Thúc'),
-            _buildTextField(ngayChieuController, 'Ngày Chiếu'),
-            _buildTextField(rapChieuController, 'Rạp Chiếu'),
+            _buildTextField(moTaController, 'Mô tả'),
             const SizedBox(height: 32),
             Center(
               child: SizedBox(
@@ -84,18 +83,21 @@ class _EditFilmPageState extends State<EditFilmPage> {
                 height: 50, // Đặt chiều cao mong muốn
                 child: ElevatedButton(
                   onPressed: () {
-                    // Xử lý sửa phim
                     _editFilm();
+                    Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Color(0xFF790000), // Màu nền của nút
+                    backgroundColor: const Color(0xFF790000), // Màu nền của nút
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8.0), // Độ bo góc
                     ),
                   ),
                   child: const Text(
-                    'Lưu Thay Đổi', // Đổi tên nút thành "Lưu Thay Đổi"
-                    style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
+                    'Cập nhật ',
+                    style: TextStyle(
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16),
                   ),
                 ),
               ),
@@ -106,7 +108,6 @@ class _EditFilmPageState extends State<EditFilmPage> {
     );
   }
 
-  // Widget tạo TextField
   Widget _buildTextField(TextEditingController controller, String label) {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
@@ -115,32 +116,37 @@ class _EditFilmPageState extends State<EditFilmPage> {
         decoration: InputDecoration(
           labelText: label,
           border: const OutlineInputBorder(),
-          contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+          contentPadding: const EdgeInsets.symmetric(
+            vertical: 12.0,
+            horizontal: 10.0,
+          ),
         ),
       ),
     );
   }
 
-  // Widget tạo Dropdown cho Mã Thể Loại
   Widget _buildDropdown() {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: DropdownButtonFormField<String>(
-        value: selectedCategory,
-        decoration: InputDecoration(
+      child: DropdownButtonFormField<Category>(
+        value: _selectedCategory,
+        decoration: const InputDecoration(
           labelText: 'Mã Thể Loại',
-          border: const OutlineInputBorder(),
-          contentPadding: const EdgeInsets.symmetric(vertical: 12.0, horizontal: 10.0),
+          border: OutlineInputBorder(),
+          contentPadding: EdgeInsets.symmetric(
+            vertical: 12.0,
+            horizontal: 10.0,
+          ),
         ),
-        items: categories.map((String category) {
-          return DropdownMenuItem<String>(
+        items: _categories.map((Category category) {
+          return DropdownMenuItem<Category>(
             value: category,
-            child: Text(category),
+            child: Text(category.tenTL),
           );
         }).toList(),
-        onChanged: (String? newValue) {
+        onChanged: (Category? newValue) {
           setState(() {
-            selectedCategory = newValue; // Cập nhật thể loại được chọn
+            _selectedCategory = newValue;
           });
         },
         isExpanded: true,
@@ -149,23 +155,23 @@ class _EditFilmPageState extends State<EditFilmPage> {
     );
   }
 
-  // Hàm xử lý sửa phim
-  void _editFilm() {
-    // Lấy dữ liệu từ các controller
+  void _editFilm() async {
     final maPhim = maPhimController.text;
     final tenPhim = tenPhimController.text;
     final anhPhim = anhPhimController.text;
     final daoDien = daoDienController.text;
-    final maTL = selectedCategory; // Lấy thể loại từ dropdown
+    final maTL = _selectedCategory?.maTL ?? '';
     final ngonNgu = ngonNguController.text;
-    final maSuatChieu = maSuatChieuController.text;
-    final thoiGianBD = thoiGianBDController.text;
-    final thoiGianKT = thoiGianKTController.text;
-    final ngayChieu = ngayChieuController.text;
-    final rapChieu = rapChieuController.text;
-
-    // Thực hiện sửa phim (có thể thêm vào database hoặc xử lý khác)
-    print('Sửa phim thành công: $tenPhim');
-    // Có thể hiển thị thông báo cho người dùng sau khi sửa thành công
+    final mota = moTaController.text;
+    try {
+      await editFilm(maPhim, tenPhim, anhPhim, daoDien, maTL, ngonNgu, mota);
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Chỉnh sửa phim thành công')),
+      );
+    } catch (e) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Failed to edit film: $e')),
+      );
+    }
   }
 }

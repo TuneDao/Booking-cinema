@@ -2,46 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:project_android/Data/API/api.dart';
 import 'package:project_android/Data/model/category.dart';
 
-class AddFilmPage extends StatefulWidget {
+class AddSuatChieuScreen extends StatefulWidget {
   @override
-  _AddFilmPageState createState() => _AddFilmPageState();
+  _AddSuatChieuScreenState createState() => _AddSuatChieuScreenState();
 }
 
-class _AddFilmPageState extends State<AddFilmPage> {
+class _AddSuatChieuScreenState extends State<AddSuatChieuScreen> {
+  final TextEditingController maSCController = TextEditingController();
   final TextEditingController maPhimController = TextEditingController();
-  final TextEditingController tenPhimController = TextEditingController();
-  final TextEditingController anhPhimController = TextEditingController();
-  final TextEditingController daoDienController = TextEditingController();
-  final TextEditingController ngonNguController = TextEditingController();
-  final TextEditingController moTaController = TextEditingController();
-
-  List<Category> _categories = [];
-  Category? _selectedCategory;
-
-  @override
-  void initState() {
-    super.initState();
-    _fetchCategories();
-  }
-
-  Future<void> _fetchCategories() async {
-    try {
-      List<dynamic> categoryData = await getCategories();
-      setState(() {
-        _categories =
-            categoryData.map((data) => Category.fromJson(data)).toList();
-      });
-    } catch (e) {
-      print('Failed to load categories: $e');
-    }
-  }
+  final TextEditingController thoiGianBDController = TextEditingController();
+  final TextEditingController thoiGianKTController = TextEditingController();
+  final TextEditingController ngayChieuController = TextEditingController();
+  final TextEditingController rapChieuController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Thêm phim',
+          'Thêm suất chiếu',
           style: TextStyle(
             color: Colors.white,
             fontWeight: FontWeight.bold,
@@ -65,17 +44,17 @@ class _AddFilmPageState extends State<AddFilmPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             const Text(
-              'Thông tin phim',
+              'Thông tin suất chiếu',
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
+            _buildTextField(maSCController, 'Mã Suất Chiếu'),
             _buildTextField(maPhimController, 'Mã Phim'),
-            _buildTextField(tenPhimController, 'Tên Phim'),
-            _buildTextField(anhPhimController, 'Ảnh Phim (URL)'),
-            _buildTextField(daoDienController, 'Đạo Diễn'),
-            _buildDropdown(), // Sử dụng Dropdown cho Mã Thể Loại
-            _buildTextField(ngonNguController, 'Ngôn Ngữ'),
-            _buildTextField(moTaController, 'Mô tả'),
+            _buildTextField(thoiGianBDController, 'Thời gian bắt đầu'),
+            _buildTextField(thoiGianKTController, 'Thời gian kết thúc'),
+            // _buildDropdown(), // Sử dụng Dropdown cho Mã Thể Loại
+            _buildTextField(ngayChieuController, 'Ngày chiếu'),
+            _buildTextField(rapChieuController, 'Rạp chiếu'),
             const SizedBox(height: 32),
             // const Text(
             //   'Thông tin suất chiếu',
@@ -95,7 +74,7 @@ class _AddFilmPageState extends State<AddFilmPage> {
                 height: 50, // Đặt chiều cao mong muốn
                 child: ElevatedButton(
                   onPressed: () {
-                    _addFilm();
+                    _addsuatChieu();
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
@@ -105,7 +84,7 @@ class _AddFilmPageState extends State<AddFilmPage> {
                     ),
                   ),
                   child: const Text(
-                    'Thêm Phim',
+                    'Thêm Suất Chiếu',
                     style: TextStyle(
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -138,49 +117,49 @@ class _AddFilmPageState extends State<AddFilmPage> {
     );
   }
 
-  Widget _buildDropdown() {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 8.0),
-      child: DropdownButtonFormField<Category>(
-        value: _selectedCategory,
-        decoration: const InputDecoration(
-          labelText: 'Mã Thể Loại',
-          border: OutlineInputBorder(),
-          contentPadding: EdgeInsets.symmetric(
-            vertical: 12.0,
-            horizontal: 10.0,
-          ),
-        ),
-        items: _categories.map((Category category) {
-          return DropdownMenuItem<Category>(
-            value: category,
-            child: Text(category.tenTL),
-          );
-        }).toList(),
-        onChanged: (Category? newValue) {
-          setState(() {
-            _selectedCategory = newValue;
-          });
-        },
-        isExpanded: true,
-        hint: const Text('Chọn thể loại'),
-      ),
-    );
-  }
+  // Widget _buildDropdown() {
+  //   return Padding(
+  //     padding: const EdgeInsets.symmetric(vertical: 8.0),
+  //     child: DropdownButtonFormField<Category>(
+  //       value: _selectedCategory,
+  //       decoration: const InputDecoration(
+  //         labelText: 'Mã Thể Loại',
+  //         border: OutlineInputBorder(),
+  //         contentPadding: EdgeInsets.symmetric(
+  //           vertical: 12.0,
+  //           horizontal: 10.0,
+  //         ),
+  //       ),
+  //       items: _categories.map((Category category) {
+  //         return DropdownMenuItem<Category>(
+  //           value: category,
+  //           child: Text(category.tenTL),
+  //         );
+  //       }).toList(),
+  //       onChanged: (Category? newValue) {
+  //         setState(() {
+  //           _selectedCategory = newValue;
+  //         });
+  //       },
+  //       isExpanded: true,
+  //       hint: const Text('Chọn thể loại'),
+  //     ),
+  //   );
+  // }
 
-  void _addFilm() async {
+  void _addsuatChieu() async {
+    final maSC = maSCController.text;
     final maPhim = maPhimController.text;
-    final tenPhim = tenPhimController.text;
-    final anhPhim = anhPhimController.text;
-    final daoDien = daoDienController.text;
-    final maTL = _selectedCategory?.maTL ?? '';
-    final ngonNgu = ngonNguController.text;
-    final mota = moTaController.text;
+    final thoigianBD = thoiGianBDController.text;
+    final thoigianKT = thoiGianKTController.text;
+    final ngayChieu = ngayChieuController.text;
+    final rapChieu = rapChieuController.text;
 
     try {
-      await addFilm(maPhim, tenPhim, anhPhim, daoDien, maTL, ngonNgu, mota);
+      await addSuatChieu(
+          maSC, maPhim, thoigianBD, thoigianKT, ngayChieu, rapChieu);
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Thêm phim thành công')),
+        const SnackBar(content: Text('Thêm suất chiếu thành công')),
       );
     } catch (e) {
       ScaffoldMessenger.of(context).showSnackBar(

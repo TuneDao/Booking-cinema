@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project_android/Screen/Admin/Film/QLFilm.dart';
 import 'package:project_android/Screen/Admin/Bill/QLHD.dart';
 import 'package:project_android/Screen/Admin/Customer/QLKH.dart';
+import 'package:project_android/Screen/Admin/Time/QLSC.dart';
 import 'package:project_android/config/const.dart';
 
 class AdminScreen extends StatelessWidget {
@@ -56,8 +58,8 @@ class AdminScreen extends StatelessWidget {
                     data: '100',
                     backgroundColor:
                         Colors.blue[200]!, // Màu nền của ô số liệu 1
-                    iconColor: Colors.blue, // Màu biểu tượng của ô số liệu 1
-                    textColor: Colors.blue, // Màu dữ liệu của ô số liệu 1
+                    iconColor: Colors.white, // Màu biểu tượng của ô số liệu 1
+                    textColor: Colors.white, // Màu dữ liệu của ô số liệu 1
                   ),
                   _buildDataItem(
                     icon: Icons.attach_money,
@@ -72,8 +74,8 @@ class AdminScreen extends StatelessWidget {
                     data: '200',
                     backgroundColor:
                         Colors.orange[200]!, // Màu nền của ô số liệu 3
-                    iconColor: Colors.orange, // Màu biểu tượng của ô số liệu 3
-                    textColor: Colors.orange, // Màu dữ liệu của ô số liệu 3
+                    iconColor: Colors.red, // Màu biểu tượng của ô số liệu 3
+                    textColor: Colors.red, // Màu dữ liệu của ô số liệu 3
                   ),
                 ],
               ),
@@ -141,6 +143,19 @@ class AdminScreen extends StatelessWidget {
                       );
                     },
                   ),
+                  _buildGridItem(
+                    icon: FontAwesomeIcons.video,
+                    title: 'QUẢN LÝ SUẤT CHIẾU',
+                    color: colorTheme2,
+                    onTap: () {
+                      // Điều hướng đến trang quản lý khách hàng
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const SuatChieuManagement()),
+                      );
+                    },
+                  ),
                 ],
               ),
             ),
@@ -168,7 +183,7 @@ class AdminScreen extends StatelessWidget {
           padding: const EdgeInsets.all(16.0),
           child: Row(
             children: [
-              Icon(icon, size: 40),
+              Icon(icon, size: 30),
               SizedBox(width: 10),
               Expanded(
                 child: Text(
