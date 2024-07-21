@@ -14,7 +14,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: AdminScreen(),
+      home: SignInPage2(),
       // routes: {
       //   '/': (context) => SplashScreen(),
       //   '/home': (context) => HomePage(), // Trang chủ của bạn.

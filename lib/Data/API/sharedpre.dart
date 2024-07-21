@@ -21,4 +21,14 @@ class SharedPreferencesUtil {
       'AnhDaiDien': prefs.getString('AnhDaiDien'),
     };
   }
+
+  static Future<void> logout() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.remove('Email');
+    await prefs.remove('HoTen');
+    await prefs.remove('MaKH');
+    await prefs.remove('AnhDaiDien');
+    await prefs.remove('MatKhau');
+    await prefs.remove('SDT');
+  }
 }

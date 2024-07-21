@@ -392,7 +392,8 @@ class _DrawerMenuState extends State<DrawerMenu> {
                   children: [
                     Expanded(
                       child: TextButton(
-                        onPressed: () {
+                        onPressed: () async {
+                          await SharedPreferencesUtil.logout();
                           Navigator.push(
                               context,
                               MaterialPageRoute(

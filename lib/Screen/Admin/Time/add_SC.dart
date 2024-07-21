@@ -52,21 +52,9 @@ class _AddSuatChieuScreenState extends State<AddSuatChieuScreen> {
             _buildTextField(maPhimController, 'Mã Phim'),
             _buildTextField(thoiGianBDController, 'Thời gian bắt đầu'),
             _buildTextField(thoiGianKTController, 'Thời gian kết thúc'),
-            // _buildDropdown(), // Sử dụng Dropdown cho Mã Thể Loại
             _buildTextField(ngayChieuController, 'Ngày chiếu'),
             _buildTextField(rapChieuController, 'Rạp chiếu'),
             const SizedBox(height: 32),
-            // const Text(
-            //   'Thông tin suất chiếu',
-            //   style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-            // ),
-            // const SizedBox(height: 16),
-            // _buildTextField(maSuatChieuController, 'Mã Suất Chiếu'),
-            // _buildTextField(maPhimController, 'Mã Phim'),
-            // _buildTextField(thoiGianBDController, 'Thời Gian Bắt Đầu'),
-            // _buildTextField(thoiGianKTController, 'Thời Gian Kết Thúc'),
-            // _buildTextField(ngayChieuController, 'Ngày Chiếu'),
-            // _buildTextField(rapChieuController, 'Rạp Chiếu'),
             const SizedBox(height: 32),
             Center(
               child: SizedBox(
@@ -116,36 +104,6 @@ class _AddSuatChieuScreenState extends State<AddSuatChieuScreen> {
       ),
     );
   }
-
-  // Widget _buildDropdown() {
-  //   return Padding(
-  //     padding: const EdgeInsets.symmetric(vertical: 8.0),
-  //     child: DropdownButtonFormField<Category>(
-  //       value: _selectedCategory,
-  //       decoration: const InputDecoration(
-  //         labelText: 'Mã Thể Loại',
-  //         border: OutlineInputBorder(),
-  //         contentPadding: EdgeInsets.symmetric(
-  //           vertical: 12.0,
-  //           horizontal: 10.0,
-  //         ),
-  //       ),
-  //       items: _categories.map((Category category) {
-  //         return DropdownMenuItem<Category>(
-  //           value: category,
-  //           child: Text(category.tenTL),
-  //         );
-  //       }).toList(),
-  //       onChanged: (Category? newValue) {
-  //         setState(() {
-  //           _selectedCategory = newValue;
-  //         });
-  //       },
-  //       isExpanded: true,
-  //       hint: const Text('Chọn thể loại'),
-  //     ),
-  //   );
-  // }
 
   void _addsuatChieu() async {
     final maSC = maSCController.text;

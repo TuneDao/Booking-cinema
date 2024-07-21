@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:project_android/Data/API/api.dart';
 import 'package:project_android/Data/API/sharedpre.dart';
+import 'package:project_android/Screen/Admin/adminscreen.dart';
 import 'package:project_android/Screen/User/SignIn/forgotpassword.dart';
 import 'package:project_android/Screen/User/Home/home.dart';
 import 'package:project_android/Screen/User/SignIn/register.dart';
@@ -279,6 +280,15 @@ class __FormContentState extends State<_FormContent> {
                         ScaffoldMessenger.of(context).showSnackBar(
                           const SnackBar(
                             content: Text('Sai tài khoản hoặc mật khẩu'),
+                          ),
+                        );
+                      }
+                      if (response['Email'] == 'tuan@gmail.com' &&
+                          response['MatKhau'] == '123456') {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => AdminScreen(),
                           ),
                         );
                       }
