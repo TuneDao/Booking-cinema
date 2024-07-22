@@ -21,17 +21,7 @@ Widget itemFilmView(
       margin: const EdgeInsets.symmetric(vertical: 0, horizontal: 0),
       padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
-        // color: const Color.fromRGBO(255, 249, 239, 0.5),
         borderRadius: BorderRadius.circular(10),
-
-        // boxShadow: const [
-        //   BoxShadow(
-        //     color: Colors.black12,
-        //     blurRadius: 5,
-        //     spreadRadius: 2,
-        //     offset: Offset(0, 3),
-        //   ),
-        // ],
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -63,6 +53,8 @@ Widget itemFilmView(
               fontSize: 18,
               fontWeight: FontWeight.bold,
             ),
+            overflow: TextOverflow.ellipsis,
+            maxLines: 1,
           ),
           const SizedBox(height: 5),
           Row(

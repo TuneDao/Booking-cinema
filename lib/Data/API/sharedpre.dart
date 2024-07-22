@@ -18,6 +18,8 @@ class SharedPreferencesUtil {
       'Email': prefs.getString('Email'),
       'HoTen': prefs.getString('HoTen'),
       'MaKH': prefs.getString('MaKH'),
+      'SDT': prefs.getString('SDT'),
+      'MatKhau': prefs.getString('MatKhau'),
       'AnhDaiDien': prefs.getString('AnhDaiDien'),
     };
   }

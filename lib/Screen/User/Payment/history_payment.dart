@@ -43,9 +43,37 @@ class _HistoryPaymentState extends State<HistoryPayment> {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
+            return Center(
+                child: Column(
+              children: [
+                Image.asset(
+                  'assets/images/nodata.jpg',
+                ),
+                const Text(
+                  'Không có dữ liệu',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red),
+                )
+              ],
+            ));
           } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-            return Center(child: Text('No data available'));
+            return Center(
+                child: Column(
+              children: [
+                Image.asset(
+                  'assets/images/nodata.jpg',
+                ),
+                const Text(
+                  'Không có dữ liệu',
+                  style: TextStyle(
+                      fontSize: 20,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.red),
+                )
+              ],
+            ));
           } else {
             final bookings = snapshot.data!;
             return ListView.builder(

@@ -216,3 +216,54 @@ Future<Map<String, dynamic>> login(String email, String password) async {
     throw Exception('Failed to login: ${response.body}');
   }
 }
+
+// Future<void> updateUser(String maKH, String hoTen, String email, String matKhau,
+//     String SDT, String anhdaiDien) async {
+//   final response = await http.put(
+//     Uri.parse('${baseUrl}/KhachHang/Put/$maKH'),
+//     headers: <String, String>{
+//       'Content-Type': 'application/json; charset=UTF-8',
+//     },
+//     body: jsonEncode(<String, String>{
+//       'MaKH': maKH,
+//       'HoTen': hoTen,
+//       'Email': email,
+//       'MatKhau': matKhau,
+//       'SDT': SDT,
+//       'AnhDaiDien': anhdaiDien,
+//     }),
+//   );
+
+//   if (response.statusCode == 200) {
+//     // If the server returns an OK response, parse the JSON.
+//     print('Cập nhật thành công.');
+//   } else {
+//     // If the server did not return an OK response, throw an exception.
+//     throw Exception('Cập nhật bị lỗi.');
+//   }
+// }
+Future<bool> updateUser(String maKH, String hoTen, String email, String matKhau,
+    String SDT, String anhDaidien) async {
+  final response = await http.put(
+    Uri.parse('${baseUrl}/KhachHang/Put/$maKH'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'MaKH': maKH,
+      'HoTen': hoTen,
+      'Email': email,
+      'MatKhau': matKhau,
+      'STD': SDT,
+      'AnhDaiDien': anhDaidien,
+    }),
+  );
+
+  if (response.statusCode == 200) {
+    print('Cập nhật thành công.');
+    return true;
+  } else {
+    print('Cập nhật bị lỗi.');
+    return false;
+  }
+}
