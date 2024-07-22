@@ -44,6 +44,16 @@ Future<List<dynamic>> getBillById(String maKH) async {
   return json.decode(response.body);
 }
 
+// ADMIN
+Future<Map<String, dynamic>> getBillDetailById(String maHD) async {
+  final response = await http.get(
+    Uri.parse('${baseUrl}HoaDon/GetByID?id=${maHD}'),
+    headers: {'Content-Type': 'application/json'},
+  );
+
+  return json.decode(response.body);
+}
+
 Future<List<dynamic>> getSuatChieu() async {
   return await fetchData('SuatChieu/Get');
 }

@@ -164,7 +164,9 @@ class _invoiceManagement extends State<invoiceManagement> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              InvoiceDetailScreen()));
+                                              InvoiceDetailScreen(
+                                                invoiceId: bill['MaHD'],
+                                              )));
                                 },
                                 child: const CircleAvatar(
                                   radius: 20,
