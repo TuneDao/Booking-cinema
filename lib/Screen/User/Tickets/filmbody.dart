@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:project_android/Data/model/filmmodel.dart';
+import 'package:project_android/Data/model/movie.dart';
 import 'package:project_android/Screen/User/Tickets/detailfilm.dart';
 import 'package:project_android/config/const.dart';
 
-Widget itemFilmView(BuildContext context, Film itemFilm) {
+Widget itemFilmView(
+  BuildContext context,
+  Film_API itemFilm,
+) {
   return GestureDetector(
     onTap: () {
       Navigator.push(
@@ -42,8 +46,8 @@ Widget itemFilmView(BuildContext context, Film itemFilm) {
             ),
             child: ClipRRect(
               borderRadius: BorderRadius.circular(10),
-              child: Image.asset(
-                'assets/images/${itemFilm.img}',
+              child: Image.network(
+                itemFilm.anhPhim,
                 height: 250,
                 width: double.infinity,
                 fit: BoxFit.cover,
@@ -54,7 +58,7 @@ Widget itemFilmView(BuildContext context, Film itemFilm) {
           ),
           const SizedBox(height: 10),
           Text(
-            itemFilm.name ?? '',
+            itemFilm.tenPhim ?? '',
             style: const TextStyle(
               fontSize: 18,
               fontWeight: FontWeight.bold,
@@ -71,7 +75,7 @@ Widget itemFilmView(BuildContext context, Film itemFilm) {
                   color: colorTheme2,
                 ),
                 child: Text(
-                  itemFilm.category ?? '',
+                  itemFilm.theLoai ?? '',
                   style: const TextStyle(
                     fontSize: 14,
                     color: Colors.white,
@@ -79,21 +83,6 @@ Widget itemFilmView(BuildContext context, Film itemFilm) {
                 ),
               ),
               const SizedBox(width: 10),
-              Container(
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(8),
-                  color: colorHome,
-                ),
-                child: Text(
-                  itemFilm.time ?? '',
-                  style: const TextStyle(
-                    fontSize: 14,
-                    color: Colors.white,
-                  ),
-                ),
-              ),
             ],
           ),
         ],

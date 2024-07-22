@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:project_android/Data/model/filmmodel.dart';
+import 'package:project_android/Data/model/movie.dart';
 import 'package:project_android/Screen/User/Tickets/seats.dart';
 import 'package:project_android/Screen/User/Home/carousel_news.dart';
 import 'package:project_android/config/const.dart'; // Import CarouselFilm
 
 class FilmDetailScreen extends StatelessWidget {
-  final Film film;
+  final Film_API film;
 
   const FilmDetailScreen({required this.film});
 
@@ -21,8 +22,8 @@ class FilmDetailScreen extends StatelessWidget {
               background: Stack(
                 fit: StackFit.expand,
                 children: [
-                  Image.asset(
-                    'assets/images/${film.img}', // Large background image
+                  Image.network(
+                    film.anhPhim, // Large background image
                     fit: BoxFit.cover,
                   ),
                   Container(
@@ -68,8 +69,8 @@ class FilmDetailScreen extends StatelessWidget {
                             ),
                           ],
                         ),
-                        child: Image.asset(
-                          'assets/images/${film.img}', // Small poster image
+                        child: Image.network(
+                          film.anhPhim, // Small poster image
                           fit: BoxFit.cover,
                         ),
                       ),
@@ -79,17 +80,73 @@ class FilmDetailScreen extends StatelessWidget {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              film.name.toString(),
+                              film.tenPhim,
                               style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            Row(
-                              children: [
-                                Text(
-                                    'Thời gian chiếu: ' + film.time.toString()),
-                              ],
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: film.suatChieux.map((suatChieu) {
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 5.0),
+                                  child: Wrap(
+                                    alignment: WrapAlignment.start,
+                                    crossAxisAlignment:
+                                        WrapCrossAlignment.center,
+                                    spacing: 5.0,
+                                    runSpacing: 5.0,
+                                    children: [
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(Icons.calendar_today,
+                                              color: Colors.blue, size: 20),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            suatChieu.ngayChieu,
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(Icons.access_time,
+                                              color: Colors.red, size: 20),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            '${suatChieu.thoiGianBD} - ${suatChieu.thoiGianKT}',
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                      Row(
+                                        mainAxisSize: MainAxisSize.min,
+                                        children: [
+                                          Icon(Icons.theaters,
+                                              color: Colors.orange, size: 20),
+                                          SizedBox(width: 5),
+                                          Text(
+                                            suatChieu.rapChieu,
+                                            style: TextStyle(
+                                              color: Colors.black,
+                                              fontSize: 16,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
+                                );
+                              }).toList(),
                             ),
                             const SizedBox(height: 8.0),
                             Row(
@@ -126,7 +183,7 @@ class FilmDetailScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 16),
                   Text(
-                    film.description.toString(),
+                    film.moTa,
                     style: const TextStyle(fontSize: 16, height: 1.5),
                   ),
                   const SizedBox(height: 16),
@@ -138,11 +195,11 @@ class FilmDetailScreen extends StatelessWidget {
                     endIndent: 0,
                   ),
                   const SizedBox(height: 20),
-                  Text('Thể loại: ' + film.category.toString()),
+                  Text('Thể loại: ' + film.theLoai),
                   const SizedBox(height: 10),
-                  const Text('Đạo diễn: Imai Kazuaki'),
+                  Text('Đạo diễn: ' + film.daoDien),
                   const SizedBox(height: 10),
-                  const Text('Ngôn ngữ: Tiếng Nhật - Phụ đề tiếng Việt'),
+                  Text('Ngôn ngữ: ' + film.ngonNgu),
                   const SizedBox(height: 10),
                   const SizedBox(height: 16),
                   const Divider(

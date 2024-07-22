@@ -32,3 +32,28 @@ class Film {
     return data;
   }
 }
+// class Film {
+//   String maPhim;
+//   String tenPhim;
+//   String anhPhim;
+//   String theLoai;
+//   String moTa;
+
+//   Film({
+//     required this.maPhim,
+//     required this.tenPhim,
+//     required this.anhPhim,
+//     required this.theLoai,
+//     required this.moTa,
+//   });
+
+//   factory Film.fromJson(Map<String, dynamic> json) {
+//     return Film(
+//       maPhim: json['MaPhim'].trim(),
+//       tenPhim: json['TenPhim'].trim(),
+//       anhPhim: json['AnhPhim'],
+//       theLoai: json['TheLoai']['TenTL'].trim(),
+//       moTa: json['MoTa'] ?? '',
+//     );
+//   }
+// }

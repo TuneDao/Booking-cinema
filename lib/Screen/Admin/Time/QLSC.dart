@@ -5,6 +5,7 @@ import 'dart:convert';
 import 'package:project_android/Data/API/api.dart';
 import 'package:project_android/Screen/Admin/Film/editFilm.dart';
 import 'package:project_android/Screen/Admin/Time/add_SC.dart';
+import 'package:project_android/Screen/Admin/Time/edit_SC.dart';
 
 class SuatChieuManagement extends StatefulWidget {
   const SuatChieuManagement({super.key});
@@ -220,7 +221,7 @@ class _suatchieuManagement extends State<SuatChieuManagement> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              EditFilmPage()));
+                                              EditSuatChieuScreen()));
                                 },
                                 child: const CircleAvatar(
                                   radius: 20,

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:project_android/Data/model/filmmodel.dart';
+import 'package:project_android/Data/model/movie.dart';
+import 'package:project_android/Data/provider/movies_provider.dart';
 import 'filmbody.dart';
 import '../../../Data/provider/filmprovider.dart';
 
@@ -11,8 +13,8 @@ class FilmWidget extends StatefulWidget {
 }
 
 class _FilmWidgetState extends State<FilmWidget> {
-  Future<List<Film>> loadFilmList() async {
-    return await ReadData().loadData();
+  Future<List<Film_API>> loadFilmList() async {
+    return await FilmProvider().loadData();
   }
 
   @override
@@ -22,9 +24,9 @@ class _FilmWidgetState extends State<FilmWidget> {
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Film>>(
+    return FutureBuilder<List<Film_API>>(
       future: loadFilmList(),
-      builder: (BuildContext context, AsyncSnapshot<List<Film>> snapshot) {
+      builder: (BuildContext context, AsyncSnapshot<List<Film_API>> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
@@ -36,7 +38,7 @@ class _FilmWidgetState extends State<FilmWidget> {
               child: Text('No data available',
                   style: TextStyle(color: Colors.grey)));
         } else {
-          List<Film> lstFilm = snapshot.data!;
+          List<Film_API> lstFilm = snapshot.data!;
           return GridView.builder(
             shrinkWrap: true,
             physics: const NeverScrollableScrollPhysics(),

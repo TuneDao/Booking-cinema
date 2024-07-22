@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:intl/intl.dart';
 import 'package:project_android/Data/model/filmmodel.dart';
+import 'package:project_android/Data/model/movie.dart';
 import 'package:project_android/Screen/User/Payment/payment.dart';
 import 'package:project_android/config/const.dart';
 import 'package:provider/provider.dart';
 
 class SeatsSelect extends StatelessWidget {
-  final Film film;
+  final Film_API film;
 
   SeatsSelect({required this.film});
 
@@ -103,7 +104,7 @@ enum SeatType {
 }
 
 class SeatSelectionScreen extends StatelessWidget {
-  final Film film;
+  final Film_API film;
 
   SeatSelectionScreen({required this.film});
 
@@ -219,7 +220,7 @@ class LegendItem extends StatelessWidget {
 
 class Bottom extends StatelessWidget {
   final int totalPrice;
-  final Film film;
+  final Film_API film;
 
   const Bottom({super.key, required this.totalPrice, required this.film});
 
@@ -243,9 +244,9 @@ class Bottom extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              textWhite(text: '${film.name}'),
+              textWhite(text: '${film.tenPhim}'),
               const SizedBox(height: 8.0),
-              textWhite(text: '${film.time}'),
+              textWhite(text: '${film.theLoai}'),
               const SizedBox(height: 8.0),
               textWhite(text: NumberFormat('###,### đ').format(totalPrice))
             ],

@@ -135,10 +135,39 @@ Future<void> editFilm(String maPhim, String tenPhim, String anhPhim,
   }
 }
 
+Future<void> editSC(String maSC, String maPhim, String thoiGianBD,
+    String thoiGianKT, String ngayChieu, String rapChieu) async {
+  final response = await http.put(
+    Uri.parse('${baseUrl}/SuatChieu/Put/$maSC'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
+    body: jsonEncode(<String, String>{
+      'MaSC': maSC,
+      'MaPhim': maPhim,
+      'ThoiGianBD': thoiGianBD,
+      'ThoiGianKT': thoiGianKT,
+      'NgayChieu': ngayChieu,
+      'RapChieu': rapChieu,
+    }),
+  );
+
+  if (response.statusCode == 200) {
+    // If the server returns an OK response, parse the JSON.
+    print('Film edited successfully.');
+  } else {
+    // If the server did not return an OK response, throw an exception.
+    throw Exception('Failed to edit film.');
+  }
+}
+
 /*===============DELETE============================= */
 Future<void> deleteFilm(String maPhim) async {
   final response = await http.delete(
-    Uri.parse('${baseUrl}/Delete/$maPhim'),
+    Uri.parse('${baseUrl}/Phim/Delete/$maPhim'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
   );
 
   if (response.statusCode == 200) {
@@ -151,6 +180,9 @@ Future<void> deleteFilm(String maPhim) async {
 Future<void> deleteSuatChieu(String maSC) async {
   final response = await http.delete(
     Uri.parse('${baseUrl}SuatChieu/Delete/$maSC'),
+    headers: <String, String>{
+      'Content-Type': 'application/json; charset=UTF-8',
+    },
   );
 
   if (response.statusCode == 200) {

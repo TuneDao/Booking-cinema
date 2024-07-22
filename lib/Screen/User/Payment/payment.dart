@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project_android/Data/model/filmmodel.dart';
+import 'package:project_android/Data/model/movie.dart';
 import 'package:project_android/Screen/User/Payment/payment_complete.dart';
 import 'package:project_android/config/const.dart';
 
 class PaymentScreen extends StatefulWidget {
-  final Film film;
+  final Film_API film;
   final int totalPrice;
 
   const PaymentScreen({Key? key, required this.film, required this.totalPrice})
@@ -78,8 +79,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(8.0),
                           image: DecorationImage(
-                            image:
-                                AssetImage('assets/images/${widget.film.img}'),
+                            image: NetworkImage(widget.film.anhPhim),
                             fit: BoxFit.cover,
                           ),
                         ),
@@ -90,7 +90,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             Text(
-                              '${widget.film.name}',
+                              '${widget.film.tenPhim}',
                               style: const TextStyle(
                                 fontSize: 22.0,
                                 fontWeight: FontWeight.bold,
@@ -99,7 +99,7 @@ class _PaymentScreenState extends State<PaymentScreen> {
                             const SizedBox(
                                 height: 8.0), // <-- Fixed constant height
                             Text(
-                              'Xuất chiếu: ${widget.film.time}',
+                              'Xuất chiếu: ${widget.film.theLoai}',
                               style: const TextStyle(fontSize: 18.0),
                             ),
                             const SizedBox(

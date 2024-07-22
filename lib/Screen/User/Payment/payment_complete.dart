@@ -2,11 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:project_android/Data/model/filmmodel.dart';
+import 'package:project_android/Data/model/movie.dart';
 import 'package:project_android/Screen/User/Home/home.dart';
 import 'package:project_android/config/const.dart';
 
 class PaymentComplete extends StatelessWidget {
-  final Film film;
+  final Film_API film;
   final int totalPrice;
   const PaymentComplete(
       {Key? key, required this.film, required this.totalPrice})
