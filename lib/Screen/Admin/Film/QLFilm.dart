@@ -178,8 +178,14 @@ class _filmManagement extends State<filmManagement> {
                                   Navigator.push(
                                       context,
                                       MaterialPageRoute(
-                                          builder: (context) =>
-                                              EditFilmPage()));
+                                          builder: (context) => EditFilmPage(
+                                                maPhim: movie['MaPhim'],
+                                                tenPhim: movie['TenPhim'],
+                                                anhPhim: movie['AnhPhim'],
+                                                daoDien: movie['DaoDien'],
+                                                ngonNgu: movie['NgonNgu'],
+                                                moTa: movie['MoTa'],
+                                              )));
                                 },
                                 child: const CircleAvatar(
                                   radius: 20,

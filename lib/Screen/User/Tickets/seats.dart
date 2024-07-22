@@ -244,20 +244,35 @@ class Bottom extends StatelessWidget {
           Column(
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
-              textWhite(text: '${film.tenPhim}'),
+              Text(
+                film.tenPhim,
+                style: const TextStyle(color: Colors.white),
+                overflow: TextOverflow.ellipsis,
+                maxLines: 1,
+              ),
               const SizedBox(height: 8.0),
-              textWhite(text: '${film.theLoai}'),
+              Text(
+                film.theLoai,
+                style: const TextStyle(color: Colors.white),
+              ),
               const SizedBox(height: 8.0),
-              textWhite(text: NumberFormat('###,### đ').format(totalPrice))
+              Text(
+                NumberFormat('###,### đ').format(totalPrice),
+                style: const TextStyle(color: Colors.white),
+              ),
             ],
           ),
           ElevatedButton(
             onPressed: () {
               Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) =>
-                          PaymentScreen(film: film, totalPrice: totalPrice)));
+                context,
+                MaterialPageRoute(
+                  builder: (context) => PaymentScreen(
+                    film: film,
+                    totalPrice: totalPrice,
+                  ),
+                ),
+              );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.white,

@@ -221,7 +221,10 @@ class _suatchieuManagement extends State<SuatChieuManagement> {
                                       context,
                                       MaterialPageRoute(
                                           builder: (context) =>
-                                              EditSuatChieuScreen()));
+                                              EditSuatChieuScreen(
+                                                maSC: time['MaSC'],
+                                                maPhim: time['MaPhim'],
+                                              )));
                                 },
                                 child: const CircleAvatar(
                                   radius: 20,

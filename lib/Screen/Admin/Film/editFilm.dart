@@ -3,17 +3,29 @@ import 'package:project_android/Data/API/api.dart';
 import 'package:project_android/Data/model/category.dart';
 
 class EditFilmPage extends StatefulWidget {
+  final String maPhim;
+  final String tenPhim;
+  final String anhPhim;
+  final String daoDien;
+  final String ngonNgu;
+  final String moTa;
+  const EditFilmPage(
+      {required this.maPhim,
+      required this.tenPhim,
+      required this.anhPhim,
+      required this.daoDien,
+      required this.moTa,
+      required this.ngonNgu});
   @override
   _EditFilmPageState createState() => _EditFilmPageState();
 }
 
 class _EditFilmPageState extends State<EditFilmPage> {
-  final TextEditingController maPhimController = TextEditingController();
-  final TextEditingController tenPhimController = TextEditingController();
-  final TextEditingController anhPhimController = TextEditingController();
-  final TextEditingController daoDienController = TextEditingController();
-  final TextEditingController ngonNguController = TextEditingController();
-  final TextEditingController moTaController = TextEditingController();
+  late TextEditingController tenPhimController;
+  late TextEditingController anhPhimController;
+  late TextEditingController daoDienController;
+  late TextEditingController ngonNguController;
+  late TextEditingController moTaController;
 
   List<Category> _categories = [];
   Category? _selectedCategory;
@@ -22,6 +34,11 @@ class _EditFilmPageState extends State<EditFilmPage> {
   void initState() {
     super.initState();
     _fetchCategories();
+    tenPhimController = TextEditingController(text: widget.tenPhim);
+    anhPhimController = TextEditingController(text: widget.anhPhim);
+    daoDienController = TextEditingController(text: widget.daoDien);
+    ngonNguController = TextEditingController(text: widget.ngonNgu);
+    moTaController = TextEditingController(text: widget.moTa);
   }
 
   Future<void> _fetchCategories() async {
@@ -69,7 +86,7 @@ class _EditFilmPageState extends State<EditFilmPage> {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            _buildTextField(maPhimController, 'Mã Phim'),
+            // _buildTextField(maPhimController, 'Mã Phim'),
             _buildTextField(tenPhimController, 'Tên Phim'),
             _buildTextField(anhPhimController, 'Ảnh Phim (URL)'),
             _buildTextField(daoDienController, 'Đạo Diễn'),
@@ -156,7 +173,7 @@ class _EditFilmPageState extends State<EditFilmPage> {
   }
 
   void _editFilm() async {
-    final maPhim = maPhimController.text;
+    widget.maPhim;
     final tenPhim = tenPhimController.text;
     final anhPhim = anhPhimController.text;
     final daoDien = daoDienController.text;
@@ -164,7 +181,8 @@ class _EditFilmPageState extends State<EditFilmPage> {
     final ngonNgu = ngonNguController.text;
     final mota = moTaController.text;
     try {
-      await editFilm(maPhim, tenPhim, anhPhim, daoDien, maTL, ngonNgu, mota);
+      await editFilm(
+          widget.maPhim, tenPhim, anhPhim, daoDien, maTL, ngonNgu, mota);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Chỉnh sửa phim thành công')),
       );

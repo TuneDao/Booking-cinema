@@ -3,17 +3,30 @@ import 'package:project_android/Data/API/api.dart';
 import 'package:project_android/Data/model/category.dart';
 
 class EditSuatChieuScreen extends StatefulWidget {
+  final String maSC;
+  final String maPhim;
+  const EditSuatChieuScreen({required this.maSC, required this.maPhim});
   @override
   _EditSuatChieuScreenState createState() => _EditSuatChieuScreenState();
 }
 
 class _EditSuatChieuScreenState extends State<EditSuatChieuScreen> {
-  final TextEditingController maSCController = TextEditingController();
-  final TextEditingController maPhimController = TextEditingController();
-  final TextEditingController thoiGianBDController = TextEditingController();
-  final TextEditingController thoiGianKTController = TextEditingController();
-  final TextEditingController ngayChieuController = TextEditingController();
-  final TextEditingController rapChieuController = TextEditingController();
+  late TextEditingController maPhimController;
+  late TextEditingController thoiGianBDController;
+  late TextEditingController thoiGianKTController;
+  late TextEditingController ngayChieuController;
+  late TextEditingController rapChieuController;
+
+  @override
+  void initState() {
+    super.initState();
+    maPhimController = TextEditingController(text: widget.maPhim);
+    thoiGianBDController = TextEditingController();
+    // Assuming phone and id are also part of the user data
+    thoiGianKTController = TextEditingController();
+    ngayChieuController = TextEditingController();
+    rapChieuController = TextEditingController();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,7 +61,7 @@ class _EditSuatChieuScreenState extends State<EditSuatChieuScreen> {
               style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
             ),
             const SizedBox(height: 16),
-            _buildTextField(maSCController, 'Mã Suất Chiếu'),
+            // _buildTextField(maSCController, 'Mã Suất Chiếu'),
             _buildTextField(maPhimController, 'Mã Phim'),
             _buildTextField(thoiGianBDController, 'Thời gian bắt đầu'),
             _buildTextField(thoiGianKTController, 'Thời gian kết thúc'),
@@ -106,7 +119,7 @@ class _EditSuatChieuScreenState extends State<EditSuatChieuScreen> {
   }
 
   void _editsuatChieu() async {
-    final maSC = maSCController.text;
+    widget.maSC;
     final maPhim = maPhimController.text;
     final thoigianBD = thoiGianBDController.text;
     final thoigianKT = thoiGianKTController.text;
@@ -114,7 +127,8 @@ class _EditSuatChieuScreenState extends State<EditSuatChieuScreen> {
     final rapChieu = rapChieuController.text;
 
     try {
-      await editSC(maSC, maPhim, thoigianBD, thoigianKT, ngayChieu, rapChieu);
+      await editSC(
+          widget.maSC, maPhim, thoigianBD, thoigianKT, ngayChieu, rapChieu);
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Sửa suất chiếu thành công')),
       );
