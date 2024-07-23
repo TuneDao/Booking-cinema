@@ -1,11 +1,12 @@
+import 'package:project_android/config/const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesUtil {
   static Future<void> saveUserDetails(String email, String hoTen,
-      String anhDaiDien, String idUser, String password, String Sdt) async {
+      String anhDaiDien, int? idUser, String password, String Sdt) async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('Email', email);
-    await prefs.setString('MaKH', idUser);
+    await prefs.setString('MaKH', idUser?.toString() ?? '');
     await prefs.setString('MatKhau', password);
     await prefs.setString('SDT', Sdt);
     await prefs.setString('HoTen', hoTen);

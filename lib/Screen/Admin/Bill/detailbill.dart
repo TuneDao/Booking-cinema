@@ -5,7 +5,7 @@ import 'package:project_android/config/const.dart';
 import 'package:project_android/Data/API/api.dart';
 
 class InvoiceDetailScreen extends StatefulWidget {
-  final String invoiceId;
+  final int invoiceId;
 
   InvoiceDetailScreen({required this.invoiceId});
 

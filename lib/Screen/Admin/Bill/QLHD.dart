@@ -75,7 +75,7 @@ class _invoiceManagement extends State<invoiceManagement> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Mã hóa đơn: ' + bill['MaHD'],
+                                      'Mã hóa đơn: ' + bill['MaHD'].toString(),
                                       style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,

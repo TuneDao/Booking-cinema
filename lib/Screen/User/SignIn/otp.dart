@@ -1,11 +1,12 @@
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:project_android/Screen/User/SignIn/changepassword.dart';
 import 'package:project_android/config/const.dart';
+import '../../../Data/API/api.dart';
 
 class OTP extends StatelessWidget {
-  const OTP({Key? key}) : super(key: key);
+  final String email;
+  const OTP({Key? key, required this.email}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -40,23 +41,23 @@ class OTP extends StatelessWidget {
         body: Center(
           child: SingleChildScrollView(
             child: isSmallScreen
-                ? const SingleChildScrollView(
+                ? SingleChildScrollView(
                     child: Column(
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                      _Logo(),
-                      _FormContent(),
+                      const _Logo(),
+                      _FormContent(email: email),
                     ],
                   ))
                 : SingleChildScrollView(
                     child: Container(
                       padding: const EdgeInsets.all(15.0),
                       constraints: const BoxConstraints(maxWidth: 800),
-                      child: const Row(
+                      child: Row(
                         children: [
-                          Expanded(child: _Logo()),
+                          const Expanded(child: _Logo()),
                           Expanded(
-                            child: Center(child: _FormContent()),
+                            child: Center(child: _FormContent(email: email)),
                           ),
                         ],
                       ),
@@ -84,7 +85,7 @@ class _Logo extends StatelessWidget {
           child: Text("XÁC NHẬN OTP",
               textAlign: TextAlign.center,
               style: TextStyle(
-                  color: Colors.white,
+                  color: Colors.black,
                   fontSize: 30,
                   fontWeight: FontWeight.bold)),
         ),
@@ -94,7 +95,8 @@ class _Logo extends StatelessWidget {
 }
 
 class _FormContent extends StatefulWidget {
-  const _FormContent({Key? key}) : super(key: key);
+  final String email;
+  const _FormContent({Key? key, required this.email}) : super(key: key);
 
   @override
   State<_FormContent> createState() => __FormContentState();
@@ -102,13 +104,13 @@ class _FormContent extends StatefulWidget {
 
 class __FormContentState extends State<_FormContent> {
   final _otpController = TextEditingController();
-
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(maxWidth: 300),
+      padding: const EdgeInsets.all(30.0),
+      constraints: const BoxConstraints(maxWidth: 600),
       child: Form(
         key: _formKey,
         child: Column(
@@ -117,33 +119,30 @@ class __FormContentState extends State<_FormContent> {
           children: [
             TextFormField(
               validator: (value) {
-                // add email validation
                 if (value == null || value.isEmpty) {
                   return 'Vui lòng nhập OTP';
                 }
-                bool otpValid = RegExp("[a-z0-9]*\\d[a-z0-9]*").hasMatch(value);
+                bool otpValid = RegExp(r"[a-z0-9]*\d[a-z0-9]*").hasMatch(value);
                 if (!otpValid) {
                   return 'Vui lòng nhập OTP';
                 }
                 return null;
               },
-              style: const TextStyle(color: Colors.white),
+              style: const TextStyle(color: Colors.black),
               controller: _otpController,
               decoration: const InputDecoration(
                 labelText: 'Nhập mã OTP',
-                labelStyle: TextStyle(color: Colors.white),
+                labelStyle: TextStyle(color: Colors.black),
                 hintText: 'Mã OTP',
-                hintStyle: TextStyle(color: Colors.white),
+                hintStyle: TextStyle(color: Colors.black),
                 border: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
+                  borderSide: BorderSide(color: Colors.black),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      color: Colors.white), // Màu border khi chưa được focus
+                  borderSide: BorderSide(color: Colors.black),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      color: Colors.white), // Màu border khi được focus
+                  borderSide: BorderSide(color: Colors.black),
                 ),
               ),
             ),
@@ -153,7 +152,7 @@ class __FormContentState extends State<_FormContent> {
                   "Mã OTP sẽ được gửi qua email của bạn. Vui lòng truy cập email để lấy mã OTP",
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                      color: Colors.white,
+                      color: Colors.black,
                       fontSize: 16,
                       fontWeight: FontWeight.bold)),
             ),
@@ -175,13 +174,34 @@ class __FormContentState extends State<_FormContent> {
                         color: Colors.white),
                   ),
                 ),
-                onPressed: () {
-                  if (_formKey.currentState?.validate() ?? false) {
-                    /// do something
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ChangePassword()),
-                    );
+                onPressed: () async {
+                  try {
+                    // Lấy OTP từ server
+                    final serverOtp = await validateOTP();
+                    print(serverOtp);
+                    // So sánh OTP từ người dùng với OTP từ server
+                    if (_otpController.text == serverOtp) {
+                      // OTP đúng
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('Xác nhận OTP thành công'),
+                      ));
+                      Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => ChangePassword()));
+                      // Thực hiện hành động tiếp theo, ví dụ điều hướng đến trang khác
+                    } else {
+                      // OTP không đúng
+                      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                        content: Text('OTP không hợp lệ'),
+                      ));
+                    }
+                  } catch (e) {
+                    // Xử lý lỗi nếu API không thành công
+                    print(e);
+                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                      content: Text('Lỗi khi kiểm tra OTP'),
+                    ));
                   }
                 },
               ),

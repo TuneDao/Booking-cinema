@@ -232,7 +232,7 @@ class _filmManagement extends State<filmManagement> {
     );
   }
 
-  void _showDeleteDialog(BuildContext context, String maPhim) {
+  void _showDeleteDialog(BuildContext context, int maPhim) {
     showDialog(
       context: context,
       builder: (BuildContext context) {

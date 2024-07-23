@@ -5,27 +5,32 @@ import 'package:project_android/Data/model/booking.dart';
 import 'package:project_android/config/const.dart';
 
 class BookingDetail extends StatelessWidget {
-  final MovieBooking booking;
+  Map<String, dynamic> booking = {};
 
-  const BookingDetail({super.key, required this.booking});
+  BookingDetail({super.key, required this.booking});
 
   @override
   Widget build(BuildContext context) {
+    final phim = booking['DatVe']['Phim'];
+    final date = booking['ThoiGianTT'];
+    DateTime dateTime = DateTime.parse(date);
+
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          booking.name,
+          phim['TenPhim'],
           style: TextStyle(color: Colors.white),
         ),
         backgroundColor: colorTheme,
         leading: IconButton(
-            onPressed: () {
-              Navigator.pop(context);
-            },
-            icon: Icon(
-              Icons.arrow_back,
-              color: Colors.white,
-            )),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: Icon(
+            Icons.arrow_back,
+            color: Colors.white,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -36,8 +41,8 @@ class BookingDetail extends StatelessWidget {
               Center(
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(10.0),
-                  child: Image.asset(
-                    'assets/images/${booking.img}',
+                  child: Image.network(
+                    phim['AnhPhim'],
                     height: 300,
                     fit: BoxFit.cover,
                   ),
@@ -45,7 +50,7 @@ class BookingDetail extends StatelessWidget {
               ),
               const SizedBox(height: 16),
               Text(
-                booking.name,
+                phim['TenPhim'],
                 style: const TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
@@ -58,7 +63,7 @@ class BookingDetail extends StatelessWidget {
                   Icon(Icons.calendar_today, color: Colors.orange, size: 24),
                   const SizedBox(width: 24),
                   Text(
-                    booking.date,
+                    DateFormat('dd/MM/yyyy').format(dateTime),
                     style: const TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ],
@@ -69,7 +74,8 @@ class BookingDetail extends StatelessWidget {
                   Icon(Icons.attach_money, color: Colors.green, size: 24),
                   const SizedBox(width: 24),
                   Text(
-                    NumberFormat('###,### VND').format(booking.price),
+                    NumberFormat('###,### VND')
+                        .format(booking['DatVe']['GiaTien']),
                     style: const TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ],
@@ -80,7 +86,7 @@ class BookingDetail extends StatelessWidget {
                   Icon(Icons.local_activity, color: Colors.blue, size: 24),
                   const SizedBox(width: 24),
                   Text(
-                    'Quantity: ${booking.quantity}',
+                    'Quantity: ${(booking['DatVe']['GiaTien'] / 70000).toString()}',
                     style: const TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ],
@@ -93,7 +99,7 @@ class BookingDetail extends StatelessWidget {
                   Icon(Icons.room, color: Colors.red, size: 24),
                   const SizedBox(width: 24),
                   Text(
-                    'Phòng chiếu: ${booking.room}',
+                    'Phòng chiếu: ${phim['SuatChieux'][0]['RapChieu']}',
                     style: const TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ],
@@ -105,7 +111,7 @@ class BookingDetail extends StatelessWidget {
                       color: Colors.blue, size: 24),
                   const SizedBox(width: 24),
                   Text(
-                    'Suất chiếu: ${booking.time}',
+                    'Suất chiếu: ${phim['SuatChieux'][0]['ThoiGianBD']} - ${phim['SuatChieux'][0]['ThoiGianKT']}',
                     style: const TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ],
@@ -116,7 +122,7 @@ class BookingDetail extends StatelessWidget {
                   FaIcon(FontAwesomeIcons.couch, color: Colors.blue, size: 16),
                   const SizedBox(width: 24),
                   Text(
-                    'Ghế: ${booking.seats}',
+                    'Ghế: ${booking['DatVe']['Ghe']}',
                     style: const TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ],

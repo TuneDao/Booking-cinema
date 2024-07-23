@@ -173,7 +173,7 @@ class _AddFilmPageState extends State<AddFilmPage> {
     final tenPhim = tenPhimController.text;
     final anhPhim = anhPhimController.text;
     final daoDien = daoDienController.text;
-    final maTL = _selectedCategory?.maTL ?? '';
+    final int? maTL = _selectedCategory?.maTL;
     final ngonNgu = ngonNguController.text;
     final mota = moTaController.text;
 

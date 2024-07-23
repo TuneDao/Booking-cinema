@@ -79,7 +79,8 @@ class _customerManagement extends State<customerManagement> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      'Mã khách hàng: ' + customer['MaKH'],
+                                      'Mã khách hàng: ' +
+                                          customer['MaKH'].toString(),
                                       style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,

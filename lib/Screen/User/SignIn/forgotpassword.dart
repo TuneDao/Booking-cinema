@@ -5,6 +5,8 @@ import 'package:project_android/Screen/User/SignIn/changepassword.dart';
 import 'package:project_android/Screen/User/SignIn/otp.dart';
 import 'package:project_android/config/const.dart';
 
+import '../../../Data/API/api.dart';
+
 class ForgotPassword extends StatelessWidget {
   const ForgotPassword({Key? key}) : super(key: key);
 
@@ -111,11 +113,13 @@ class _FormContent extends StatefulWidget {
 
 class __FormContentState extends State<_FormContent> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String? _email;
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      constraints: const BoxConstraints(maxWidth: 300),
+      padding: const EdgeInsets.all(30.0),
+      constraints: const BoxConstraints(maxWidth: 600),
       child: Form(
         key: _formKey,
         child: Column(
@@ -123,8 +127,8 @@ class __FormContentState extends State<_FormContent> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             TextFormField(
+              onSaved: (value) => _email = value,
               validator: (value) {
-                // add email validation
                 if (value == null || value.isEmpty) {
                   return 'Vui lòng nhập thông tin';
                 }
@@ -150,12 +154,10 @@ class __FormContentState extends State<_FormContent> {
                   borderSide: BorderSide(color: colorHome),
                 ),
                 enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(
-                      color: colorHome), // Màu border khi chưa được focus
+                  borderSide: BorderSide(color: colorHome),
                 ),
                 focusedBorder: OutlineInputBorder(
-                  borderSide:
-                      BorderSide(color: colorHome), // Màu border khi được focus
+                  borderSide: BorderSide(color: colorHome),
                 ),
               ),
             ),
@@ -177,13 +179,22 @@ class __FormContentState extends State<_FormContent> {
                         color: Colors.white),
                   ),
                 ),
-                onPressed: () {
+                onPressed: () async {
                   if (_formKey.currentState?.validate() ?? false) {
-                    /// do something
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => ChangePassword()),
-                    );
+                    _formKey.currentState?.save();
+                    try {
+                      await sendOTP(_email!);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => OTP(email: _email!),
+                        ),
+                      );
+                    } catch (e) {
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text('Failed to send OTP: $e')),
+                      );
+                    }
                   }
                 },
               ),

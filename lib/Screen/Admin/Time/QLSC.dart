@@ -66,7 +66,7 @@ class _suatchieuManagement extends State<SuatChieuManagement> {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                      time['MaSC'],
+                                      'SC0' + time['MaSC'].toString(),
                                       style: const TextStyle(
                                         fontSize: 20,
                                         fontWeight: FontWeight.bold,
@@ -271,7 +271,7 @@ class _suatchieuManagement extends State<SuatChieuManagement> {
     );
   }
 
-  void _showDeleteDialog(BuildContext context, String maSC) {
+  void _showDeleteDialog(BuildContext context, int maSC) {
     showDialog(
       context: context,
       builder: (BuildContext context) {

@@ -44,8 +44,8 @@ Future<List<dynamic>> getBillById(String maKH) async {
   return json.decode(response.body);
 }
 
-// ADMIN
-Future<Map<String, dynamic>> getBillDetailById(String maHD) async {
+/*===================ADMIN============================ */
+Future<Map<String, dynamic>> getBillDetailById(int maHD) async {
   final response = await http.get(
     Uri.parse('${baseUrl}HoaDon/GetByID?id=${maHD}'),
     headers: {'Content-Type': 'application/json'},
@@ -64,7 +64,7 @@ Future<void> addFilm(
   String tenPhim,
   String anhPhim,
   String daoDien,
-  String maTL,
+  int? maTL,
   String ngonNgu,
   String mota,
 ) async {
@@ -78,7 +78,7 @@ Future<void> addFilm(
       'TenPhim': tenPhim,
       'AnhPhim': anhPhim,
       'DaoDien': daoDien,
-      'MaTL': maTL,
+      'MaTL': maTL.toString(),
       'NgonNgu': ngonNgu,
       'MoTa': mota,
     }),
@@ -94,7 +94,7 @@ Future<void> addSuatChieu(
   String rapChieu,
 ) async {
   final response = await http.post(
-    Uri.parse('http://192.168.1.224:3030/api/SuatChieu/Post'),
+    Uri.parse('${baseUrl}SuatChieu/Post'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
@@ -119,20 +119,20 @@ Future<void> addSuatChieu(
 
 /*===============PUT================================ */
 
-Future<void> editFilm(String maPhim, String tenPhim, String anhPhim,
-    String daoDien, String maTL, String ngonNgu, mota) async {
+Future<void> editFilm(int maPhim, String tenPhim, String anhPhim,
+    String daoDien, int? maTL, String ngonNgu, mota) async {
   final response = await http.put(
     Uri.parse('${baseUrl}/Phim/Put/$maPhim'),
     headers: <String, String>{
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(<String, String>{
-      'MaPhim': maPhim,
+      'MaPhim': maPhim.toString(),
       'TenPhim': tenPhim,
       'AnhPhim': anhPhim,
       'DaoDien': daoDien,
       'NgonNgu': ngonNgu,
-      'MaTL': maTL,
+      'MaTL': maTL.toString(),
       'MoTa': mota,
     }),
   );
@@ -146,7 +146,7 @@ Future<void> editFilm(String maPhim, String tenPhim, String anhPhim,
   }
 }
 
-Future<void> editSC(String maSC, String maPhim, String thoiGianBD,
+Future<void> editSC(int? maSC, String maPhim, String thoiGianBD,
     String thoiGianKT, String ngayChieu, String rapChieu) async {
   final response = await http.put(
     Uri.parse('${baseUrl}/SuatChieu/Put/$maSC'),
@@ -154,7 +154,7 @@ Future<void> editSC(String maSC, String maPhim, String thoiGianBD,
       'Content-Type': 'application/json; charset=UTF-8',
     },
     body: jsonEncode(<String, String>{
-      'MaSC': maSC,
+      'MaSC': maSC.toString(),
       'MaPhim': maPhim,
       'ThoiGianBD': thoiGianBD,
       'ThoiGianKT': thoiGianKT,
@@ -173,7 +173,7 @@ Future<void> editSC(String maSC, String maPhim, String thoiGianBD,
 }
 
 /*===============DELETE============================= */
-Future<void> deleteFilm(String maPhim) async {
+Future<void> deleteFilm(int? maPhim) async {
   final response = await http.delete(
     Uri.parse('${baseUrl}/Phim/Delete/$maPhim'),
     headers: <String, String>{
@@ -188,7 +188,7 @@ Future<void> deleteFilm(String maPhim) async {
   }
 }
 
-Future<void> deleteSuatChieu(String maSC) async {
+Future<void> deleteSuatChieu(int maSC) async {
   final response = await http.delete(
     Uri.parse('${baseUrl}SuatChieu/Delete/$maSC'),
     headers: <String, String>{
@@ -228,31 +228,6 @@ Future<Map<String, dynamic>> login(String email, String password) async {
   }
 }
 
-// Future<void> updateUser(String maKH, String hoTen, String email, String matKhau,
-//     String SDT, String anhdaiDien) async {
-//   final response = await http.put(
-//     Uri.parse('${baseUrl}/KhachHang/Put/$maKH'),
-//     headers: <String, String>{
-//       'Content-Type': 'application/json; charset=UTF-8',
-//     },
-//     body: jsonEncode(<String, String>{
-//       'MaKH': maKH,
-//       'HoTen': hoTen,
-//       'Email': email,
-//       'MatKhau': matKhau,
-//       'SDT': SDT,
-//       'AnhDaiDien': anhdaiDien,
-//     }),
-//   );
-
-//   if (response.statusCode == 200) {
-//     // If the server returns an OK response, parse the JSON.
-//     print('Cập nhật thành công.');
-//   } else {
-//     // If the server did not return an OK response, throw an exception.
-//     throw Exception('Cập nhật bị lỗi.');
-//   }
-// }
 Future<bool> updateUser(String maKH, String hoTen, String email, String matKhau,
     String SDT, String anhDaidien) async {
   final response = await http.put(
@@ -276,5 +251,34 @@ Future<bool> updateUser(String maKH, String hoTen, String email, String matKhau,
   } else {
     print('Cập nhật bị lỗi.');
     return false;
+  }
+}
+
+/*==============================OTP======================== */
+
+Future<Map<String, dynamic>> sendOTP(String email) async {
+  final response = await http.post(
+    Uri.parse('$baseUrl/KhachHang/PostOTP')
+        .replace(queryParameters: {'email': email}),
+    headers: {'Content-Type': 'application/json'},
+  );
+
+  if (response.statusCode == 200) {
+    // Successful response
+    return json.decode(response.body);
+  } else {
+    // Error response
+    throw Exception('Failed to send OTP');
+  }
+}
+
+Future<String> validateOTP() async {
+  final response = await http.get(Uri.parse('$baseUrl/KhachHang/getOTP'));
+
+  if (response.statusCode == 200) {
+    final Map<String, dynamic> data = json.decode(response.body);
+    return data['OTP'];
+  } else {
+    throw Exception('Failed to load OTP');
   }
 }

@@ -3,8 +3,8 @@ import 'package:project_android/Data/API/api.dart';
 import 'package:project_android/Data/model/category.dart';
 
 class EditSuatChieuScreen extends StatefulWidget {
-  final String maSC;
-  final String maPhim;
+  final int? maSC;
+  final int? maPhim;
   const EditSuatChieuScreen({required this.maSC, required this.maPhim});
   @override
   _EditSuatChieuScreenState createState() => _EditSuatChieuScreenState();
@@ -20,7 +20,7 @@ class _EditSuatChieuScreenState extends State<EditSuatChieuScreen> {
   @override
   void initState() {
     super.initState();
-    maPhimController = TextEditingController(text: widget.maPhim);
+    maPhimController = TextEditingController(text: widget.maPhim.toString());
     thoiGianBDController = TextEditingController();
     // Assuming phone and id are also part of the user data
     thoiGianKTController = TextEditingController();

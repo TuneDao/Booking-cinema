@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:project_android/Data/API/sharedpre.dart';
 import 'package:project_android/Screen/User/Home/drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:project_android/Screen/User/Home/inf.dart';
@@ -18,6 +19,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  String? savedImageUrl;
   int _selectedIndex = 0;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -65,12 +67,16 @@ class _HomePageState extends State<HomePage> {
                 ),
               Expanded(
                 child: Center(
-                  child: Image.asset(
-                    urlLogo1,
-                    errorBuilder: (context, error, stackTrace) =>
-                        const SizedBox.shrink(),
-                    width: 150,
-                    height: 150,
+                  child: ClipRRect(
+                    borderRadius:
+                        BorderRadius.circular(8.0), // Set the radius as needed
+                    child: Image.asset(
+                      urlLogo1,
+                      errorBuilder: (context, error, stackTrace) =>
+                          const SizedBox.shrink(),
+                      width: 150,
+                      height: 150,
+                    ),
                   ),
                 ),
               ),

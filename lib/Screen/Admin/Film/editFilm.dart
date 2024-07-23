@@ -3,7 +3,7 @@ import 'package:project_android/Data/API/api.dart';
 import 'package:project_android/Data/model/category.dart';
 
 class EditFilmPage extends StatefulWidget {
-  final String maPhim;
+  final int maPhim;
   final String tenPhim;
   final String anhPhim;
   final String daoDien;
@@ -177,7 +177,7 @@ class _EditFilmPageState extends State<EditFilmPage> {
     final tenPhim = tenPhimController.text;
     final anhPhim = anhPhimController.text;
     final daoDien = daoDienController.text;
-    final maTL = _selectedCategory?.maTL ?? '';
+    final int? maTL = _selectedCategory!.maTL;
     final ngonNgu = ngonNguController.text;
     final mota = moTaController.text;
     try {

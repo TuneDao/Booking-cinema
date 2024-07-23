@@ -1,5 +1,5 @@
 class Film_API {
-  String maPhim;
+  int? maPhim;
   String tenPhim;
   String anhPhim;
   String theLoai;
@@ -24,7 +24,7 @@ class Film_API {
     List<Screening> screeningList =
         list.map((i) => Screening.fromJson(i)).toList();
     return Film_API(
-      maPhim: json['MaPhim'].trim(),
+      maPhim: json['MaPhim'],
       tenPhim: json['TenPhim'].trim(),
       anhPhim: json['AnhPhim'],
       theLoai: json['TheLoai']['TenTL'].trim(),
@@ -37,8 +37,8 @@ class Film_API {
 }
 
 class Screening {
-  String maSC;
-  String maPhim;
+  int? maSC;
+  int? maPhim;
   String thoiGianBD;
   String thoiGianKT;
   String ngayChieu;
@@ -55,8 +55,8 @@ class Screening {
 
   factory Screening.fromJson(Map<String, dynamic> json) {
     return Screening(
-      maSC: json['MaSC'].trim(),
-      maPhim: json['MaPhim'].trim(),
+      maSC: json['MaSC'],
+      maPhim: json['MaPhim'],
       thoiGianBD: json['ThoiGianBD'],
       thoiGianKT: json['ThoiGianKT'],
       ngayChieu: json['NgayChieu'],
