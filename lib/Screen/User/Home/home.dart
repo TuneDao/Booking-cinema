@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:project_android/Data/API/sharedpre.dart';
 import 'package:project_android/Screen/User/Home/drawer.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -65,18 +66,14 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.white,
                   onPressed: () => _scaffoldKey.currentState?.openDrawer(),
                 ),
-              Expanded(
+              const Expanded(
                 child: Center(
-                  child: ClipRRect(
-                    borderRadius:
-                        BorderRadius.circular(8.0), // Set the radius as needed
-                    child: Image.asset(
-                      urlLogo1,
-                      errorBuilder: (context, error, stackTrace) =>
-                          const SizedBox.shrink(),
-                      width: 150,
-                      height: 150,
-                    ),
+                  child: Text(
+                    'HF CINEMA',
+                    style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.white),
                   ),
                 ),
               ),

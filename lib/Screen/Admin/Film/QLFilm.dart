@@ -13,6 +13,19 @@ class filmManagement extends StatefulWidget {
 }
 
 class _filmManagement extends State<filmManagement> {
+  late Future<List<dynamic>> _itemsFuture;
+  @override
+  void initState() {
+    super.initState();
+    _itemsFuture = getMovies();
+  }
+
+  Future<void> _refreshItems() async {
+    setState(() {
+      _itemsFuture = getMovies();
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -40,180 +53,187 @@ class _filmManagement extends State<filmManagement> {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else {
             final movies = snapshot.data!;
-            return ListView.builder(
-              itemCount: movies.length,
-              itemBuilder: (context, index) {
-                final movie = movies[index];
-                return Padding(
-                  padding: EdgeInsets.all(10),
-                  child: Card(
-                    color: Colors.grey[850],
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Stack(
-                      children: [
-                        Row(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10.0),
-                                bottomLeft: Radius.circular(10.0),
+            return RefreshIndicator(
+              onRefresh: _refreshItems,
+              child: ListView.builder(
+                itemCount: movies.length,
+                itemBuilder: (context, index) {
+                  final movie = movies[index];
+                  return Padding(
+                    padding: EdgeInsets.all(10),
+                    child: Card(
+                      color: Colors.grey[850],
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: Stack(
+                        children: [
+                          Row(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              ClipRRect(
+                                borderRadius: BorderRadius.only(
+                                  topLeft: Radius.circular(10.0),
+                                  bottomLeft: Radius.circular(10.0),
+                                ),
+                                child: Image.network(movie['AnhPhim'],
+                                    height: 180, width: 100, fit: BoxFit.cover),
                               ),
-                              child: Image.network(movie['AnhPhim'],
-                                  height: 180, width: 100, fit: BoxFit.cover),
-                            ),
-                            const SizedBox(width: 15),
-                            Expanded(
-                              child: Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 10.0),
-                                child: Column(
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Text(
-                                      movie['TenPhim'],
-                                      style: const TextStyle(
-                                        fontSize: 20,
-                                        fontWeight: FontWeight.bold,
-                                        color: Colors.white,
+                              const SizedBox(width: 15),
+                              Expanded(
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 10.0),
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        movie['TenPhim'],
+                                        style: const TextStyle(
+                                          fontSize: 20,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white,
+                                        ),
                                       ),
-                                    ),
-                                    const SizedBox(height: 8),
-                                    Column(
-                                      children: [
-                                        Row(
-                                          children: [
-                                            FaIcon(FontAwesomeIcons.video,
-                                                color: Colors.blue, size: 20),
-                                            const SizedBox(width: 8),
-                                            Text.rich(
-                                              TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text: 'Đạo diễn: ',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16,
-                                                        color: Colors.white),
-                                                  ),
-                                                  TextSpan(
-                                                    text: '${movie['DaoDien']}',
-                                                    style: TextStyle(
-                                                        fontSize: 16,
-                                                        color: Colors.white),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Row(
-                                          children: [
-                                            Icon(Icons.category,
-                                                color: Colors.orange, size: 20),
-                                            const SizedBox(width: 8),
-                                            Text.rich(
-                                              TextSpan(
-                                                children: [
-                                                  TextSpan(
-                                                    text: 'Thể Loại: ',
-                                                    style: TextStyle(
-                                                        fontWeight:
-                                                            FontWeight.bold,
-                                                        fontSize: 16,
-                                                        color: Colors.white),
-                                                  ),
-                                                  TextSpan(
-                                                    text:
-                                                        '${movie['TheLoai']['TenTL']}',
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                      color: Colors.white,
+                                      const SizedBox(height: 8),
+                                      Column(
+                                        children: [
+                                          Row(
+                                            children: [
+                                              FaIcon(FontAwesomeIcons.video,
+                                                  color: Colors.blue, size: 20),
+                                              const SizedBox(width: 8),
+                                              Text.rich(
+                                                TextSpan(
+                                                  children: [
+                                                    TextSpan(
+                                                      text: 'Đạo diễn: ',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 16,
+                                                          color: Colors.white),
                                                     ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 8),
-                                        Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: movie['SuatChieux']
-                                              .map<Widget>((suatChieu) {
-                                            return Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      vertical: 4.0),
-                                              child: Text(
-                                                'Suất chiếu: ${suatChieu['NgayChieu']} - ${suatChieu['ThoiGianBD']} đến ${suatChieu['ThoiGianKT']}\nTại rạp: ${suatChieu['RapChieu']}',
-                                                style: TextStyle(
-                                                  color: Colors.white,
+                                                    TextSpan(
+                                                      text:
+                                                          '${movie['DaoDien']}',
+                                                      style: TextStyle(
+                                                          fontSize: 16,
+                                                          color: Colors.white),
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
-                                            );
-                                          }).toList(),
-                                        ),
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Positioned(
-                          top: 8,
-                          right: 8,
-                          child: Column(
-                            children: [
-                              // NÚT SỬA
-                              GestureDetector(
-                                onTap: () {
-                                  Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                          builder: (context) => EditFilmPage(
-                                                maPhim: movie['MaPhim'],
-                                                tenPhim: movie['TenPhim'],
-                                                anhPhim: movie['AnhPhim'],
-                                                daoDien: movie['DaoDien'],
-                                                ngonNgu: movie['NgonNgu'],
-                                                moTa: movie['MoTa'],
-                                              )));
-                                },
-                                child: const CircleAvatar(
-                                  radius: 20,
-                                  backgroundColor: Colors.yellow,
-                                  child: Icon(Icons.edit, color: Colors.black),
-                                ),
-                              ),
-                              const SizedBox(height: 12),
-                              // NÚT XÓA
-                              GestureDetector(
-                                onTap: () {
-                                  _showDeleteDialog(context, movie['MaPhim']);
-                                },
-                                child: const CircleAvatar(
-                                  radius: 20,
-                                  backgroundColor: Colors.red,
-                                  child:
-                                      Icon(Icons.delete, color: Colors.black),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Row(
+                                            children: [
+                                              Icon(Icons.category,
+                                                  color: Colors.orange,
+                                                  size: 20),
+                                              const SizedBox(width: 8),
+                                              Text.rich(
+                                                TextSpan(
+                                                  children: [
+                                                    TextSpan(
+                                                      text: 'Thể Loại: ',
+                                                      style: TextStyle(
+                                                          fontWeight:
+                                                              FontWeight.bold,
+                                                          fontSize: 16,
+                                                          color: Colors.white),
+                                                    ),
+                                                    TextSpan(
+                                                      text:
+                                                          '${movie['TheLoai']['TenTL']}',
+                                                      style: TextStyle(
+                                                        fontSize: 16,
+                                                        color: Colors.white,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          const SizedBox(height: 8),
+                                          Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: movie['SuatChieux']
+                                                .map<Widget>((suatChieu) {
+                                              return Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        vertical: 4.0),
+                                                child: Text(
+                                                  'Suất chiếu: ${suatChieu['NgayChieu']} - ${suatChieu['ThoiGianBD']} đến ${suatChieu['ThoiGianKT']}\nTại rạp: ${suatChieu['RapChieu']}',
+                                                  style: TextStyle(
+                                                    color: Colors.white,
+                                                  ),
+                                                ),
+                                              );
+                                            }).toList(),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               ),
                             ],
                           ),
-                        ),
-                      ],
+                          Positioned(
+                            top: 8,
+                            right: 8,
+                            child: Column(
+                              children: [
+                                // NÚT SỬA
+                                GestureDetector(
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) => EditFilmPage(
+                                                  maPhim: movie['MaPhim'],
+                                                  tenPhim: movie['TenPhim'],
+                                                  anhPhim: movie['AnhPhim'],
+                                                  daoDien: movie['DaoDien'],
+                                                  ngonNgu: movie['NgonNgu'],
+                                                  moTa: movie['MoTa'],
+                                                )));
+                                  },
+                                  child: const CircleAvatar(
+                                    radius: 20,
+                                    backgroundColor: Colors.yellow,
+                                    child:
+                                        Icon(Icons.edit, color: Colors.black),
+                                  ),
+                                ),
+                                const SizedBox(height: 12),
+                                // NÚT XÓA
+                                GestureDetector(
+                                  onTap: () {
+                                    _showDeleteDialog(context, movie['MaPhim']);
+                                  },
+                                  child: const CircleAvatar(
+                                    radius: 20,
+                                    backgroundColor: Colors.red,
+                                    child:
+                                        Icon(Icons.delete, color: Colors.black),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
-                );
-              },
+                  );
+                },
+              ),
             );
           }
         },

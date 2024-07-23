@@ -1,6 +1,6 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
-import 'package:project_android/Screen/User/SignIn/changepassword.dart';
+import 'package:project_android/Screen/User/SignIn/getpassword.dart';
 import 'package:project_android/config/const.dart';
 import '../../../Data/API/api.dart';
 
@@ -188,7 +188,8 @@ class __FormContentState extends State<_FormContent> {
                       Navigator.pushReplacement(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => ChangePassword()));
+                              builder: (context) =>
+                                  GetPassword(email: widget.email)));
                       // Thực hiện hành động tiếp theo, ví dụ điều hướng đến trang khác
                     } else {
                       // OTP không đúng

@@ -132,6 +132,7 @@
 // }
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
+import 'package:project_android/Data/API/api.dart';
 import 'package:project_android/Data/model/filmmodel.dart';
 import 'package:project_android/Data/model/movie.dart';
 import 'package:project_android/Data/provider/movies_provider.dart';

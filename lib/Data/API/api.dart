@@ -282,3 +282,95 @@ Future<String> validateOTP() async {
     throw Exception('Failed to load OTP');
   }
 }
+
+/*==============================ForgotPassword======================== */
+Future<String> getPassword(String email) async {
+  final response = await http.get(
+    Uri.parse(
+        '$baseUrl/KhachHang/GetPassword?email=${Uri.encodeComponent(email)}'),
+    headers: {'Accept': 'application/json'},
+  );
+
+  if (response.statusCode == 200) {
+    // Parse the JSON response
+    final data = json.decode(response.body);
+    // Extract the password from the response
+    if (data.containsKey('MatKhau')) {
+      return data['MatKhau'];
+    } else {
+      throw Exception('Password not found in response');
+    }
+  } else {
+    throw Exception('Failed to load password');
+  }
+}
+
+/**==========================BILL======================= */
+class ApiService {
+  final String detailUrl = '${baseUrl}DatVe/Post';
+  final String orderUrl = '${baseUrl}HoaDon/Post';
+
+  Future<int?> createDetail(Map<String, dynamic> detailData) async {
+    final http.Response detailResponse = await http.post(
+      Uri.parse(detailUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(detailData),
+    );
+
+    if (detailResponse.statusCode == 201) {
+      return jsonDecode(detailResponse.body)['MaDat'];
+    } else {
+      print('Tạo chi tiết hóa đơn thất bại: ${detailResponse.statusCode}');
+      return null;
+    }
+  }
+
+  Future<bool> createOrder(Map<String, dynamic> orderData) async {
+    final http.Response orderResponse = await http.post(
+      Uri.parse(orderUrl),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+      body: jsonEncode(orderData),
+    );
+
+    if (orderResponse.statusCode == 201) {
+      return true;
+    } else {
+      print('Tạo hóa đơn thất bại: ${orderResponse.statusCode}');
+      return false;
+    }
+  }
+}
+
+//get MAX id Đặt vé
+Future<int> fetchMaxIdDV() async {
+  final response = await http.get(Uri.parse('${baseUrl}/DatVe/Get'));
+
+  if (response.statusCode == 200) {
+    final List<dynamic> accounts = json.decode(response.body);
+    int maxId = accounts
+        .map((account) => account['MaDat'])
+        .reduce((a, b) => a > b ? a : b);
+    return maxId;
+  } else {
+    throw Exception('Failed to load accounts');
+  }
+}
+
+//get MAX id Đặt vé
+Future<int> fetchMaxIdHoaDon() async {
+  final response = await http.get(Uri.parse('${baseUrl}/HoaDon/Get'));
+
+  if (response.statusCode == 200) {
+    final List<dynamic> accounts = json.decode(response.body);
+    int maxId = accounts
+        .map((account) => account['MaHD'])
+        .reduce((a, b) => a > b ? a : b);
+    return maxId;
+  } else {
+    throw Exception('Failed to load accounts');
+  }
+}

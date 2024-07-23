@@ -17,7 +17,7 @@ class MainApp extends StatelessWidget {
       home: SignInPage2(),
       // routes: {
       //   '/': (context) => SplashScreen(),
-      //   '/home': (context) => HomePage(), // Trang chủ của bạn.
+      //   '/home': (context) => SignInPage2(), // Trang chủ của bạn.
       // },
     );
   }
