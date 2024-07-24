@@ -63,7 +63,7 @@ class BookingDetail extends StatelessWidget {
                   Icon(Icons.calendar_today, color: Colors.orange, size: 24),
                   const SizedBox(width: 24),
                   Text(
-                    DateFormat('dd/MM/yyyy').format(dateTime),
+                    'Ngày đặt: ' + DateFormat('dd/MM/yyyy').format(dateTime),
                     style: const TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ],
@@ -74,8 +74,9 @@ class BookingDetail extends StatelessWidget {
                   Icon(Icons.attach_money, color: Colors.green, size: 24),
                   const SizedBox(width: 24),
                   Text(
-                    NumberFormat('###,### VND')
-                        .format(booking['DatVe']['GiaTien']),
+                    'Giá tiền: ' +
+                        NumberFormat('###,### VND')
+                            .format(booking['DatVe']['GiaTien']),
                     style: const TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ],
@@ -86,7 +87,7 @@ class BookingDetail extends StatelessWidget {
                   Icon(Icons.local_activity, color: Colors.blue, size: 24),
                   const SizedBox(width: 24),
                   Text(
-                    'Quantity: ${(booking['DatVe']['GiaTien'] / 70000).toString()}',
+                    'Số lượng vé: ${NumberFormat('###.##').format(booking['DatVe']['GiaTien'] / 70000)}',
                     style: const TextStyle(fontSize: 18, color: Colors.white),
                   ),
                 ],

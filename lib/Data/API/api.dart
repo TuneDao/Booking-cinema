@@ -360,7 +360,7 @@ Future<int> fetchMaxIdDV() async {
   }
 }
 
-//get MAX id Đặt vé
+//get MAX id Hóa đơn
 Future<int> fetchMaxIdHoaDon() async {
   final response = await http.get(Uri.parse('${baseUrl}/HoaDon/Get'));
 

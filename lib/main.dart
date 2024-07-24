@@ -14,11 +14,11 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: SignInPage2(),
-      // routes: {
-      //   '/': (context) => SplashScreen(),
-      //   '/home': (context) => SignInPage2(), // Trang chủ của bạn.
-      // },
+      // home: SignInPage2(),
+      routes: {
+        '/': (context) => SplashScreen(),
+        '/home': (context) => SignInPage2(), // Trang chủ của bạn.
+      },
     );
   }
 }
