@@ -56,7 +56,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     super.initState();
     // Mô phỏng việc tải dữ liệu hoặc khởi tạo.
-    Future.delayed(const Duration(seconds: 3), () {
+    Future.delayed(const Duration(seconds: 10), () {
       // Sau 3 giây, chuyển đến trang chủ hoặc trang đăng nhập.
       Navigator.pushReplacementNamed(context, '/home');
     });

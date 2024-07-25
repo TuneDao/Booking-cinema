@@ -147,7 +147,6 @@ class CarouselFilm extends StatefulWidget {
 
 class _CarouselFilmState extends State<CarouselFilm> {
   List<Film_API> films = [];
-
   @override
   void initState() {
     super.initState();

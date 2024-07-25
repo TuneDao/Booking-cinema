@@ -70,21 +70,21 @@ class _InvoiceDetailScreenState extends State<InvoiceDetailScreen> {
           ? const Center(child: CircularProgressIndicator())
           : Stack(
               children: [
-                Center(
-                  child: Opacity(
-                    opacity: 0.1,
-                    child: Transform.rotate(
-                      angle: 45 * 3.1415927 / 180, // Xoay 45 độ
-                      child: Image.asset(
-                        'assets/images/logo2.png',
-                        errorBuilder: (context, error, stackTrace) =>
-                            const SizedBox.shrink(),
-                        width: 500, // Điều chỉnh kích thước lớn hơn
-                        height: 500, // Điều chỉnh kích thước lớn hơn
-                      ),
-                    ),
-                  ),
-                ),
+                // Center(
+                //   child: Opacity(
+                //     opacity: 0.1,
+                //     child: Transform.rotate(
+                //       angle: 45 * 3.1415927 / 180, // Xoay 45 độ
+                //       child: Image.asset(
+                //         'assets/images/logo2.png',
+                //         errorBuilder: (context, error, stackTrace) =>
+                //             const SizedBox.shrink(),
+                //         width: 500, // Điều chỉnh kích thước lớn hơn
+                //         height: 500, // Điều chỉnh kích thước lớn hơn
+                //       ),
+                //     ),
+                //   ),
+                // ),
                 SingleChildScrollView(
                   child: Container(
                     padding: const EdgeInsets.symmetric(

@@ -1,11 +1,10 @@
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 
-// http://10.21.21.131:3030/ trường (HUFLIT-GV)
-// http://10.21.11.217:3030/
-// http://10.21.43.166:3030/
+// http://10.21.27.70:3030/ trường (HUFLIT-GV)
 // http://192.168.29.164:3030/ 4G Toàn
 // http://192.168.1.224:3030 nhà
+
 const String baseUrl = 'http://192.168.1.224:3030/api/';
 
 Future<List<dynamic>> fetchData(String endpoint) async {
@@ -254,6 +253,22 @@ Future<bool> updateUser(String maKH, String hoTen, String email, String matKhau,
   }
 }
 
+Future<bool> registerUser(Map<String, dynamic> userData) async {
+  final response = await http.post(
+    Uri.parse('${baseUrl}/KhachHang/Post'),
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: jsonEncode(userData),
+  );
+
+  if (response.statusCode == 200) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
 /*==============================OTP======================== */
 
 Future<Map<String, dynamic>> sendOTP(String email) async {
@@ -368,6 +383,21 @@ Future<int> fetchMaxIdHoaDon() async {
     final List<dynamic> accounts = json.decode(response.body);
     int maxId = accounts
         .map((account) => account['MaHD'])
+        .reduce((a, b) => a > b ? a : b);
+    return maxId;
+  } else {
+    throw Exception('Failed to load accounts');
+  }
+}
+
+// get max id KhachHang
+Future<int> fetchMaxIdKhachHang() async {
+  final response = await http.get(Uri.parse('${baseUrl}/KhachHang/Get'));
+
+  if (response.statusCode == 200) {
+    final List<dynamic> accounts = json.decode(response.body);
+    int maxId = accounts
+        .map((account) => account['MaKH'])
         .reduce((a, b) => a > b ? a : b);
     return maxId;
   } else {
